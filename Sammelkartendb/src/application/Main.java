@@ -18,6 +18,7 @@ public class Main extends Application {
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
+			//test1231231
 		}
 	}
 	
