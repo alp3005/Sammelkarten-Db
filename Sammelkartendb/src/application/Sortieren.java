@@ -3,7 +3,7 @@ package application;
 public class Sortieren {
 	
 	public static void sort(/*method, array*/) {
-		//sinnvoll?
+		//sinnvoll???
 	}
 
 	private static int[] mergeSort(int[] arr) {
