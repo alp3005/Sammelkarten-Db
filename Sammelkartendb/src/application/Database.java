@@ -34,7 +34,7 @@ public class Database {
 		ensureJsonFileExists(spellDatabasePath);
 	}
 	
-	// Lade Karten aus den Datenbanken (Monster,Traps,Spells) und gib füg sie als Liste zusammen
+	// Lade Karten aus den Datenbanken (Monster,Traps,Spells) und füg sie als Liste zusammen
 	public ArrayList<Card> loadCards() {
 		try {
 			ArrayList<Card> cards = new ArrayList<Card>();
