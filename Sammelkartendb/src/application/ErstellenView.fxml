@@ -80,7 +80,7 @@
                                  </font>
                               </Label>
                               <TextField fx:id="nameField" prefHeight="26.0" prefWidth="341.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" />
-                              <ComboBox fx:id="typeBox" onAction="#Select" prefHeight="26.0" prefWidth="327.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="typeBox" onAction="#selectCardType" prefHeight="26.0" prefWidth="327.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -153,8 +153,11 @@
                               </Label>
                               <ComboBox fx:id="levelBox1" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="attackField1" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextArea GridPane.columnIndex="1" />
+                              <TextArea prefHeight="152.0" prefWidth="158.0" GridPane.columnIndex="1" />
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </GridPane>
                         <GridPane fx:id="trapGrid" prefHeight="248.0" prefWidth="428.0">
                            <columnConstraints>
@@ -186,6 +189,9 @@
                               <TextField fx:id="attackField11" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextArea GridPane.columnIndex="1" />
                            </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
                         </GridPane>
                      </children>
                   </HBox>

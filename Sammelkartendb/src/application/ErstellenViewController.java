@@ -50,11 +50,45 @@ public class ErstellenViewController {
 		elementBox.setValue("Licht");
 		levelBox.setItems(monsterLevelList);
 		levelBox.setValue("1");
+		
+		//entferne andere stuff
+		magicGrid.setManaged(false);
+		magicGrid.setVisible(false);
+		trapGrid.setManaged(false);
+		trapGrid.setVisible(false);
 	}
 	
 	@FXML
 	private void selectCardType(ActionEvent event) {
 		String cardType = typeBox.getSelectionModel().getSelectedItem().toString();
-		System.out.println(cardType);
+		//System.out.println(cardType);
+		
+		if(cardType.equals("Monster")) {
+			monsterGrid.setManaged(true);
+			monsterGrid.setVisible(true);
+			//entferne andere stuff
+			magicGrid.setManaged(false);
+			magicGrid.setVisible(false);
+			trapGrid.setManaged(false);
+			trapGrid.setVisible(false);
+		}
+		else if(cardType.equals("Zauber")) {
+			magicGrid.setManaged(true);
+			magicGrid.setVisible(true);
+			//entferne andere stuff
+			monsterGrid.setManaged(false);
+			monsterGrid.setVisible(false);
+			trapGrid.setManaged(false);
+			trapGrid.setVisible(false);
+		}
+		else if(cardType.equals("Falle")) {
+			trapGrid.setManaged(true);
+			trapGrid.setVisible(true);
+			//entferne andere stuff
+			monsterGrid.setManaged(false);
+			monsterGrid.setVisible(false);
+			magicGrid.setManaged(false);
+			magicGrid.setVisible(false);
+		}
 	}
 }
