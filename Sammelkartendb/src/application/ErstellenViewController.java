@@ -35,10 +35,25 @@ public class ErstellenViewController {
 	//Zauber Stuff
 	@FXML
 	private GridPane magicGrid;
+	
+	ObservableList<String> magicTypeList = FXCollections.observableArrayList("Normal", "Schnellzauber", "Permanentenzauber", "Ausrüstungszauber");
+	@FXML
+	private ComboBox magicTypeBox;
+	@FXML
+	private ComboBox magicTagBox;
 
 	//Fallen stuff
 	@FXML
 	private GridPane trapGrid;
+	
+	ObservableList<String> trapTypeList = FXCollections.observableArrayList("Normal", "Konterfalle", "Permanentenfalle");
+	@FXML
+	private ComboBox trapTypeBox;
+	@FXML
+	private ComboBox trapTagBox;
+	
+	ObservableList<String> magicTrapTagList = FXCollections.observableArrayList("zerstören", "beschwören", "einschränken", "Position ändern", "suchen", "anderes");
+
 	
 	@FXML
 	private void initialize() {
@@ -50,6 +65,18 @@ public class ErstellenViewController {
 		elementBox.setValue("Licht");
 		levelBox.setItems(monsterLevelList);
 		levelBox.setValue("1");
+		
+		//Zauber stuff
+		magicTypeBox.setItems(magicTypeList);
+		magicTypeBox.setValue("Normal");
+		magicTagBox.setItems(magicTrapTagList);
+		magicTagBox.setValue("anderes");
+		
+		//Fallen stuff
+		trapTypeBox.setItems(trapTypeList);
+		trapTypeBox.setValue("Normal");
+		trapTagBox.setItems(magicTrapTagList);
+		trapTagBox.setValue("anderes");
 		
 		//entferne andere stuff
 		magicGrid.setManaged(false);

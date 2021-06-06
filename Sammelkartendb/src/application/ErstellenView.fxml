@@ -124,6 +124,9 @@
                               <TextField fx:id="attackField" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="defenseField" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </GridPane>
                         <GridPane fx:id="magicGrid" prefHeight="248.0" prefWidth="428.0">
                            <columnConstraints>
@@ -151,13 +154,16 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="levelBox1" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="attackField1" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="magicTagBox" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextArea prefHeight="152.0" prefWidth="158.0" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="magicTypeBox" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
                         </GridPane>
                         <GridPane fx:id="trapGrid" prefHeight="248.0" prefWidth="428.0">
                            <columnConstraints>
@@ -185,13 +191,16 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="levelBox11" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="attackField11" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="trapTypeBox" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="trapTagBox" prefHeight="26.0" prefWidth="308.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextArea GridPane.columnIndex="1" />
                            </children>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
                         </GridPane>
                      </children>
                   </HBox>
