@@ -77,6 +77,7 @@ public class Filehandling {
 				pWriterM.println(spellList.get(i).getId());
 				pWriterM.println(spellList.get(i).getType());
 				pWriterM.println(spellList.get(i).getEffect());
+				pWriterM.println("[]");
 				String tag = "";
 				for(int t = 0; t < spellList.get(i).getTags().length; t++) {
 					tag += spellList.get(i).getTags()[t].getBezeichnung();
@@ -105,6 +106,7 @@ public class Filehandling {
 				pWriterM.println(trapList.get(i).getId());
 				pWriterM.println(trapList.get(i).getType());
 				pWriterM.println(trapList.get(i).getEffect());
+				pWriterM.println("[]");
 				String tag = "";
 				for(int t = 0; t < trapList.get(i).getTags().length; t++) {
 					tag += trapList.get(i).getTags()[t].getBezeichnung();
@@ -158,6 +160,11 @@ public class Filehandling {
 				int id = Integer.parseInt(in.readLine());
 				int t = Integer.parseInt(in.readLine());
 				String e = in.readLine();
+				in.mark(1000);
+				if(!in.readLine().equals("[]")) {
+					in.reset();
+					e += in.readLine();
+				}
 				Tag[] tag = ArrayMaker(in.readLine());
 				cardList.add(new Spell(n, id, t, e, tag));
 				in.mark(50);
@@ -181,6 +188,11 @@ public class Filehandling {
 				int id = Integer.parseInt(in.readLine());
 				int t = Integer.parseInt(in.readLine());
 				String e = in.readLine();
+				in.mark(1000);
+				if(!in.readLine().equals("[]")) {
+					in.reset();
+					e += in.readLine();
+				}
 				Tag[] tag = ArrayMaker(in.readLine());
 				cardList.add(new Trap(n, id, t, e, tag));
 				in.mark(50);
