@@ -62,9 +62,9 @@ public class Sortieren {
 					spellList.add((Spell) temp[i]);
 				for(int j = 0; j < temp2.length; j++)
 					trapList.add((Trap) temp2[j]);
+				cardList.add((Card) monList);
 				cardList.add((Card) spellList);
 				cardList.add((Card) trapList);
-				cardList.add((Card) monList);
 				sortedCards = (Card[]) cardList.toArray();
 				break;
 			case 3: //ATK
@@ -112,9 +112,9 @@ public class Sortieren {
 					spellList.add((Spell) temp[i]);
 				for(int j = 0; j < temp2.length; j++)
 					trapList.add((Trap) temp2[j]);
+				cardList.add((Card) monList);
 				cardList.add((Card) spellList);
 				cardList.add((Card) trapList);
-				cardList.add((Card) monList);
 				sortedCards = (Card[]) cardList.toArray();
 				break;
 			case 3: //ATK
@@ -162,9 +162,9 @@ public class Sortieren {
 					spellList.add((Spell) temp[i]);
 				for(int j = 0; j < temp2.length; j++)
 					trapList.add((Trap) temp2[j]);
+				cardList.add((Card) monList);
 				cardList.add((Card) spellList);
 				cardList.add((Card) trapList);
-				cardList.add((Card) monList);
 				sortedCards = (Card[]) cardList.toArray();
 				break;
 			case 3: //ATK
@@ -212,9 +212,9 @@ public class Sortieren {
 					spellList.add((Spell) temp[i]);
 				for(int j = 0; j < temp2.length; j++)
 					trapList.add((Trap) temp2[j]);
+				cardList.add((Card) monList);
 				cardList.add((Card) spellList);
 				cardList.add((Card) trapList);
-				cardList.add((Card) monList);
 				sortedCards = (Card[]) cardList.toArray();
 				break;
 			case 3: //ATK
@@ -249,14 +249,14 @@ public class Sortieren {
 		return sortedCards;
 	}
 
-	private static int[] mergeSort(int[] arr, int at) {
+	private static Card[] mergeSort(Card[] arr, int at) {
 		if(arr.length > 1) {
 			int mid = (int)(arr.length / 2);
-			int[] l = new int[mid];
+			Card[] l = new Card[mid];
 			for (int i = 0; i < mid; i++) {
 				l[i] = arr[i];
 			}
-			int[] r = new int[arr.length-mid];
+			Card[] r = new Card[arr.length-mid];
 			for (int i = mid; i < arr.length; i++) {
 				r[i-mid] = arr[i];
 			}
@@ -268,20 +268,96 @@ public class Sortieren {
 		}
 	}
 
-	private static int[] mergeSortCombine(int[] l, int[] r, int at) {
-		int[] newl = new int[l.length + r.length];
+	private static Card[] mergeSortCombine(Card[] l, Card[] r, int at) {
+		Monster[] ml = new Monster[l.length];
+		Monster[] mr = new Monster[r.length];
+		Spell[] sl = new Spell[l.length];
+		Spell[] sr = new Spell[r.length];
+		Trap[] tl = new Trap[l.length];
+		Trap[] tr = new Trap[r.length];
+		boolean spell = true;
+		//Cast des Card-Arrays auf den nˆtigen Typ
+		switch(at) {
+		case 1:
+			break;
+		case 2:
+			if(l[0].getKategory() == 2) {
+				sl = (Spell[]) l;
+				sr = (Spell[]) r;
+			} else {
+				spell = false;
+				tl = (Trap[]) l;
+				tr = (Trap[]) r;
+			}
+			break;
+		case 3:
+			ml = (Monster[]) l;
+			mr = (Monster[]) r;
+			break;
+		case 4:
+			ml = (Monster[]) l;
+			mr = (Monster[]) r;
+			break;
+		}
+		//Eigentliche Combine-Funktion
+		Card[] newl = new Card[l.length + r.length];
 		int indexl = 0;
 		int indexr = 0;
 		int indexx = 0;
 		while (indexl < l.length && indexr < r.length) {
-			if (l[indexl] < r[indexr]) {
-				newl[indexx] = l[indexl];
-				indexl++;
-			} else {
-				newl[indexx] = r[indexr];
-				indexr += 1;
+			switch(at) {
+			case 1: //Name
+				if (l[indexl].getName().compareToIgnoreCase(r[indexr].getName()) <= 0) { // Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
+					newl[indexx] = l[indexl];
+					indexl++;
+				} else {
+					newl[indexx] = r[indexr];
+					indexr += 1;
+				}
+				indexx++;
+				break;
+			case 2: //Typ
+				if(spell) {
+					if (sl[indexl].getType() < sr[indexr].getType()) {
+						newl[indexx] = sl[indexl];
+						indexl++;
+					} else {
+						newl[indexx] = sr[indexr];
+						indexr += 1;
+					}
+					indexx++;
+				} else {
+					if (tl[indexl].getType() < tr[indexr].getType()) {
+						newl[indexx] = tl[indexl];
+						indexl++;
+					} else {
+						newl[indexx] = tr[indexr];
+						indexr += 1;
+					}
+					indexx++;
+				}
+				break;
+			case 3: //ATK
+				if (ml[indexl].getAtk() < mr[indexr].getAtk()) {
+					newl[indexx] = ml[indexl];
+					indexl++;
+				} else {
+					newl[indexx] = mr[indexr];
+					indexr += 1;
+				}
+				indexx++;
+				break;
+			case 4: //DEF
+				if (ml[indexl].getDef() < mr[indexr].getDef()) {
+					newl[indexx] = ml[indexl];
+					indexl++;
+				} else {
+					newl[indexx] = mr[indexr];
+					indexr += 1;
+				}
+				indexx++;
+				break;
 			}
-			indexx++;
 		}
 		while (indexl < l.length) {
 			newl[indexx] = l[indexl];
