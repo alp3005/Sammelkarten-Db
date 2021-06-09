@@ -22,7 +22,7 @@ public class Main extends Application {
 		
 			
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Sample.fxml")); 
-			Scene scene = new Scene(root,1600,1000);
+			Scene scene = new Scene(root,1280,720);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
