@@ -5,7 +5,7 @@ import Cards.Trap;
 
 public class SortierenFalle {
 
-	static Card[] mergeSort(Trap[] arr, int at) {
+	static Card[] mergeSort(Trap[] arr, int at) throws Exception {
 		if(arr.length > 1) {
 			int mid = (int)(arr.length / 2);
 			Trap[] l = new Trap[mid];
@@ -24,14 +24,13 @@ public class SortierenFalle {
 		}
 	}
 
-	private static Trap[] mergeSortCombine(Trap[] l, Trap[] r, int at) {
+	private static Trap[] mergeSortCombine(Trap[] l, Trap[] r, int at) throws Exception {
 		Trap[] newl = new Trap[l.length + r.length];
 		int indexl = 0;
 		int indexr = 0;
 		int indexx = 0;
 		while (indexl < l.length && indexr < r.length) {
-			switch(at) {
-			case 2: //Typ
+			if(at == 2) {
 				if (l[indexl].getType() < r[indexr].getType()) {
 					newl[indexx] = l[indexl];
 					indexl++;
@@ -40,9 +39,8 @@ public class SortierenFalle {
 					indexr += 1;
 				}
 				indexx++;
-				break;
-			default:
-				break;
+			} else {
+				throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Falle"); //Sollte im fertigen Programm nicht eintreten können
 			}
 			while (indexl < l.length) {
 				newl[indexx] = l[indexl];
@@ -58,42 +56,47 @@ public class SortierenFalle {
 		return newl;
 	}
 
-	private static int[] quickSortInit(int[] arr) {
-		return quicksort(arr, 0, arr.length-1);
+	static Card[] quickSortInit(Trap[] arr, int at) throws Exception {
+		return quicksort(arr, 0, arr.length-1, at);
 	}
 
-	private static int[] quicksort(int[] arr, int l, int r) {
+	private static Trap[] quicksort(Trap[] arr, int l, int r, int at) throws Exception {
 		int t;
 		if(l < r) {
-			t = quicksortSplit(arr, l, r);
-			quicksort(arr, l, t);
-			quicksort(arr, t+1, r);
+			t = quicksortSplit(arr, l, r, at);
+			quicksort(arr, l, t, at);
+			quicksort(arr, t+1, r, at);
 		}
 		return arr;
 	}
 
-	private static int quicksortSplit(int[] arr,int l, int r) {
-		int i, j, pivot = arr[(l+r)/2];
-		i = l-1;
-		j = r+1;
-		while (true) {
-			do {
-				i++;
-			} while (arr[i] < pivot);
-			do {
-				j--;
-			} while (arr[j] > pivot);
-			if (i < j) {
-				int a = arr[i];
-				arr[i] = arr[j];
-				arr[j] = a;
-			} else {
-				return j;
+	private static int quicksortSplit(Trap[] arr,int l, int r, int at) throws Exception {
+		int pivot;
+		int i = l-1;
+		int j = r+1;
+		if(at == 2) {
+			pivot = arr[(l+r)/2].getType();
+			while (true) {
+				do {
+					i++;
+				} while (arr[i].getType() < pivot);
+				do {
+					j--;
+				} while (arr[j].getType() > pivot);
+				if (i < j) {
+					Trap a = arr[i];
+					arr[i] = arr[j];
+					arr[j] = a;
+				} else {
+					return j;
+				}
 			}
+		} else {
+			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 		}
 	}
 
-	private static void selectionSort(int[] arr) {
+	static void selectionSort(int[] arr) {
 		for (int i = 0; i < arr.length-1; i++) {
 			int minPos = i;
 			int min = arr[minPos];
@@ -110,7 +113,7 @@ public class SortierenFalle {
 		}
 	}
 
-	private static void heapSort(int[] arr) {
+	static void heapSort(int[] arr) {
 		heapSortMax(arr);
 		for(int i = arr.length-1; i > 0; i--) {
 			heapSortSwap(arr, i, 0);

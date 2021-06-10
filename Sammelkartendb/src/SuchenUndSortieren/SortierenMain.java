@@ -3,6 +3,7 @@ package SuchenUndSortieren;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.io.IOException;
 import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
@@ -41,94 +42,207 @@ public class SortierenMain {
 
 		Card[] sortedCards = cards;
 		//gewünschter Algorithmus wird ausgewählt
-		switch(m) {
-		case 1: //Mergesort
-			if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
-				sortedCards = mergeSort(cards);
-				if(down)
-					sortedCards = reverse(sortedCards);
-			} else {
-				sortedCards = mergeSwitch(monsters, spells, traps, at, down);
+		try {
+			switch(m) {
+			case 1: //Mergesort
+				if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
+					sortedCards = mergeSort(cards);
+					if(down)
+						sortedCards = reverse(sortedCards);
+				} else {
+					sortedCards = mergeSwitch(monsters, spells, traps, at, down);
+				}
+				break;
+			case 2: //Quicksort
+				if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
+					sortedCards = quickSortInit(cards);
+					if(down)
+						sortedCards = reverse(sortedCards);
+				} else {
+					sortedCards = quickSwitch(monsters, spells, traps, at, down);
+				}
+				break;
+			case 3: //Selectionsort
+				if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
+					sortedCards = selectionSort(cards);
+					if(down)
+						sortedCards = reverse(sortedCards);
+				} else {
+					sortedCards = selectionSwitch(monsters, spells, traps, at, down);
+				}
+				break;
+			case 4: //Heapsort
+				if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
+					sortedCards = heapSort(cards);
+					if(down)
+						sortedCards = reverse(sortedCards);
+				} else {
+					sortedCards = heapSwitch(monsters, spells, traps, at, down);
+				}
+				break;
+			default: //sollte nicht eintreten können
+				break;
 			}
-			break;
-		case 2: //Quicksort
-			if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
-				sortedCards = quickSortInit(cards);
-				if(down)
-					sortedCards = reverse(sortedCards);
-			} else {
-				sortedCards = quickSwitch(monsters, spells, traps, at, down);
-			}
-			break;
-		case 3: //Selectionsort
-			if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
-				sortedCards = selectionSort(cards);
-				if(down)
-					sortedCards = reverse(sortedCards);
-			} else {
-				sortedCards = selectionSwitch(monsters, spells, traps, at, down);
-			}
-			break;
-		case 4: //Heapsort
-			if(at == 1) { //Sortierung nach Name --> findet in dieser Klasse statt
-				sortedCards = heapSort(cards);
-				if(down)
-					sortedCards = reverse(sortedCards);
-			} else {
-				sortedCards = heapSwitch(monsters, spells, traps, at, down);
-			}
-			break;
-		default: //sollte nicht eintreten können
-			break;
+		} catch (IOException e) { //Exception falls gewünschtes Attribut und Kartentyp nicht zusammen passen
+			e.printStackTrace();
 		}
 		return sortedCards;
 	}
 
-	private static Card[] mergeSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) {
+	private static Card[] mergeSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) throws Exception {
 		Card[] sortedCards = new Card[monsters.length + spells.length + traps.length];
 		Card[] tempS = spells;
 		Card[] tempT = traps;
 		Card[] tempM = monsters;
 		Card[] tempC = combine2Arrays(tempS, tempT);
-		switch(at) { //case 1 wurde schon vorher abgehandelt
-		case 2: //Typ
-			tempS = SortierenZauber.mergeSort(spells, at);
-			tempT = SortierenFalle.mergeSort(traps, at);
-			if(down) {
-				tempS = reverse(tempS);
-				tempT = reverse(tempT);
+		try {
+			switch(at) { //case 1 wurde schon vorher abgehandelt
+			case 2: //Typ
+				tempS = SortierenZauber.mergeSort(spells, at);
+				tempT = SortierenFalle.mergeSort(traps, at);
+				if(down) {
+					tempS = reverse(tempS);
+					tempT = reverse(tempT);
+				}
+				tempM = mergeSort(monsters); //Monster haben keinen Typ und werden deshalb einfach nach Name sortiert
+				sortedCards = combine3Arrays(tempM, tempS, tempT); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 3: //ATK
+				tempM = SortierenMonster.mergeSort(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = mergeSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine ATK und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 4: //DEF
+				tempM = SortierenMonster.mergeSort(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = mergeSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine DEF und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
 			}
-			tempM = mergeSort(monsters); //Monster haben keinen Typ und werden deshalb einfach nach Name sortiert
-			sortedCards = combine3Arrays(tempM, tempS, tempT); //Alle Karten wieder in ein einzelnes Array überführen
-			break;
-		case 3: //ATK
-			tempM = SortierenMonster.mergeSort(monsters, at);
-			if(down)
-				tempM = reverse(tempM);
-			tempC = mergeSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine ATK und werden deshalb einfach nach Name sortiert
-			sortedCards = combine3Arrays(tempM, tempS, tempT); //Alle Karten wieder in ein einzelnes Array überführen
-			break;
-		case 4: //DEF
-			tempM = SortierenMonster.mergeSort(monsters, at);
-			if(down)
-				tempM = reverse(tempM);
-			tempC = mergeSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine DEF und werden deshalb einfach nach Name sortiert
-			sortedCards = combine3Arrays(tempM, tempS, tempT); //Alle Karten wieder in ein einzelnes Array überführen
-			break;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return sortedCards;
 	}
 
-	private static Card[] quickSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) {
-		
+	private static Card[] quickSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) throws Exception {
+		Card[] sortedCards = new Card[monsters.length + spells.length + traps.length];
+		Card[] tempS = spells;
+		Card[] tempT = traps;
+		Card[] tempM = monsters;
+		Card[] tempC = combine2Arrays(tempS, tempT);
+		try {
+			switch(at) { //case 1 wurde schon vorher abgehandelt
+			case 2: //Typ
+				tempS = SortierenZauber.quickSortInit(spells, at);
+				tempT = SortierenFalle.quickSortInit(traps, at);
+				if(down) {
+					tempS = reverse(tempS);
+					tempT = reverse(tempT);
+				}
+				tempM = quickSortInit(monsters); //Monster haben keinen Typ und werden deshalb einfach nach Name sortiert
+				sortedCards = combine3Arrays(tempM, tempS, tempT); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 3: //ATK
+				tempM = SortierenMonster.quickSortInit(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = quickSortInit(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine ATK und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 4: //DEF
+				tempM = SortierenMonster.quickSortInit(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = quickSortInit(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine DEF und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sortedCards;
 	}
 
-	private static Card[] selectionSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) {
-		
+	private static Card[] selectionSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) throws Exception {
+		Card[] sortedCards = new Card[monsters.length + spells.length + traps.length];
+		Card[] tempS = spells;
+		Card[] tempT = traps;
+		Card[] tempM = monsters;
+		Card[] tempC = combine2Arrays(tempS, tempT);
+		try {
+			switch(at) { //case 1 wurde schon vorher abgehandelt
+			case 2: //Typ
+				tempS = SortierenZauber.selectionSort(spells, at);
+				tempT = SortierenFalle.selectionSort(traps, at);
+				if(down) {
+					tempS = reverse(tempS);
+					tempT = reverse(tempT);
+				}
+				tempM = selectionSort(monsters); //Monster haben keinen Typ und werden deshalb einfach nach Name sortiert
+				sortedCards = combine3Arrays(tempM, tempS, tempT); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 3: //ATK
+				tempM = SortierenMonster.selectionSort(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = selectionSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine ATK und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 4: //DEF
+				tempM = SortierenMonster.selectionSort(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = selectionSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine DEF und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sortedCards;
 	}
 
-	private static Card[] heapSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) {
-	
+	private static Card[] heapSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, boolean down) throws Exception {
+		Card[] sortedCards = new Card[monsters.length + spells.length + traps.length];
+		Card[] tempS = spells;
+		Card[] tempT = traps;
+		Card[] tempM = monsters;
+		Card[] tempC = combine2Arrays(tempS, tempT);
+		try {
+			switch(at) { //case 1 wurde schon vorher abgehandelt
+			case 2: //Typ
+				tempS = SortierenZauber.heapSort(spells, at);
+				tempT = SortierenFalle.heapSort(traps, at);
+				if(down) {
+					tempS = reverse(tempS);
+					tempT = reverse(tempT);
+				}
+				tempM = heapSort(monsters); //Monster haben keinen Typ und werden deshalb einfach nach Name sortiert
+				sortedCards = combine3Arrays(tempM, tempS, tempT); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 3: //ATK
+				tempM = SortierenMonster.heapSort(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = heapSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine ATK und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			case 4: //DEF
+				tempM = SortierenMonster.heapSort(monsters, at);
+				if(down)
+					tempM = reverse(tempM);
+				tempC = heapSort(combine2Arrays(spells, traps)); //Zauber und Fallen haben keine DEF und werden deshalb einfach nach Name sortiert
+				sortedCards = combine2Arrays(tempM, tempC); //Alle Karten wieder in ein einzelnes Array überführen
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sortedCards;
 	}
 
 	private static Card[] mergeSort(Card[] arr) {
@@ -149,7 +263,7 @@ public class SortierenMain {
 			return arr;
 		}
 	}
-	
+
 	private static Card[] mergeSortCombine(Card[] l, Card[] r) {
 		Card[] newl = new Card[l.length + r.length];
 		int indexl = 0;
@@ -168,11 +282,11 @@ public class SortierenMain {
 		return newl;
 	}
 
-	private static int[] quickSortInit(int[] arr) {
+	private static Card[] quickSortInit(Card[] arr) {
 		return quicksort(arr, 0, arr.length-1);
 	}
 
-	private static int[] quicksort(int[] arr, int l, int r) {
+	private static Card[] quicksort(Card[] arr, int l, int r) {
 		int t;
 		if(l < r) {
 			t = quicksortSplit(arr, l, r);
@@ -182,19 +296,19 @@ public class SortierenMain {
 		return arr;
 	}
 
-	private static int quicksortSplit(int[] arr,int l, int r) {
-		int i, j, pivot = arr[(l+r)/2];
-		i = l-1;
-		j = r+1;
+	private static int quicksortSplit(Card[] arr,int l, int r) {
+		String pivot = arr[(l+r)/2].getName();
+		int i = l-1;
+		int j = r+1;
 		while (true) {
 			do {
 				i++;
-			} while (arr[i] < pivot);
+			} while (arr[i].getName().compareToIgnoreCase(pivot) <= 0); // Wert < 0 heißt im unicode vorher, > 0 heißt im Unicode nachher, = 0 heißt selber String
 			do {
 				j--;
-			} while (arr[j] > pivot);
+			} while (arr[i].getName().compareToIgnoreCase(pivot) > 0);
 			if (i < j) {
-				int a = arr[i];
+				Card a = arr[i];
 				arr[i] = arr[j];
 				arr[j] = a;
 			} else {
@@ -207,12 +321,11 @@ public class SortierenMain {
 		for (int i = 0; i < arr.length-1; i++) {
 			int minPos = i;
 			int min = arr[minPos];
-			for (int j = i+1; j < arr.length; j++) {
+			for (int j = i+1; j < arr.length; j++)
 				if (arr[j] < min) {
 					minPos = j;
 					min = arr[minPos];
 				}
-			}
 			if (minPos != i) {
 				arr[minPos] = arr[i];
 				arr[i] = min;
@@ -229,9 +342,8 @@ public class SortierenMain {
 	}
 
 	private static void heapSortMax(int[] arr) {
-		for(int i = (arr.length/2)-1; i >= 0 ; i--) {
+		for(int i = (arr.length/2)-1; i >= 0 ; i--)
 			heapSortDown(arr, i, arr.length);
-		}
 	}
 
 	private static void heapSortDown(int[] arr, int i, int j) {
@@ -263,16 +375,16 @@ public class SortierenMain {
 	}
 
 	private static Card[] combine2Arrays(Card[] arr1, Card[] arr2) {
-        Card[] combinedArray = Arrays.copyOf(arr1, arr1.length + arr2.length);
-        System.arraycopy(arr2, 0, combinedArray, arr1.length, arr2.length);
-        return combinedArray;
-    }
+		Card[] combinedArray = Arrays.copyOf(arr1, arr1.length + arr2.length);
+		System.arraycopy(arr2, 0, combinedArray, arr1.length, arr2.length);
+		return combinedArray;
+	}
 
 	private static Card[] combine3Arrays(Card[] arr1, Card[] arr2, Card[] arr3) {
-        Card[] combinedArray = Arrays.copyOf(arr1, arr1.length + arr2.length + arr3.length);
-        System.arraycopy(arr2, 0, combinedArray, arr1.length, arr2.length);
-        System.arraycopy(arr3, 0, combinedArray, arr1.length + arr2.length, arr3.length);
-        return combinedArray;
-    }
-    
+		Card[] combinedArray = Arrays.copyOf(arr1, arr1.length + arr2.length + arr3.length);
+		System.arraycopy(arr2, 0, combinedArray, arr1.length, arr2.length);
+		System.arraycopy(arr3, 0, combinedArray, arr1.length + arr2.length, arr3.length);
+		return combinedArray;
+	}
+
 }
