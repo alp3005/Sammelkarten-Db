@@ -96,14 +96,17 @@ public class SortierenZauber {
 		}
 	}
 
-	static void selectionSort(int[] arr) {
+	static Card[] selectionSort(Spell[] arr, int at) throws Exception {
 		for (int i = 0; i < arr.length-1; i++) {
 			int minPos = i;
-			int min = arr[minPos];
+			Spell min = arr[minPos];
 			for (int j = i+1; j < arr.length; j++) {
-				if (arr[j] < min) {
-					minPos = j;
-					min = arr[minPos];
+				if(at == 2) {
+					if (arr[j].getType() < min.getType()) {
+						minPos = j;
+						min = arr[minPos];
+					} else
+						throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 				}
 			}
 			if (minPos != i) {
@@ -111,40 +114,48 @@ public class SortierenZauber {
 				arr[i] = min;
 			}
 		}
+		return arr;
 	}
 
-	static void heapSort(int[] arr) {
-		heapSortMax(arr);
+	static Card[] heapSort(Spell[] arr, int at) throws Exception {
+		arr = heapSortMax(arr, at);
 		for(int i = arr.length-1; i > 0; i--) {
-			heapSortSwap(arr, i, 0);
-			heapSortDown(arr, 0, i);
+			arr = heapSortSwap(arr, i, 0);
+			arr = heapSortDown(arr, 0, i, at);
 		}
+		return arr;
 	}
 
-	private static void heapSortMax(int[] arr) {
-		for(int i = (arr.length/2)-1; i >= 0 ; i--) {
-			heapSortDown(arr, i, arr.length);
-		}
+	private static Spell[] heapSortMax(Spell[] arr, int at) throws Exception {
+		Spell[] arrMax = arr;
+		for(int i = (arr.length/2)-1; i >= 0 ; i--)
+			arrMax = heapSortDown(arr, i, arr.length, at);
+		return arrMax;
 	}
 
-	private static void heapSortDown(int[] arr, int i, int j) {
-		while(i <= (j/2)-1) {
-			int IndexC = ((i+1)*2)-1;
-			if(IndexC+1 <= j-1)
-				if(arr[IndexC] < arr[IndexC+1])
-					IndexC++;
-			if(arr[i] < arr[IndexC]) {
-				heapSortSwap(arr, i, IndexC);
-				i = IndexC;
+	private static Spell[] heapSortDown(Spell[] arr, int a, int b, int at) throws Exception {
+		while(a <= (b/2)-1) {
+			int c = ((a+1)*2)-1;
+			if(at == 2) {
+				if(c+1 <= b-1)
+					if(arr[c].getType() <= arr[c+1].getType())
+						c++;
+				if(arr[a].getType() <= arr[c].getType()) {
+					arr = heapSortSwap(arr, a, c);
+					a = c;
+				} else
+					break;
 			} else
-				break;
+				throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 		}
+		return arr;
 	}
 
-	private static void heapSortSwap(int[] arr, int i, int IndexC) {
-		int c = arr[i];
-		arr[i] = arr[IndexC];
-		arr[IndexC] = c;
+	private static Spell[] heapSortSwap(Spell[] arr, int i, int c) {
+		Spell temp = arr[i];
+		arr[i] = arr[c];
+		arr[c] = temp;
+		return arr;
 	}
 
 }

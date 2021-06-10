@@ -124,14 +124,26 @@ public class SortierenMonster {
 		}
 	}
 
-	static void selectionSort(int[] arr) {
+	static Card[] selectionSort(Monster[] arr, int at) throws Exception {
 		for (int i = 0; i < arr.length-1; i++) {
 			int minPos = i;
-			int min = arr[minPos];
+			Monster min = arr[minPos];
 			for (int j = i+1; j < arr.length; j++) {
-				if (arr[j] < min) {
-					minPos = j;
-					min = arr[minPos];
+				switch (at) {
+				case 3:
+					if (arr[j].getAtk() < min.getAtk()) {
+						minPos = j;
+						min = arr[minPos];
+					}
+					break;
+				case 4:
+					if (arr[j].getDef() < min.getDef()) {
+						minPos = j;
+						min = arr[minPos];
+					}
+					break;
+				default:
+					throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 				}
 			}
 			if (minPos != i) {
@@ -139,40 +151,61 @@ public class SortierenMonster {
 				arr[i] = min;
 			}
 		}
+		return arr;
 	}
 
-	static void heapSort(int[] arr) {
-		heapSortMax(arr);
+	static Card[] heapSort(Monster[] arr, int at) throws Exception {
+		arr = heapSortMax(arr, at);
 		for(int i = arr.length-1; i > 0; i--) {
-			heapSortSwap(arr, i, 0);
-			heapSortDown(arr, 0, i);
+			arr = heapSortSwap(arr, i, 0);
+			arr = heapSortDown(arr, 0, i, at);
 		}
+		return arr;
 	}
 
-	private static void heapSortMax(int[] arr) {
-		for(int i = (arr.length/2)-1; i >= 0 ; i--) {
-			heapSortDown(arr, i, arr.length);
-		}
+	private static Monster[] heapSortMax(Monster[] arr, int at) throws Exception {
+		Monster[] arrMax = arr;
+		for(int i = (arr.length/2)-1; i >= 0 ; i--)
+			arrMax = heapSortDown(arr, i, arr.length, at);
+		return arrMax;
 	}
 
-	private static void heapSortDown(int[] arr, int i, int j) {
-		while(i <= (j/2)-1) {
-			int IndexC = ((i+1)*2)-1;
-			if(IndexC+1 <= j-1)
-				if(arr[IndexC] < arr[IndexC+1])
-					IndexC++;
-			if(arr[i] < arr[IndexC]) {
-				heapSortSwap(arr, i, IndexC);
-				i = IndexC;
-			} else
+	private static Monster[] heapSortDown(Monster[] arr, int a, int b, int at) throws Exception {
+		while(a <= (b/2)-1) {
+			int c = ((a+1)*2)-1;
+			switch(at) {
+			case 3:
+				if(c+1 <= b-1)
+					if(arr[c].getAtk() <= arr[c+1].getAtk())
+						c++;
+				if(arr[a].getAtk() <= arr[c].getAtk()) {
+					arr = heapSortSwap(arr, a, c);
+					a = c;
+				} else
+					break;
 				break;
+			case 4:
+				if(c+1 <= b-1)
+					if(arr[c].getDef() <= arr[c+1].getDef())
+						c++;
+				if(arr[a].getDef() <= arr[c].getDef()) {
+					arr = heapSortSwap(arr, a, c);
+					a = c;
+				} else
+					break;
+				break;
+				default:
+					throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
+			}
 		}
+		return arr;
 	}
 
-	private static void heapSortSwap(int[] arr, int i, int IndexC) {
-		int c = arr[i];
-		arr[i] = arr[IndexC];
-		arr[IndexC] = c;
+	private static Monster[] heapSortSwap(Monster[] arr, int i, int c) {
+		Monster temp = arr[i];
+		arr[i] = arr[c];
+		arr[c] = temp;
+		return arr;
 	}
 
 }

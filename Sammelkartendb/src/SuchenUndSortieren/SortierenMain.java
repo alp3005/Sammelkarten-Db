@@ -7,12 +7,11 @@ import java.io.IOException;
 import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
-import Cards.Tag;
 import Cards.Trap;
 
 public class SortierenMain {
 
-	public static Card[] sort(Card[] cards, int m, int at, boolean down) {
+	public static Card[] sort(Card[] cards, int m, int at, boolean down) throws Exception {
 		/* m = Variable zur Zuordnung der Sortiermethode --> 1=Mergesort, 2=Quicksort, 3=Selectionsort, 4=Heapsort
 		 * at = Variable zur Zuordnung des Attributs nach dem sortiert werden soll --> 1=Name, 2=Typ, 3=ATK, 4=DEF
 		 * down = Variable, ob absteigend sortiert wird
@@ -22,7 +21,6 @@ public class SortierenMain {
 		List<Monster> monList = new Vector<Monster>(0,1);
 		List<Spell> spellList = new Vector<Spell>(0,1);
 		List<Trap> trapList = new Vector<Trap>(0,1);
-		List<Card> cardList = new Vector<Card>(0,1);
 		for(int i = 0; i < cards.length; i++) {
 			switch(cards[i].getKategory()) {
 			case 1:
@@ -317,12 +315,12 @@ public class SortierenMain {
 		}
 	}
 
-	private static void selectionSort(int[] arr) {
+	private static Card[] selectionSort(Card[] arr) {
 		for (int i = 0; i < arr.length-1; i++) {
 			int minPos = i;
-			int min = arr[minPos];
+			Card min = arr[minPos];
 			for (int j = i+1; j < arr.length; j++)
-				if (arr[j] < min) {
+				if (arr[j].getName().compareToIgnoreCase(min.getName()) <= 0) {
 					minPos = j;
 					min = arr[minPos];
 				}
@@ -331,39 +329,45 @@ public class SortierenMain {
 				arr[i] = min;
 			}
 		}
+		return arr;
 	}
 
-	private static void heapSort(int[] arr) {
-		heapSortMax(arr);
+	private static Card[] heapSort(Card[] arr) {
+		arr = heapSortMax(arr);
 		for(int i = arr.length-1; i > 0; i--) {
-			heapSortSwap(arr, i, 0);
-			heapSortDown(arr, 0, i);
+			arr = heapSortSwap(arr, i, 0);
+			arr = heapSortDown(arr, 0, i);
 		}
+		return arr;
 	}
 
-	private static void heapSortMax(int[] arr) {
+	private static Card[] heapSortMax(Card[] arr) {
+		Card[] arrMax = arr;
 		for(int i = (arr.length/2)-1; i >= 0 ; i--)
-			heapSortDown(arr, i, arr.length);
+			arrMax = heapSortDown(arr, i, arr.length);
+		return arrMax;
 	}
 
-	private static void heapSortDown(int[] arr, int i, int j) {
-		while(i <= (j/2)-1) {
-			int IndexC = ((i+1)*2)-1;
-			if(IndexC+1 <= j-1)
-				if(arr[IndexC] < arr[IndexC+1])
-					IndexC++;
-			if(arr[i] < arr[IndexC]) {
-				heapSortSwap(arr, i, IndexC);
-				i = IndexC;
+	private static Card[] heapSortDown(Card[] arr, int a, int b) {
+		while(a <= (b/2)-1) {
+			int c = ((a+1)*2)-1;
+			if(c+1 <= b-1)
+				if(arr[c].getName().compareToIgnoreCase(arr[c+1].getName()) <= 0)
+					c++;
+			if(arr[a].getName().compareToIgnoreCase(arr[c].getName()) <= 0) {
+				arr = heapSortSwap(arr, a, c);
+				a = c;
 			} else
 				break;
 		}
+		return arr;
 	}
 
-	private static void heapSortSwap(int[] arr, int i, int IndexC) {
-		int c = arr[i];
-		arr[i] = arr[IndexC];
-		arr[IndexC] = c;
+	private static Card[] heapSortSwap(Card[] arr, int i, int c) {
+		Card temp = arr[i];
+		arr[i] = arr[c];
+		arr[c] = temp;
+		return arr;
 	}
 
 	private static Card[] reverse(Card[] arr) {
