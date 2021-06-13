@@ -14,13 +14,10 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 	private static Stage primaryStage;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Database database = new Database();
-			ArrayList<Card> cards = database.loadCards();
-		
-			
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Sample.fxml")); 
 			Scene scene = new Scene(root,1280,720);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -42,6 +39,7 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("ErstellenView.fxml"));
 		AnchorPane erstellenView = loader.load();
+	 
 		
 		Stage addDialogeStage = new Stage();
 		addDialogeStage.setTitle("Erstelle Sie eine eigene Karte");

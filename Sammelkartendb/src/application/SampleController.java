@@ -67,6 +67,11 @@ public class SampleController {
 		
 		@FXML
 		private void initialize() {
+			// TODO - SO LADET IHR ALLE KARTEN //
+			// List<Card> cards = CardsHandler.get().getCards();
+			/////////////////////////////////////
+			
+			
 			typeBoxSearch.setItems(cardTypeListSearch);
 			typeBoxSearch.setValue("Monster");
 			

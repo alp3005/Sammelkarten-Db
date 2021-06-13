@@ -6,8 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,7 +16,7 @@ import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
 
-public class Database {
+class Database {
 	// Erstelle Objekt für Json
 	private Gson gson = new Gson(); 
 	
@@ -28,101 +27,54 @@ public class Database {
 	
 	
 	// Erstelle Konstruktor, um sicherzugehen das Json Datei existiert  
-	public Database() {
+	Database() {
 		ensureJsonFileExists(monsterDatabasePath);
 		ensureJsonFileExists(trapDatabasePath);
 		ensureJsonFileExists(spellDatabasePath);
 	}
 	
-	// Lade Karten aus den Datenbanken (Monster,Traps,Spells) und füg sie als Liste zusammen
-	public ArrayList<Card> loadCards() {
-		try {
-			ArrayList<Card> cards = new ArrayList<Card>();
-			cards.addAll(loadMonsters());
-			cards.addAll(loadTraps());
-			cards.addAll(loadSpells());
-			return cards;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return new ArrayList<Card>();
-		}
-	}
-	
-	
 	// Lade Monster aus der Datenbank
-	private ArrayList<Monster> loadMonsters() throws FileNotFoundException {
+	public List<Monster> loadMonsters() throws FileNotFoundException {
 		FileReader filereader = new FileReader(monsterDatabasePath);
-		//ArrayListType ist der Type von ArrayList<Monster> um Json in Arraylist umzuwandeln -Stackoverflow
-		Type arrayListType = new TypeToken<ArrayList<Monster>>() {}.getType();
-		ArrayList<Monster> monster = gson.fromJson(filereader, arrayListType);
+		//ListType ist der Type von List<Monster> um Json in Liste umzuwandeln -Stackoverflow
+		Type listType = new TypeToken<List<Monster>>() {}.getType();
+		List<Monster> monster = gson.fromJson(filereader, listType);
 		return monster;
 	}
 	
 	// Lade Traps aus der Datenbank
-	private ArrayList<Trap> loadTraps() throws FileNotFoundException {
+	public List<Trap> loadTraps() throws FileNotFoundException {
 		FileReader filereader = new FileReader(trapDatabasePath);
-		Type arrayListType = new TypeToken<ArrayList<Trap>>() {}.getType();
-		ArrayList<Trap> traps = gson.fromJson(filereader, arrayListType);
+		Type listType = new TypeToken<List<Trap>>() {}.getType();
+		List<Trap> traps = gson.fromJson(filereader, listType);
 		return traps;
 	}
 	
 	
 	// Lade Spells aus der Datenbank
-	private ArrayList<Spell> loadSpells() throws FileNotFoundException {
+	public List<Spell> loadSpells() throws FileNotFoundException {
 		FileReader filereader = new FileReader(spellDatabasePath);
-		Type arrayListType = new TypeToken<ArrayList<Spell>>() {}.getType();
-		ArrayList<Spell> spells = gson.fromJson(filereader, arrayListType);
+		Type listType = new TypeToken<List<Spell>>() {}.getType();
+		List<Spell> spells = gson.fromJson(filereader, listType);
 		return spells;
 	}
 	
 	
-	// Speichere alle Karten
-	public void saveCards(ArrayList<Card> cards) {
-		try {
-			saveMonsters(cards);
-			saveTraps(cards);
-			saveSpells(cards);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	// Speichere Monster 
-	private void saveMonsters(ArrayList<Card> cards) throws FileNotFoundException {
-		ArrayList<Monster> monsters = new ArrayList<Monster>();
-		for (Card card : cards) {
-			if (card instanceof Monster) {
-				monsters.add((Monster)card);
-			}
-		}
+	public void saveMonsters(List<Monster> monsters) throws FileNotFoundException {
 		String json = gson.toJson(monsters);
-		
 		writeInFile(monsterDatabasePath, json);
 	}
 	
 	// Speichere Traps 
-	private void saveTraps(ArrayList<Card> cards) throws FileNotFoundException {
-		ArrayList<Trap> traps = new ArrayList<Trap>();
-		for (Card card : cards) {
-			if (card instanceof Trap) {
-				traps.add((Trap)card);
-			}
-		}
+	public void saveTraps(List<Trap> traps) throws FileNotFoundException {
 		String json = gson.toJson(traps);
-		
 		writeInFile(trapDatabasePath, json);
 	}
 	
 	// Speichere Spells
-	private void saveSpells(ArrayList<Card> cards) throws FileNotFoundException {
-		ArrayList<Spell> spells = new ArrayList<Spell>();
-		for (Card card : cards) {
-			if (card instanceof Spell) {
-				spells.add((Spell)card);
-			}
-		}
+	public void saveSpells(List<Spell> spells) throws FileNotFoundException {
 		String json = gson.toJson(spells);
-		
 		writeInFile(spellDatabasePath, json);
 	}
 	

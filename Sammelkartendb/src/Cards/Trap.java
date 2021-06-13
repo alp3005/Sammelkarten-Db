@@ -3,13 +3,13 @@ package Cards;
 public class Trap extends Card {
 	private int type;
 	private String effect;
-	private Tag[] tags;
+	private int tag;
 	
-	public Trap(String n, int id, int t, String e, Tag[] tag) {
+	public Trap(String n, int id, int t, String e, int tag) {
 		super(n, 3, id);
 		this.type = t;
 		this.effect = e;
-		this.tags = tag;
+		this.tag = tag;
 	}
 	
 	public int getType() {
@@ -28,12 +28,12 @@ public class Trap extends Card {
 		this.effect = e;
 	}
 	
-	public Tag[] getTags() {
-		return this.tags;
+	public int getTag() {
+		return this.tag;
 	}
 	
-	public void setTags(Tag[] t) {
-		this.tags = t;
+	public void setTags(int t) {
+		this.tag = t;
 	}
 	
 }

@@ -1,5 +1,11 @@
 package application;
 
+import java.io.FileNotFoundException;
+
+import Cards.Monster;
+import Cards.Spell;
+import Cards.Trap;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +46,8 @@ public class ErstellenViewController {
 	@FXML
 	private ComboBox magicTypeBox;
 	@FXML
+	private TextField magicEffectBox;
+	@FXML
 	private ComboBox magicTagBox;
 
 	//Fallen stuff
@@ -49,6 +57,8 @@ public class ErstellenViewController {
 	ObservableList<String> trapTypeList = FXCollections.observableArrayList("Normal", "Konterfalle", "Permanentenfalle");
 	@FXML
 	private ComboBox trapTypeBox;
+	@FXML
+	private TextField trapEffectBox;
 	@FXML
 	private ComboBox trapTagBox;
 	
@@ -117,5 +127,65 @@ public class ErstellenViewController {
 			magicGrid.setManaged(false);
 			magicGrid.setVisible(false);
 		}
+	}
+	
+	@FXML
+	private void createCard(ActionEvent event) {
+		try {
+			String cardType = (String)typeBox.getValue();
+			switch (cardType) {
+				case "Monster":
+					createMonsterCard();
+					break;
+				case "Zauber":
+					createSpellCard();
+					break;
+				case "Falle":
+					createTrapCard();
+					break;
+			}
+			Platform.exit();
+		} catch(Exception ex) {
+			// Maybe revert the highest id in CardsHandler
+			ex.printStackTrace();
+		}
+		
+	}
+	
+	private void createMonsterCard() throws FileNotFoundException {
+		CardsHandler cardsHandler = CardsHandler.get();
+		String name = nameField.getText();
+		int id = cardsHandler.getNextId();
+		int element = monsterElementList.indexOf(elementBox.getValue());
+		int level = Integer.parseInt((String)levelBox.getValue());
+		int attack = Integer.parseInt(attackField.getText());
+		int defense = Integer.parseInt(defenseField.getText());
+		
+		Monster monster = new Monster(name, id, element, level, attack, defense);
+		cardsHandler.addMonster(monster);
+	}
+	
+	private void createSpellCard() throws FileNotFoundException {
+		CardsHandler cardsHandler = CardsHandler.get();
+		String name = nameField.getText();
+		int id = cardsHandler.getNextId();
+		int type = magicTypeList.indexOf(magicTypeBox.getValue());
+		String effect = magicEffectBox.getText();
+		int tag = magicTrapTagList.indexOf(magicTagBox.getValue());
+		
+		Spell spell = new Spell(name, id, type, effect, tag);
+		cardsHandler.addSpell(spell);
+	}
+	
+	private void createTrapCard() throws FileNotFoundException {
+		CardsHandler cardsHandler = CardsHandler.get();
+		String name = nameField.getText();
+		int id = cardsHandler.getNextId();
+		int type = trapTypeList.indexOf(trapTypeBox.getValue());
+		String effect = trapEffectBox.getText();
+		int tag = magicTrapTagList.indexOf(trapTagBox.getValue());
+		
+		Trap trap = new Trap(name, id, type, effect, tag);
+		cardsHandler.addTrap(trap);
 	}
 }
