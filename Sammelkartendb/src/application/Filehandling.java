@@ -108,7 +108,7 @@ public class Filehandling {
 				pWriterM.println(trapList.get(i).getEffect());
 				pWriterM.println("[]");
 				String tag = "";
-				for(int t = 0; t < trapList.get(i).getTags().length; t++) {
+				for(int t = 0; t < trapList.get(i).getTag().length; t++) {
 					tag += trapList.get(i).getTags()[t].getBezeichnung();
 					tag += ",";
 				}

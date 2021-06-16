@@ -9,10 +9,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -26,29 +24,34 @@
                   <Font name="Arial Black" size="53.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="TOP_CENTER" prefHeight="120.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="628.0" spacing="10.0">
+                  <HBox alignment="CENTER" prefHeight="93.0" prefWidth="638.0">
                      <children>
-                        <Label text="Suchgorithmen:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <ComboBox prefWidth="150.0" />
-                        <Label text="Sortieralgorithmen:">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <ComboBox prefWidth="150.0" />
+                        <HBox alignment="CENTER" prefHeight="93.0" prefWidth="290.0" spacing="5.0">
+                           <children>
+                              <Label text="Suchgorithmen:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox prefWidth="150.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="93.0" prefWidth="350.0" spacing="5.0">
+                           <children>
+                              <Label text="Sortieralgorithmen:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox prefWidth="150.0" />
+                           </children>
+                        </HBox>
                      </children>
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
                   </HBox>
                   <HBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="610.0">
                      <children>
@@ -65,15 +68,12 @@
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
             </HBox>
             <HBox alignment="TOP_CENTER" prefHeight="654.0" prefWidth="1280.0" style="-fx-background-color: lightblue;">
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="640.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="515.0" prefWidth="620.0" style="-fx-background-color: #8697A6;">
+                        <VBox prefHeight="515.0" prefWidth="620.0" style="-fx-background-color: #8697A6;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </VBox.margin>
@@ -81,39 +81,15 @@
                               <Insets />
                            </opaqueInsets>
                            <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                            <children>
-                              <Label prefHeight="29.0" prefWidth="125.0" text="Kartenliste" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Arial Black" size="20.0" />
-                                 </font>
-                              </Label>
                               <ScrollPane prefHeight="488.0" prefWidth="511.0" style="-fx-background-color: lightgrey;">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="396.0" prefWidth="605.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="34.0" prefWidth="573.0">
                                        <children>
                                           <VBox prefHeight="476.0" prefWidth="568.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <HBox prefHeight="0.0" prefWidth="595.0" spacing="5.0" style="-fx-background-color: brown;">
-                                                <children>
-                                                	<Label prefHeight="29.0" prefWidth="350.0" text="Kartenname">
-                                                      <font>
-                                                         <Font name="Arial Black" size="20.0" />
-                                                      </font>
-                                                   </Label>
-                                                   <Label prefHeight="29.0" prefWidth="220.0" text="Attribut">
-                                                      <font>
-                                                         <Font name="Arial Black" size="20.0" />
-                                                      </font>
-                                                   </Label>
-                                                </children>
-                                                <padding>
-                                                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                                </padding>
-                                             </HBox>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
+                                          	<Label text="Test Test Test">Test Test Test</Label>
                                           </VBox>
                                        </children>
                                     </AnchorPane>
@@ -127,67 +103,10 @@
                               </ScrollPane>
                            </children>
                         </VBox>
-                        <VBox alignment="TOP_CENTER" prefHeight="119.0" prefWidth="620.0" style="-fx-background-color: #8697A6;">
+                        <VBox prefHeight="50.0" prefWidth="640.0" style="-fx-background-color: #8697A6;">
                            <VBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" />
                            </VBox.margin>
-                           <children>
-                              <Label prefHeight="29.0" prefWidth="184.0" text="Karten Sortieren" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Arial Black" size="20.0" />
-                                 </font>
-                              </Label>
-                              <FlowPane columnHalignment="CENTER" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="5.0">
-                                 <children>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Name">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Kartenart">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Element">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Stufe">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Angriff">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Verteidigung">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Typ">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Tag">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </FlowPane>
-                           </children>
                         </VBox>
                      </children>
                   </VBox>
@@ -200,412 +119,404 @@
                                     <Font name="Arial Black" size="20.0" />
                                  </font>
                               </Label>
-                              <HBox prefHeight="341.0" prefWidth="620.0" spacing="5.0" style="-fx-background-color: #8697A6;">
+                              <HBox prefHeight="341.0" prefWidth="620.0" style="-fx-background-color: #8697A6;">
                                  <children>
-                                    <Pane prefHeight="252.0" prefWidth="305.0">
+                                    <VBox alignment="TOP_CENTER" prefHeight="280.0" prefWidth="315.0" style="-fx-background-color: #BFCDD9;">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
                                        <children>
-                                          <VBox alignment="TOP_CENTER" prefHeight="242.0" prefWidth="303.0" style="-fx-background-color: #BFCDD9;">
+                                          <GridPane prefHeight="72.0" prefWidth="305.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="205.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
                                              <children>
-                                                <GridPane prefHeight="72.0" prefWidth="305.0">
-                                                  <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="100.0" />
-                                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="205.0" />
-                                                  </columnConstraints>
-                                                  <rowConstraints>
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                  </rowConstraints>
-                                                   <children>
-                                                      <Label text="Name:">
-                                                         <font>
-                                                            <Font size="20.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label text="Kartenart:" GridPane.rowIndex="1">
-                                                         <font>
-                                                            <Font size="20.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="nameFieldKF1" text="TestTestTest" GridPane.columnIndex="1">
-                                                         <font>
-                                                            <Font size="20.0" />
-                                                         </font>
-                                                      </Label>
-                                                      <Label fx:id="typeBoxKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                         <font>
-                                                            <Font size="20.0" />
-                                                         </font>
-                                                      </Label>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" />
-                                                   </VBox.margin>
-                                                </GridPane>
-                                                <HBox prefHeight="205.0" prefWidth="305.0">
-                                                   <children>
-                                                      <GridPane fx:id="monsterGridKF1" prefHeight="248.0" prefWidth="428.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Element:">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Stufe:" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Angriff:" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Verteidigung:" GridPane.rowIndex="3">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="elementKF1" text="TestTestTest" GridPane.columnIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="levelBoxKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="attackFieldKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="defenseFieldKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </GridPane>
-                                                      <GridPane fx:id="magicGridKF1" prefHeight="248.0" prefWidth="428.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="6.0" prefWidth="23.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Effekt:">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Typ:" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Tag:" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <TextArea editable="false" prefHeight="85.0" prefWidth="172.0" GridPane.columnIndex="1" />
-                                                            <Label fx:id="magicTypeBoxKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="magicTagBoxKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                      </GridPane>
-                                                      <GridPane fx:id="trapGridKF1" prefHeight="248.0" prefWidth="428.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="171.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Effekt:">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Typ:" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Tag:" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <TextArea editable="false" GridPane.columnIndex="1" />
-                                                            <Label fx:id="trapTypeBoxKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="trapTagBoxKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                      </GridPane>
-                                                   </children>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </HBox>
+                                                <Label text="Name:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Kartentyp:" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="TestTestTest" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
                                              </children>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </VBox>
-                                       </children>
-                                    </Pane>
-                                    <Pane prefHeight="200.0" prefWidth="305.0">
-                                       <children>
-                                          <VBox alignment="TOP_CENTER" prefHeight="242.0" prefWidth="303.0" style="-fx-background-color: #BFCDD9;">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                          <HBox prefHeight="205.0" prefWidth="305.0">
                                              <children>
-                                                <GridPane prefHeight="72.0" prefWidth="305.0">
+                                                <GridPane fx:id="monsterGrid" prefHeight="248.0" prefWidth="428.0">
                                                    <columnConstraints>
-                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="100.0" />
-                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="205.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
                                                    </columnConstraints>
                                                    <rowConstraints>
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                    <children>
-                                                      <Label text="Name:">
+                                                      <Label text="Element:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Stufe:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Angriff:" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Verteidigung:" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1">
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label text="Kartenart:" GridPane.rowIndex="1">
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="nameFieldKF2" text="TestTestTest" GridPane.columnIndex="1">
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
-                                                      <Label fx:id="typeBoxKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                                          <font>
                                                             <Font size="20.0" />
                                                          </font>
                                                       </Label>
                                                    </children>
-                                                   <VBox.margin>
-                                                      <Insets bottom="5.0" />
-                                                   </VBox.margin>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
                                                 </GridPane>
-                                                <HBox prefHeight="205.0" prefWidth="305.0">
+                                                <GridPane fx:id="magicGrid" prefHeight="248.0" prefWidth="428.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="6.0" prefWidth="23.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
                                                    <children>
-                                                      <GridPane fx:id="monsterGridKF2" prefHeight="248.0" prefWidth="428.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Element:">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Stufe:" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Angriff:" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Verteidigung:" GridPane.rowIndex="3">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="elementKF2" text="TestTestTest" GridPane.columnIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="levelBoxKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="attackFieldKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="defenseFieldKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </GridPane>
-                                                      <GridPane fx:id="magicGridKF2" prefHeight="248.0" prefWidth="428.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="6.0" prefWidth="23.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Effekt:">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Typ:" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Tag:" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <TextArea editable="false" prefHeight="85.0" prefWidth="172.0" GridPane.columnIndex="1" />
-                                                            <Label fx:id="magicTypeBoxKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="magicTagBoxKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                      </GridPane>
-                                                      <GridPane fx:id="trapGridKF2" prefHeight="248.0" prefWidth="428.0">
-                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="171.0" />
-                                                         </columnConstraints>
-                                                         <rowConstraints>
-                                                            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                         </rowConstraints>
-                                                         <children>
-                                                            <Label text="Effekt:">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Typ:" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label text="Tag:" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="18.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <TextArea editable="false" GridPane.columnIndex="1" />
-                                                            <Label fx:id="trapTypeBoxKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                            <Label fx:id="trapTagBoxKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                               <font>
-                                                                  <Font size="20.0" />
-                                                               </font>
-                                                            </Label>
-                                                         </children>
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                      </GridPane>
+                                                      <Label text="Effekt:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Typ:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Tag:" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextArea prefHeight="85.0" prefWidth="172.0" GridPane.columnIndex="1" />
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
                                                    </children>
-                                                </HBox>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <HBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </HBox.margin>
+                                                </GridPane>
+                                                <GridPane fx:id="trapGrid" prefHeight="248.0" prefWidth="428.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="171.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="Effekt:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Typ:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Tag:" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextArea GridPane.columnIndex="1" />
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <HBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </HBox.margin>
+                                                </GridPane>
                                              </children>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </VBox>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
                                        </children>
-                                    </Pane>
+                                    </VBox>
+                                    <VBox alignment="TOP_CENTER" prefHeight="280.0" prefWidth="315.0" style="-fx-background-color: #BFCDD9;">
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                       <children>
+                                          <GridPane prefHeight="72.0" prefWidth="305.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="205.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label text="Name:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Kartentyp:" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="TestTestTest" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" />
+                                             </VBox.margin>
+                                          </GridPane>
+                                          <HBox prefHeight="205.0" prefWidth="305.0">
+                                             <children>
+                                                <GridPane fx:id="monsterGrid1" prefHeight="248.0" prefWidth="428.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="Element:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Stufe:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Angriff:" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Verteidigung:" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
+                                                </GridPane>
+                                                <GridPane fx:id="magicGrid1" prefHeight="248.0" prefWidth="428.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="6.0" prefWidth="23.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="170.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="Effekt:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Typ:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Tag:" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextArea prefHeight="85.0" prefWidth="172.0" GridPane.columnIndex="1" />
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <HBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </HBox.margin>
+                                                </GridPane>
+                                                <GridPane fx:id="trapGrid1" prefHeight="248.0" prefWidth="428.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="177.0" minWidth="10.0" prefWidth="23.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="171.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="Effekt:">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Typ:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="Tag:" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextArea GridPane.columnIndex="1" />
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <HBox.margin>
+                                                      <Insets top="5.0" />
+                                                   </HBox.margin>
+                                                </GridPane>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </VBox>
                                  </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
                               </HBox>
                            </children>
                            <VBox.margin>
@@ -638,7 +549,7 @@
                                                       <Font size="18.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="Kartenart:" GridPane.rowIndex="1">
+                                                <Label text="Typ:" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
