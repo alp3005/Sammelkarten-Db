@@ -19,7 +19,7 @@ public class CardsHandler {
 	private List<Spell> spellCards;
 	private List<Trap> trapCards;
 	private static CardsHandler instance;
-	//setze Id=0 und erhöhe immer um +1 für eine geaddete Karte
+	//setze Id=0 und erhöhe immer um +1 für eine geaddete Karte [Buggt noch ?]
 	//private int highestId = 0;
 	
 	
