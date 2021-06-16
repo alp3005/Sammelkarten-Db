@@ -49,6 +49,16 @@ public class SortierenMonster {
 				}
 				indexx++;
 				break;
+			case 6:
+				if (l[indexl].getLvl() < r[indexr].getLvl()) {
+					newl[indexx] = l[indexl];
+					indexl++;
+				} else {
+					newl[indexx] = r[indexr];
+					indexr += 1;
+				}
+				indexx++;
+				break;
 			default:
 				throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 			}
@@ -119,6 +129,23 @@ public class SortierenMonster {
 					return j;
 				}
 			}
+		case 6:
+			pivot = arr[(l+r)/2].getLvl();
+			while (true) {
+				do {
+					i++;
+				} while (arr[i].getLvl() < pivot);
+				do {
+					j--;
+				} while (arr[j].getLvl() > pivot);
+				if (i < j) {
+					Monster a = arr[i];
+					arr[i] = arr[j];
+					arr[j] = a;
+				} else {
+					return j;
+				}
+			}
 		default:
 			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 		}
@@ -138,6 +165,12 @@ public class SortierenMonster {
 					break;
 				case 4:
 					if (arr[j].getDef() < min.getDef()) {
+						minPos = j;
+						min = arr[minPos];
+					}
+					break;
+				case 6:
+					if (arr[j].getLvl() < min.getLvl()) {
 						minPos = j;
 						min = arr[minPos];
 					}
@@ -194,8 +227,18 @@ public class SortierenMonster {
 				} else
 					break;
 				break;
-				default:
-					throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
+			case 6:
+				if(c+1 <= b-1)
+					if(arr[c].getLvl() <= arr[c+1].getLvl())
+						c++;
+				if(arr[a].getLvl() <= arr[c].getLvl()) {
+					arr = heapSortSwap(arr, a, c);
+					a = c;
+				} else
+					break;
+				break;
+			default:
+				throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 			}
 		}
 		return arr;
