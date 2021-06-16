@@ -1,1 +1,26 @@
-[{"type":1,"effect":"Düsterwüster Schüster","tag":2,"name":"Düsterwüster ","kategory":3,"id":3}]
+[
+  {
+    "type": 1,
+    "effect": "Wenn ein Monster eines Gegners einen Angriff deklariert: Wähle das angreifende Monster; annulliere den Angriff, dann beende die Battle Phase.",
+    "tag": 2,
+    "name": "Angriff annullieren",
+    "kategory": 3,
+    "id": 2
+  },
+  {
+    "type": 2,
+    "effect": "Jeder „Dunkler Magier“ in deiner Monsterzone bleibt von Karteneffekten deines Gegners unberührt. Falls diese offene Karte das Spielfeld verlässt: Zerstöre alle Monster, die du kontrollierst. Du kannst den folgenden Effekt von „Ewige Seele“ nur einmal pro Spielzug verwenden. Du kannst 1 dieser Effekte aktivieren;?Beschwöre 1 „Dunkler Magier“ als Spezialbeschwörung von deiner Hand oder deinem Friedhof.?Füge deiner Hand 1 „Angriff mit Dunkler Magie“ oder „Tausend Messer“ von deinem Deck hinzu. ",
+    "tag": 1,
+    "name": "Ewige Seele",
+    "kategory": 3,
+    "id": 1
+  },
+  {
+    "type": 0,
+    "effect": "Wähle 1 offenes Monster, das du kontrollierst; zerstöre es und falls du dies tust, beschwöre 1 „Rakkete“-Monster mit einem unterschiedlichen Grund-Namen als Spezialbeschwörung von deinem Deck oder Friedhof. Du kannst nur 1 „Taktischer Wechsler“ pro Spielzug aktivieren. ",
+    "tag": 0,
+    "name": "Taktischer Wechsler",
+    "kategory": 3,
+    "id": 0
+  }
+]

@@ -1,1 +1,46 @@
-[{"type":1,"effect":"465465465465465","tags":[],"name":"kokoko","kategory":2,"id":2}]
+[
+  {
+    "type": 3,
+    "effect": "Rüste nur ein „Amazonisch“-Monster mit dieser Karte aus. Einmal pro Spielzug kann das ausgerüstete Monster nicht durch Kampf zerstört werden. Nach der Schadensberechnung, falls das ausgerüstete Monster ein Monster angreift: Zerstöre das angegriffene Monster. ",
+    "tag": 0,
+    "name": "Amazonisches Erbstück",
+    "kategory": 2,
+    "id": 0
+  },
+  {
+    "type": 1,
+    "effect": "Aktiviere 1 dieser Effekte.
+?Wähle 1 offenes Monster,
+das dein Gegner kontrolliert;
+ändere die Kampfposition
+des gewählten Ziels.
+?Biete 1 Monster als Tribut
+an und wähle dann 1 offenes
+Monster, das dein Gegner
+kontrolliert; übernimm bis zur
+End Phase die Kontrolle über
+das gewählte Ziel. ",
+    "tag": 3,
+    "name": "Feindkontrolle",
+    "kategory": 2,
+    "id": 3
+  },
+  {
+    "type": 0,
+    "effect": "Annulliere bis zum Ende dieses
+Spielzugs die Effekte aller
+offenen Monster, die dein
+Gegner derzeit kontrolliert,
+zusätzlich erhält dein Gegner für
+den Rest dieses Spielzugs,
+nachdem diese Karte aufgelöst
+wurde, keinen Schaden. Kein
+Spieler kann Monstereffekte als
+Reaktion auf die Aktivierung
+dieser Karte aktivieren. ",
+    "tag": 2,
+    "name": "Kein dunkler Herrscher mehr",
+    "kategory": 2,
+    "id": 2
+  }
+]

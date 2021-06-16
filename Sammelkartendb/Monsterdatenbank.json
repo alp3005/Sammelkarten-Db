@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "attribute": 2500,
+    "lvl": 7,
+    "atk": 2500,
+    "def": 2000,
+    "name": "Dunkler Magier",
+    "kategory": 1,
+    "id": 1
+  },
+  {
+    "attribute": 3000,
+    "lvl": 8,
+    "atk": 3000,
+    "def": 2500,
+    "name": "Blauäugiger W.Drache",
+    "kategory": 1,
+    "id": 0
+  },
+  {
+    "attribute": 300,
+    "lvl": 1,
+    "atk": 300,
+    "def": 200,
+    "name": "Kleine Motte",
+    "kategory": 1,
+    "id": 5
+  },
+  {
+    "attribute": 1200,
+    "lvl": 4,
+    "atk": 1200,
+    "def": 2000,
+    "name": "Aqua Madoor",
+    "kategory": 1,
+    "id": 4
+  },
+  {
+    "attribute": 100,
+    "lvl": 5,
+    "atk": 100,
+    "def": 100,
+    "name": "Aitsu",
+    "kategory": 1,
+    "id": 3
+  },
+  {
+    "attribute": 1200,
+    "lvl": 3,
+    "atk": 1200,
+    "def": 700,
+    "name": "Babydrache",
+    "kategory": 1,
+    "id": 2
+  }
+]
