@@ -9,16 +9,18 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
 
 class Database {
-	// Erstelle Objekt für Json
-	private Gson gson = new Gson(); 
+	// Erstelle Objekt für Json - GsonBuilder().setPrettyPrinting().create() = Json Datei schreiben mit Zeilenumbruch statt Einzeiler // Mehr Speicherplatz
+	private Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
+	// Alternative als Einzeiler:
+	// private Gson gson = new Gson();
 	
 	// Pfade 
 	private final String monsterDatabasePath = "Monsterdatenbank.json";
