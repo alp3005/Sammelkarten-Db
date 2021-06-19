@@ -20,7 +20,7 @@ public class CardsHandler {
 	private List<Trap> trapCards;
 	private static CardsHandler instance;
 	//setze Id=0 und erhöhe immer um +1 für eine geaddete Karte [Buggt noch ?]
-	//private int highestId = 0;
+	private int highestId = 0;
 	
 	
 	private CardsHandler() {
@@ -31,19 +31,19 @@ public class CardsHandler {
 			allCards.addAll(monsterCards);
 			allCards.addAll(spellCards);
 			allCards.addAll(trapCards);	
-	//		loadHighestId();
+			loadHighestId();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 	
-	/*private void loadHighestId() {
+	private void loadHighestId() {
 		if (!allCards.isEmpty()) {
 			Card highestIdCard = Collections.max(allCards, Comparator.comparing(c -> c.getId()));
 			highestId = highestIdCard.getId();
 		}
 	}
-	*/
+	
 	public static CardsHandler get() {
 		if (instance == null) {
 			instance = new CardsHandler();
@@ -73,8 +73,8 @@ public class CardsHandler {
 		return allCards;
 	}
 	
-	/*public int getNextId() {
-		highestId ++;
+	public int getNextId() {
+		highestId++;
 		return highestId;
-	}*/
+	}
 }

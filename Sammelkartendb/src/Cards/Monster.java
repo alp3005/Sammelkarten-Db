@@ -1,25 +1,25 @@
 package Cards;
 
 public class Monster extends Card {
-	private int attribute;
+	private String element;
 	private int lvl;
 	private int atk;
 	private int def;
 
-	public Monster(String n, int id, int a, int l, int atk, int def) {
+	public Monster(String n, int id, String attr, int l, int atk, int def) {
 		super(n, 1, id);
-		this.attribute = a;
+		this.element = attr;
 		this.lvl = l;
 		this.atk = atk;
 		this.def = def;
 	}
 
-	public int getAttribute() {
-		return this.attribute;
+	public String getAttribute() {
+		return this.element;
 	}
 
-	public void setAttribute(int a) {
-		this.attribute = a;
+	public void setAttribute(String a) {
+		this.element = a;
 	}
 
 	public int getLvl() {
