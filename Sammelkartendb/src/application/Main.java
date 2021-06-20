@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Cards.Card;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -47,7 +48,6 @@ public class Main extends Application {
 		addDialogeStage.initOwner(primaryStage);
 		Scene scene = new Scene(erstellenView);
 		addDialogeStage.setScene(scene);
-		addDialogeStage.showAndWait();
-		
+		addDialogeStage.showAndWait();	
 	}
 }

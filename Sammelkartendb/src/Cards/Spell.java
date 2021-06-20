@@ -1,22 +1,22 @@
 package Cards;
 
 public class Spell extends Card {
-	private int type;
+	private String type;
 	private String effect;
-	private int tag;
+	private String tag;
 	
-	public Spell(String name, int id, int type, String effect, int tag) {
+	public Spell(String name, int id, String type, String effect, String tag) {
 		super(name, 2, id);
 		this.type = type;
 		this.effect = effect;
 		this.tag = tag;
 	}
 
-	public int getType() {
+	public String getType() {
 		return this.type;
 	}
 	
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	
@@ -28,11 +28,11 @@ public class Spell extends Card {
 		this.effect = effect;
 	}
 	
-	public int getTag() {
+	public String getTag() {
 		return this.tag;
 	}
 	
-	public void setTag(int t) {
+	public void setTag(String t) {
 		this.tag = t;
 	}
 	

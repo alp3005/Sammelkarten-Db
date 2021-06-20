@@ -1,46 +1,26 @@
 [
   {
-    "type": 3,
-    "effect": "Rüste nur ein „Amazonisch“-Monster mit dieser Karte aus. Einmal pro Spielzug kann das ausgerüstete Monster nicht durch Kampf zerstört werden. Nach der Schadensberechnung, falls das ausgerüstete Monster ein Monster angreift: Zerstöre das angegriffene Monster. ",
-    "tag": 0,
+    "type": "Ausrüstungszauber",
+    "effect": "Rüste nur ein Amazonisch-Monster mit dieser Karte aus. Einmal pro Spielzug kann das ausgerüstete Monster nicht durch Kampf zerstört werden. Nach der Schadensberechnung, falls das ausgerüstete Monster ein Monster angreift: Zerstöre das angegriffene Monster.",
+    "tag": "zerstören",
     "name": "Amazonisches Erbstück",
     "kategory": 2,
-    "id": 0
+    "id": 7
   },
   {
-    "type": 1,
-    "effect": "Aktiviere 1 dieser Effekte.
-?Wähle 1 offenes Monster,
-das dein Gegner kontrolliert;
-ändere die Kampfposition
-des gewählten Ziels.
-?Biete 1 Monster als Tribut
-an und wähle dann 1 offenes
-Monster, das dein Gegner
-kontrolliert; übernimm bis zur
-End Phase die Kontrolle über
-das gewählte Ziel. ",
-    "tag": 3,
+    "type": "Schnellzauber",
+    "effect": "Wähle 1 offenes Monster, das dein Gegner kontrolliert; ändere die Kampfposition des gewählten Ziels.\nBiete 1 Monster als Tribut an und wähle dann 1 offenes Monster, das dein Gegner kontrolliert; übernimm bis zur End Phase die Kontrolle über das gewählte Ziel. ",
+    "tag": "Position ändern",
     "name": "Feindkontrolle",
     "kategory": 2,
-    "id": 3
+    "id": 8
   },
   {
-    "type": 0,
-    "effect": "Annulliere bis zum Ende dieses
-Spielzugs die Effekte aller
-offenen Monster, die dein
-Gegner derzeit kontrolliert,
-zusätzlich erhält dein Gegner für
-den Rest dieses Spielzugs,
-nachdem diese Karte aufgelöst
-wurde, keinen Schaden. Kein
-Spieler kann Monstereffekte als
-Reaktion auf die Aktivierung
-dieser Karte aktivieren. ",
-    "tag": 2,
+    "type": "Normal",
+    "effect": "Annulliere bis zum Ende dieses Spielzugs die Effekte aller offenen Monster, die dein Gegner derzeit kontrolliert, zusätzlich erhält dein Gegner für den Rest dieses Spielzugs, nachdem diese Karte aufgelöst wurde, keinen Schaden. Kein Spieler kann Monstereffekte als Reaktion auf die Aktivierung dieser Karte aktivieren. ",
+    "tag": "einschränken",
     "name": "Kein dunkler Herrscher mehr",
     "kategory": 2,
-    "id": 2
+    "id": 9
   }
 ]
