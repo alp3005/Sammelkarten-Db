@@ -46,9 +46,17 @@ public class ErstellenViewController {
 	@FXML
 	private ComboBox magicTypeBox;
 	@FXML
-	private TextField magicEffectBox;
+	private TextArea magicEffectBox;
 	@FXML
-	private ComboBox magicTagBox;
+	private CheckBox magicTagZer;
+	@FXML
+	private CheckBox magicTagBes;
+	@FXML
+	private CheckBox magicTagEin;
+	@FXML
+	private CheckBox magicTagPos;
+	@FXML
+	private CheckBox magicTagSuc;
 
 	//Fallen stuff
 	@FXML
@@ -58,9 +66,17 @@ public class ErstellenViewController {
 	@FXML
 	private ComboBox trapTypeBox;
 	@FXML
-	private TextField trapEffectBox;
+	private TextArea trapEffectBox;
 	@FXML
-	private ComboBox trapTagBox;
+	private CheckBox trapTagZer;
+	@FXML
+	private CheckBox trapTagBes;
+	@FXML
+	private CheckBox trapTagEin;
+	@FXML
+	private CheckBox trapTagPos;
+	@FXML
+	private CheckBox trapTagSuc;
 	
 	ObservableList<String> magicTrapTagList = FXCollections.observableArrayList("zerstören", "beschwören", "einschränken", "Position ändern", "suchen", "anderes");
 
@@ -79,14 +95,10 @@ public class ErstellenViewController {
 		//Zauber stuff
 		magicTypeBox.setItems(magicTypeList);
 		magicTypeBox.setValue("Normal");
-		magicTagBox.setItems(magicTrapTagList);
-		magicTagBox.setValue("anderes");
 		
 		//Fallen stuff
 		trapTypeBox.setItems(trapTypeList);
 		trapTypeBox.setValue("Normal");
-		trapTagBox.setItems(magicTrapTagList);
-		trapTagBox.setValue("anderes");
 		
 		//entferne andere stuff
 		magicGrid.setManaged(false);

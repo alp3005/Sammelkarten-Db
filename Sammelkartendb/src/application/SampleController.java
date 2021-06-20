@@ -6,8 +6,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -157,22 +159,42 @@ public class SampleController {
 		//Zauber Stuff
 		@FXML
 		private GridPane magicGridSearch;
+		@FXML
+		private TextArea magicEffectSearch;
 		
 		ObservableList<String> magicTypeListSearch = FXCollections.observableArrayList("Normal", "Schnellzauber", "Permanentenzauber", "Ausrüstungszauber");
 		@FXML
 		private ComboBox magicTypeBoxSearch;
 		@FXML
-		private ComboBox magicTagBoxSearch;
-
+		private CheckBox magicTagZerSearch;
+		@FXML
+		private CheckBox magicTagBesSearch;
+		@FXML
+		private CheckBox magicTagEinSearch;
+		@FXML
+		private CheckBox magicTagPosSearch;
+		@FXML
+		private CheckBox magicTagSucSearch;
+		
 		//Fallen stuff
 		@FXML
 		private GridPane trapGridSearch;
+		@FXML
+		private TextArea trapEffectSearch;
 		
 		ObservableList<String> trapTypeListSearch = FXCollections.observableArrayList("Normal", "Konterfalle", "Permanentenfalle");
 		@FXML
 		private ComboBox trapTypeBoxSearch;
 		@FXML
-		private ComboBox trapTagBoxSearch;
+		private CheckBox trapTagZerSearch;
+		@FXML
+		private CheckBox trapTagBesSearch;
+		@FXML
+		private CheckBox trapTagEinSearch;
+		@FXML
+		private CheckBox trapTagPosSearch;
+		@FXML
+		private CheckBox trapTagSucSearch;
 		
 		ObservableList<String> magicTrapTagListSearch = FXCollections.observableArrayList("zerstören", "beschwören", "einschränken", "Position ändern", "suchen", "anderes");
 //<<<<<<< Updated upstream
@@ -185,25 +207,25 @@ public class SampleController {
 			/////////////////////////////////////
 			
 			//--KartenFeld 1 start--
-			monsterGridKF1.setManaged(false);
-			monsterGridKF1.setVisible(false);
+//			monsterGridKF1.setManaged(false);
+			//monsterGridKF1.setVisible(false);
 			
-			magicGridKF1.setManaged(false);
-			magicGridKF1.setVisible(false);
+//			magicGridKF1.setManaged(false);
+//			magicGridKF1.setVisible(false);
 			
-			trapGridKF1.setManaged(false);
-			trapGridKF1.setVisible(false);
+//			trapGridKF1.setManaged(false);
+//			trapGridKF1.setVisible(false);
 			//--KartenFeld 1 ende--
 			
 			//--KartenFeld 2 start--
-			monsterGridKF2.setManaged(false);
-			monsterGridKF2.setVisible(false);
+//			monsterGridKF2.setManaged(false);
+//			monsterGridKF2.setVisible(false);
 			
-			magicGridKF2.setManaged(false);
-			magicGridKF2.setVisible(false);
+//			magicGridKF2.setManaged(false);
+//			magicGridKF2.setVisible(false);
 			
-			trapGridKF2.setManaged(false);
-			trapGridKF2.setVisible(false);
+//			trapGridKF2.setManaged(false);
+//			trapGridKF2.setVisible(false);
 			//--KartenFeld 2 ende--
 			
 			//--Suche start--
@@ -219,14 +241,10 @@ public class SampleController {
 			//Zauber stuff
 			magicTypeBoxSearch.setItems(magicTypeListSearch);
 			magicTypeBoxSearch.setValue("Normal");
-			magicTagBoxSearch.setItems(magicTrapTagListSearch);
-			magicTagBoxSearch.setValue("anderes");
 			
 			//Fallen stuff
 			trapTypeBoxSearch.setItems(trapTypeListSearch);
 			trapTypeBoxSearch.setValue("Normal");
-			trapTagBoxSearch.setItems(magicTrapTagListSearch);
-			trapTagBoxSearch.setValue("anderes");
 			
 			//entferne andere stuff
 			magicGridSearch.setManaged(false);
