@@ -93,7 +93,7 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="396.0" prefWidth="605.0">
                                        <children>
-                                          <VBox prefHeight="396.0" prefWidth="588.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="0.0">
+                                          <VBox fx:id="cardsVBox" prefHeight="396.0" prefWidth="588.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="0.0">
                                              <HBox prefHeight="39.0" prefWidth="569.0" spacing="5.0" style="-fx-background-color: brown;">
                                                 <children>
                                                 	<Label prefHeight="29.0" prefWidth="350.0" text="Kartenname">
@@ -111,9 +111,6 @@
                                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                                 </padding>
                                              </HBox>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
                                           </VBox>
                                        </children>
                                     </AnchorPane>
@@ -139,42 +136,42 @@
                               </Label>
                               <FlowPane columnHalignment="CENTER" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="5.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Name">
+                                    <Button  mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Name" onAction="#setSortType" userData="0">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Kartenart">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Kartenart" onAction="#setSortType" userData="1">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Element">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Element" onAction="#setSortType" userData="2">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Stufe">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Stufe" onAction="#setSortType" userData="3">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Angriff">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Angriff" onAction="#setSortType" userData="4">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Verteidigung">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Verteidigung" onAction="#setSortType" userData="5">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Typ">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Typ" onAction="#setSortType" userData="6">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Tag">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Tag" onAction="#setSortType" userData="7">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>

@@ -40,6 +40,7 @@ class Database {
 		FileReader filereader = new FileReader(monsterDatabasePath);
 		//ListType ist der Type von List<Monster> um Json in Liste umzuwandeln -Stackoverflow
 		Type listType = new TypeToken<List<Monster>>() {}.getType();
+		//?
 		List<Monster> monster = gson.fromJson(filereader, listType);
 		return monster;
 	}
@@ -70,6 +71,7 @@ class Database {
 	
 	// Speichere Traps 
 	public void saveTraps(List<Trap> traps) throws FileNotFoundException {
+		//?
 		String json = gson.toJson(traps);
 		writeInFile(trapDatabasePath, json);
 	}

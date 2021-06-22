@@ -19,7 +19,6 @@ public class CardsHandler {
 	private List<Spell> spellCards;
 	private List<Trap> trapCards;
 	private static CardsHandler instance;
-	//setze Id=0 und erhöhe immer um +1 für eine geaddete Karte [Buggt noch ?]
 	private int highestId = 0;
 	
 	
@@ -51,6 +50,7 @@ public class CardsHandler {
 		return instance;
 	}
 	
+	//? wieso monsterCard
 	public void addMonster(Monster monsterCard) throws FileNotFoundException {
 		monsterCards.add(monsterCard);
 		allCards.add(monsterCard);
