@@ -297,7 +297,7 @@ public class SortierenMain {
 		int indexx = 0;
 		if(at == 1) { //Name
 			while (indexl < l.length && indexr < r.length) {
-				if (l[indexl].getName().compareToIgnoreCase(r[indexr].getName()) <= 0) { // Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
+				if (l[indexl].getName().compareToIgnoreCase(r[indexr].getName()) <= 0) { //Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
 					newl[indexx] = l[indexl];
 					indexl++;
 				} else {

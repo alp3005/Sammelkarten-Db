@@ -31,12 +31,12 @@ public class SortierenZauber {
 		int indexx = 0;
 		while (indexl < l.length && indexr < r.length) {
 			if(at == 2) {
-				if (l[indexl].getType() < r[indexr].getType()) {
+				if (l[indexl].getType().compareToIgnoreCase(r[indexr].getType()) <= 0 ) { //Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
 					newl[indexx] = l[indexl];
 					indexl++;
 				} else {
 					newl[indexx] = r[indexr];
-					indexr += 1;
+					indexr++;
 				}
 				indexx++;
 			} else {
@@ -71,7 +71,7 @@ public class SortierenZauber {
 	}
 
 	private static int quicksortSplit(Spell[] arr,int l, int r, int at) throws Exception {
-		int pivot;
+		String pivot;
 		int i = l-1;
 		int j = r+1;
 		if(at == 2) {
@@ -79,10 +79,10 @@ public class SortierenZauber {
 			while (true) {
 				do {
 					i++;
-				} while (arr[i].getType() < pivot);
+				} while (arr[i].getType().compareToIgnoreCase(pivot) <= 0); //Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
 				do {
 					j--;
-				} while (arr[j].getType() > pivot);
+				} while (arr[j].getType().compareToIgnoreCase(pivot) > 0); //Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
 				if (i < j) {
 					Spell a = arr[i];
 					arr[i] = arr[j];
@@ -102,7 +102,7 @@ public class SortierenZauber {
 			Spell min = arr[minPos];
 			for (int j = i+1; j < arr.length; j++) {
 				if(at == 2) {
-					if (arr[j].getType() < min.getType()) {
+					if (arr[j].getType().compareToIgnoreCase(min.getType()) <= 0) { //Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
 						minPos = j;
 						min = arr[minPos];
 					} else
@@ -138,9 +138,9 @@ public class SortierenZauber {
 			int c = ((a+1)*2)-1;
 			if(at == 2) {
 				if(c+1 <= b-1)
-					if(arr[c].getType() <= arr[c+1].getType())
+					if(arr[c].getType().compareToIgnoreCase(arr[c+1].getType()) <= 0) //Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
 						c++;
-				if(arr[a].getType() <= arr[c].getType()) {
+				if(arr[a].getType().compareToIgnoreCase(arr[c].getType()) <= 0) { //Wert < 0 heiﬂt im unicode vorher, > 0 heiﬂt im Unicode nachher, = 0 heiﬂt selber String
 					arr = heapSortSwap(arr, a, c);
 					a = c;
 				} else
