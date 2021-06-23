@@ -69,7 +69,7 @@ public class SuchenMain {
 				break;
 			case 4: //InterpolationSearch
 				if(at == 1 || at == 5) {
-					suchergebnis = InterpolationSearch(cards, at, wertInt, wertString);
+					suchergebnis = InterpolationSearch(cards, 0, cards.length-1, at, wertInt, wertString);
 				} else {
 					suchergebnis = InterpolationSwitch(monsters, spells, traps, at, wertInt, wertString);
 				}
@@ -94,17 +94,17 @@ public class SuchenMain {
 		Arrays.fill(ergebnis, null);
 		switch(at) {
 		case 2: //Typ
-			tempS = SuchenZauber.BinarySearchZauber(spells, 0, spells.length, at, wertString);
-			tempT = SuchenFalle.BinarySearchFalle(traps, 0, spells.length, at, wertString);
+			tempS = SuchenZauber.BinarySearchZauber(spells, 0, spells.length-1, at, wertString);
+			tempT = SuchenFalle.BinarySearchFalle(traps, 0, spells.length-1, at, wertString);
 			break;
 		case 3: //ATK
-			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length, at, wertInt);
+			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
 		case 4: //DEF
-			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length, at, wertInt);
+			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
 		case 6: //Stufe
-			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length, at, wertInt);
+			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
 		}
 		ergebnis = combine3Arrays(tempM, tempS, tempT);
@@ -178,17 +178,17 @@ public class SuchenMain {
 		Arrays.fill(ergebnis, null);
 		switch(at) {
 		case 2: //Typ
-			tempS = SuchenZauber.InterpolationSearchZauber(spells, 0, spells.length, at, wertString);
-			tempT = SuchenFalle.InterpolationSearchFalle(traps, 0, spells.length, at, wertString);
+			tempS = SuchenZauber.InterpolationSearchZauber(spells, 0, spells.length-1, at, wertString);
+			tempT = SuchenFalle.InterpolationSearchFalle(traps, 0, spells.length-1, at, wertString);
 			break;
 		case 3: //ATK
-			tempM = SuchenMonster.InterpolationSearchMonster(monsters, 0, monsters.length, at, wertInt);
+			tempM = SuchenMonster.InterpolationSearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
 		case 4: //DEF
-			tempM = SuchenMonster.InterpolationSearchMonster(monsters, 0, monsters.length, at, wertInt);
+			tempM = SuchenMonster.InterpolationSearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
 		case 6: //Stufe
-			tempM = SuchenMonster.InterpolationSearchMonster(monsters, 0, monsters.length, at, wertInt);
+			tempM = SuchenMonster.InterpolationSearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
 		}
 		ergebnis = combine3Arrays(tempM, tempS, tempT);
@@ -246,7 +246,7 @@ public class SuchenMain {
 		//Eigentliche Suche
 		if(at == 1) { //Name
 			while (fibN > 1) {
-				int n = FibMin(offset+fibNr2, arr.length-1);
+				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getName().compareToIgnoreCase(wertString) < 0) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
 					fibN = fibNr1;
 					fibNr1 = fibNr2;
@@ -268,7 +268,7 @@ public class SuchenMain {
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht im Array gefunden, leeres Array zurückgegeben
 		} else { //Kartenart (at kann hier nur 1 oder 5 sein)
 			while (fibN > 1) {
-				int n = FibMin(offset+fibNr2, arr.length-1);
+				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getKategory() < wertInt) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
 					fibN = fibNr1;
 					fibNr1 = fibNr2;
@@ -291,21 +291,70 @@ public class SuchenMain {
 		}
 	}
 
-	private static int FibMin(int x, int y) {
-		if(x <= y)
-			return x;
-		else
-			return y;
-	}
-
 	private static Card[] ExponentialSearch(Card[] arr, int at, int wertInt, String wertString) throws Exception {
-		//TODO
-		return arr;
+		if(arr.length == 0)
+			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
+		List<Card> cardList = new Vector<Card>(0,1);
+		int ex = 1; //Exponentiale Variable
+		if(at == 1) { //Name
+			if (arr[0].getName().equals(wertString)) { //Test, ob das erste Element des Array ein Treffer ist
+				cardList = CheckForMoreString(arr, cardList, 0, wertString); //Check, ob weitere Werte den Suchparametern entsprechen
+				return (Card[]) cardList.toArray();
+			}
+			//Suchbereich wird eingeschränkt
+			while (ex < arr.length && arr[ex].getName().compareToIgnoreCase(wertString) <= 0)
+				ex = ex*2;
+			//Binäre Suche für eingeschränkten Bereich
+			return BinarySearch(arr, ex/2, Math.min(ex, arr.length-1), at, wertInt, wertString);
+		} else { //Kartenart (at kann hier nur 1 oder 5 sein)
+			if (arr[0].getKategory() == wertInt) { //Test, ob das erste Element des Array ein Treffer ist
+				cardList = CheckForMoreInt(arr, cardList, 0, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+				return (Card[]) cardList.toArray();
+			}
+			//Suchbereich wird eingeschränkt
+			while (ex < arr.length && arr[ex].getKategory() <= wertInt)
+				ex = ex*2;
+			//Binäre Suche für eingeschränkten Bereich
+			return BinarySearch(arr, ex/2, Math.min(ex, arr.length-1), at, wertInt, wertString);
+		}
 	}
 
-	private static Card[] InterpolationSearch(Card[] arr, int at, int wertInt, String wertString) throws Exception {
-		//TODO
-		return arr;
+	private static Card[] InterpolationSearch(Card[] arr, int start, int stop, int at, int wertInt, String wertString) throws Exception {
+		if(arr.length == 0)
+			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
+		List<Card> cardList = new Vector<Card>(0,1);
+		int pos;
+		if(at == 1) { //Name
+			if (start <= stop && wertString.compareToIgnoreCase(arr[start].getName()) >= 0 && wertString.compareToIgnoreCase(arr[stop].getName()) <= 0) {
+
+				pos = start+(((stop-start)/(arr[stop].getName().hashCode()-arr[start].getName().hashCode()))*(wertString.hashCode()-arr[start].getName().hashCode())); //Neue Testposition //WICHTIG: Potentieller Fehler
+
+				if (arr[pos].getName() == wertString) { //gesuchter Wert gefunden
+					cardList = CheckForMoreString(arr, cardList, pos, wertString); //Check, ob weitere Werte den Suchparametern entsprechen
+					return (Card[]) cardList.toArray();
+				} else if (arr[pos].getName().compareToIgnoreCase(wertString) < 0) { //Wenn der gesuchte Wert größer ist, muss sein index auch größer als pos sein
+					return InterpolationSearch(arr, pos+1, stop, at, wertInt, wertString);
+				} else if (arr[pos].getName().compareToIgnoreCase(wertString) > 0) { //Wenn der gesuchte Wert kleiner ist, muss sein index auch kleiner als pos sein
+					return InterpolationSearch(arr, start, pos-1, at, wertInt, wertString);
+				}
+			}
+			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
+		} else { //Kartenart (at kann hier nur 1 oder 5 sein)
+			if (start <= stop && wertInt >= arr[start].getKategory() && wertInt <= arr[stop].getKategory()) {
+
+				pos = start+(((stop-start)/(arr[stop].getKategory()-arr[start].getKategory()))*(wertInt-arr[start].getKategory())); //Neue Testposition
+
+				if (arr[pos].getKategory() == wertInt) { //gesuchter Wert gefunden
+					cardList = CheckForMoreInt(arr, cardList, pos, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+					return (Card[]) cardList.toArray();
+				} else if (arr[pos].getKategory() < wertInt) { //Wenn der gesuchte Wert größer ist, muss sein index auch größer als pos sein
+					return InterpolationSearch(arr, pos+1, stop, at, wertInt, wertString);
+				} else if (arr[pos].getKategory() > wertInt) { //Wenn der gesuchte Wert kleiner ist, muss sein index auch kleiner als pos sein
+					return InterpolationSearch(arr, start, pos-1, at, wertInt, wertString);
+				}
+			}
+			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
+		}
 	}
 
 	private static List<Card> CheckForMoreInt(Card[] arr, List<Card> list, int n, int wertInt) { //Prüft, ob die Werte nach und vor einem gegebenen index n ebenfalls zu den Suchparametern passen
@@ -324,7 +373,7 @@ public class SuchenMain {
 		}
 		return list;
 	}
-	
+
 	private static List<Card> CheckForMoreString(Card[] arr, List<Card> list, int n, String wertString) { //Prüft, ob die Werte nach und vor einem gegebenen index n ebenfalls zu den Suchparametern passen
 		list.add(arr[n]); //erstes gefundenens Element
 		for(int i = n; i > 0; i--) { //Werte unter n
@@ -341,7 +390,7 @@ public class SuchenMain {
 		}
 		return list;
 	}
-	
+
 	private static Card[] combine3Arrays(Card[] arr1, Card[] arr2, Card[] arr3) {
 		Card[] combinedArray = Arrays.copyOf(arr1, arr1.length + arr2.length + arr3.length);
 		System.arraycopy(arr2, 0, combinedArray, arr1.length, arr2.length);

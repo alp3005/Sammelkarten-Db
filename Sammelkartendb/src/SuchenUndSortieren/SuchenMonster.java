@@ -79,7 +79,7 @@ public class SuchenMonster {
 		switch(at) {
 		case 3: //ATK
 			while (fibN > 1) {
-				int n = FibMin(offset+fibNr2, arr.length-1);
+				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getAtk() < wertInt) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
 					fibN = fibNr1;
 					fibNr1 = fibNr2;
@@ -101,7 +101,7 @@ public class SuchenMonster {
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht im Array gefunden, leeres Array zurückgegeben
 		case 4: //DEF
 			while (fibN > 1) {
-				int n = FibMin(offset+fibNr2, arr.length-1);
+				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getDef() < wertInt) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
 					fibN = fibNr1;
 					fibNr1 = fibNr2;
@@ -123,7 +123,7 @@ public class SuchenMonster {
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht im Array gefunden, leeres Array zurückgegeben
 		case 6: //Stufe
 			while (fibN > 1) {
-				int n = FibMin(offset+fibNr2, arr.length-1);
+				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getLvl() < wertInt) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
 					fibN = fibNr1;
 					fibNr1 = fibNr2;
@@ -148,21 +148,104 @@ public class SuchenMonster {
 		}
 	}
 
-	private static int FibMin(int x, int y) {
-		if(x <= y)
-			return x;
-		else
-			return y;
-	}
-
 	static Card[] ExponentialSearchMonster(Monster[] arr, int i, int length, int at, int wertInt) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(arr.length == 0)
+			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
+		List<Card> cardList = new Vector<Card>(0,1);
+		int ex = 1; //Exponentiale Variable
+		switch(at) {
+		case 2: //ATK
+			if (arr[0].getAtk() == wertInt) { //Test, ob das erste Element des Array ein Treffer ist
+				cardList = CheckForMoreInt(arr, cardList, 0, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+				return (Card[]) cardList.toArray();
+			}
+			//Suchbereich wird eingeschränkt
+			while (ex < arr.length && arr[ex].getAtk() <= wertInt)
+				ex = ex*2;
+			//Binäre Suche für eingeschränkten Bereich
+			return BinarySearchMonster(arr, ex/2, Math.min(ex, arr.length-1), at, wertInt);
+		case 3: //DEF
+			if (arr[0].getDef() == wertInt) { //Test, ob das erste Element des Array ein Treffer ist
+				cardList = CheckForMoreInt(arr, cardList, 0, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+				return (Card[]) cardList.toArray();
+			}
+			//Suchbereich wird eingeschränkt
+			while (ex < arr.length && arr[ex].getDef() <= wertInt)
+				ex = ex*2;
+			//Binäre Suche für eingeschränkten Bereich
+			return BinarySearchMonster(arr, ex/2, Math.min(ex, arr.length-1), at, wertInt);
+		case 6: //Stufe
+			if (arr[0].getLvl() == wertInt) { //Test, ob das erste Element des Array ein Treffer ist
+				cardList = CheckForMoreInt(arr, cardList, 0, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+				return (Card[]) cardList.toArray();
+			}
+			//Suchbereich wird eingeschränkt
+			while (ex < arr.length && arr[ex].getLvl() <= wertInt)
+				ex = ex*2;
+			//Binäre Suche für eingeschränkten Bereich
+			return BinarySearchMonster(arr, ex/2, Math.min(ex, arr.length-1), at, wertInt);
+		default:
+			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
+		}
 	}
 
-	static Card[] InterpolationSearchMonster(Monster[] arr, int i, int length, int at, int wertInt) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	static Card[] InterpolationSearchMonster(Monster[] arr, int start, int stop, int at, int wertInt) throws Exception {
+		if(arr.length == 0)
+			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
+		List<Card> cardList = new Vector<Card>(0,1);
+		int pos;
+		switch(at) {
+		case 3: //ATK
+			if (start <= stop && wertInt >= arr[start].getAtk() && wertInt <= arr[stop].getAtk()) {
+
+				pos = start+(((stop-start)/(arr[stop].getAtk()-arr[start].getAtk()))*(wertInt-arr[start].getAtk())); //Neue Testposition
+
+				if (arr[pos].getAtk() == wertInt) { //gesuchter Wert gefunden
+					cardList = CheckForMoreInt(arr, cardList, pos, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+					return (Card[]) cardList.toArray();
+				} else if (arr[pos].getAtk() < wertInt) { //Wenn der gesuchte Wert größer ist, muss sein index auch größer als pos sein
+					return InterpolationSearchMonster(arr, pos+1, stop, at, wertInt);
+				} else if (arr[pos].getAtk() > wertInt) { //Wenn der gesuchte Wert kleiner ist, muss sein index auch kleiner als pos sein
+					return InterpolationSearchMonster(arr, start, pos-1, at, wertInt);
+				}
+			}
+			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
+		case 4: //DEF
+			if (start <= stop && wertInt >= arr[start].getDef() && wertInt <= arr[stop].getDef()) {
+
+				pos = start+(((stop-start)/(arr[stop].getDef()-arr[start].getDef()))*(wertInt-arr[start].getDef())); //Neue Testposition
+
+				if (arr[pos].getDef() == wertInt) { //gesuchter Wert gefunden
+					cardList = CheckForMoreInt(arr, cardList, pos, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+					return (Card[]) cardList.toArray();
+				} else if (arr[pos].getDef() < wertInt) { //Wenn der gesuchte Wert größer ist, muss sein index auch größer als pos sein
+					return InterpolationSearchMonster(arr, pos+1, stop, at, wertInt);
+				} else if (arr[pos].getDef() > wertInt) { //Wenn der gesuchte Wert kleiner ist, muss sein index auch kleiner als pos sein
+					return InterpolationSearchMonster(arr, start, pos-1, at, wertInt);
+				}
+			}
+			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
+		case 6: //Stufe
+			if (start <= stop && wertInt >= arr[start].getLvl() && wertInt <= arr[stop].getLvl()) {
+
+				pos = start+(((stop-start)/(arr[stop].getLvl()-arr[start].getLvl()))*(wertInt-arr[start].getLvl())); //Neue Testposition
+
+				if (arr[pos].getLvl() == wertInt) { //gesuchter Wert gefunden
+					cardList = CheckForMoreInt(arr, cardList, pos, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
+					return (Card[]) cardList.toArray();
+				} else if (arr[pos].getLvl() < wertInt) { //Wenn der gesuchte Wert größer ist, muss sein index auch größer als pos sein
+					return InterpolationSearchMonster(arr, pos+1, stop, at, wertInt);
+				} else if (arr[pos].getLvl() > wertInt) { //Wenn der gesuchte Wert kleiner ist, muss sein index auch kleiner als pos sein
+					return InterpolationSearchMonster(arr, start, pos-1, at, wertInt);
+				}
+			}
+			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
+		default:
+			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können	
+		}
+
+
+
 	}
 
 	private static List<Card> CheckForMoreInt(Monster[] arr, List<Card> list, int n, int at, int wertInt) { //Prüft, ob die Werte nach und vor einem gegebenen index n ebenfalls zu den Suchparametern passen

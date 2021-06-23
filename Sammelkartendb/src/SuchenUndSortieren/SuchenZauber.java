@@ -27,7 +27,7 @@ public class SuchenZauber {
 				return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
 			}
 		} else
-			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
+			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Zauber"); //Sollte im fertigen Programm nicht eintreten können
 		return (Card[]) cardList.toArray();
 	}
 
@@ -48,7 +48,7 @@ public class SuchenZauber {
 		//Eigentliche Suche
 		if(at == 2) { //Typ
 			while (fibN > 1) {
-				int n = FibMin(offset+fibNr2, arr.length-1);
+				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getType().compareToIgnoreCase(wertString) < 0) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
 					fibN = fibNr1;
 					fibNr1 = fibNr2;
@@ -69,25 +69,53 @@ public class SuchenZauber {
 			}
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht im Array gefunden, leeres Array zurückgegeben
 		} else {
-			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
+			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Zauber"); //Sollte im fertigen Programm nicht eintreten können
 		}
 	}
 	
-	private static int FibMin(int x, int y) {
-		if(x <= y)
-			return x;
-		else
-			return y;
-	}
-
 	static Card[] ExponentialSearchZauber(Spell[] arr, int i, int length, int at, String wertString) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(arr.length == 0)
+			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
+		if(at == 2) {
+			List<Card> cardList = new Vector<Card>(0,1);
+			int ex = 1; //Exponentiale Variable
+			if (arr[0].getType().equals(wertString)) { //Test, ob das erste Element des Array ein Treffer ist
+				cardList = CheckForMoreString(arr, cardList, 0, wertString); //Check, ob weitere Werte den Suchparametern entsprechen
+				return (Card[]) cardList.toArray();
+			}
+			//Suchbereich wird eingeschränkt
+			while (ex < arr.length && arr[ex].getType().compareToIgnoreCase(wertString) <= 0)
+				ex = ex*2;
+			//Binäre Suche für eingeschränkten Bereich
+			return BinarySearchZauber(arr, ex/2, Math.min(ex, arr.length-1), at, wertString);
+		} else {
+			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Zauber"); //Sollte im fertigen Programm nicht eintreten können
+		}
 	}
 
-	static Card[] InterpolationSearchZauber(Spell[] arr, int i, int length, int at, String wertString) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	static Card[] InterpolationSearchZauber(Spell[] arr, int start, int stop, int at, String wertString) throws Exception {
+		if(arr.length == 0)
+			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
+		List<Card> cardList = new Vector<Card>(0,1);
+		int pos;
+		if(at == 2) { //Name
+			if (start <= stop && wertString.compareToIgnoreCase(arr[start].getType()) >= 0 && wertString.compareToIgnoreCase(arr[stop].getType()) <= 0) {
+
+				pos = start+(((stop-start)/(arr[stop].getType().hashCode()-arr[start].getType().hashCode()))*(wertString.hashCode()-arr[start].getType().hashCode())); //Neue Testposition //WICHTIG: Potentieller Fehler
+
+				if (arr[pos].getType() == wertString) { //gesuchter Wert gefunden
+					cardList = CheckForMoreString(arr, cardList, pos, wertString); //Check, ob weitere Werte den Suchparametern entsprechen
+					return (Card[]) cardList.toArray();
+				} else if (arr[pos].getType().compareToIgnoreCase(wertString) < 0) { //Wenn der gesuchte Wert größer ist, muss sein index auch größer als pos sein
+					return InterpolationSearchZauber(arr, pos+1, stop, at, wertString);
+				} else if (arr[pos].getType().compareToIgnoreCase(wertString) > 0) { //Wenn der gesuchte Wert kleiner ist, muss sein index auch kleiner als pos sein
+					return InterpolationSearchZauber(arr, start, pos-1, at, wertString);
+				}
+			}
+			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
+		} else {
+			throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Zauber"); //Sollte im fertigen Programm nicht eintreten können
+		}
 	}
 
 	private static List<Card> CheckForMoreString(Spell[] arr, List<Card> list, int n, String wertString) { //Prüft, ob die Werte nach und vor einem gegebenen index n ebenfalls zu den Suchparametern passen
