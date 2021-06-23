@@ -273,20 +273,19 @@ public class SampleController {
 			List<Card> cards = cardsHandler.getCards();
 			
 			ObservableList<Node> cardsVBoxChildren = cardsVBox.getChildren();
-			//bleibt immer
 			HBox titleNode = (HBox)cardsVBoxChildren.get(0);
-			
 			//Lösche Inhalt damit beim Buttonpress die alte Liste an Karten gelöscht ist außer Title
 			cardsVBoxChildren.clear();
-
+			//Titel "Kartenname Attribut" bleibt jedesmal erhalten.
 			cardsVBoxChildren.add(titleNode);
-			//erstelle für jede Karte einen neuen Node
+			
 			for (Card card : cards) {
+			//erstelle für jede einzelne Karte einen neuen Node und füge sie in die Liste hinzu
 				Node cardNode = createNodeForCard(card);
 				cardsVBoxChildren.add(cardNode);
 			}
 		}
-		
+		//Übergebe in dieser Methode eine Hbox mit der entsprechen Höhe und Länge der jeweils zu erstellenden Nodes 
 		private Node createNodeForCard(Card card) {
 			HBox hBox = new HBox();
 			hBox.setPrefHeight(39.0);
@@ -295,16 +294,16 @@ public class SampleController {
 			hBox.setPadding(new Insets(5, 5, 5, 5));
 			
 			Label nameLabel = new Label();
-			nameLabel.setPrefHeight(29.0);
+			nameLabel.setPrefHeight(40.0);
 			nameLabel.setPrefWidth(350.0);
-			//nameLabel.setPadding(new Insets(0, 50.0, 0, 0));
+			//Test:nameLabel.setPadding(new Insets(0, 50.0, 0, 0));
 			nameLabel.setText(card.getName());
 			nameLabel.setFont(labelFont);
 
 			Label attributeLabel = new Label();
 			attributeLabel.setPrefHeight(29.0);
 			attributeLabel.setPrefWidth(220.0);
-			attributeLabel.setText(getAttributeLabelText(card));
+			attributeLabel.setText(getAttributeText(card));
 			attributeLabel.setFont(labelFont);
 			
 			ObservableList<Node> hBoxChildren = hBox.getChildren();
@@ -315,7 +314,7 @@ public class SampleController {
 			return hBox;
 		}
 		
-		private String getAttributeLabelText(Card card) {
+		private String getAttributeText(Card card) {
 			switch (sortType) {
 			//Schaue auf Sample.fxml: Buttons haben Userdata übergeben (Name=0 ....Tag=7) anhanddessen weiß man welcher Button angeklickt wurde und übergibt diesen Wert
 				case NAME: return card.getName();
@@ -342,6 +341,8 @@ public class SampleController {
 					if (card instanceof Trap) return ((Trap)card).getTag();
 					return "";
 				default: return "";
+				//mit if (card instanceof ...) fragen wir ab ob die Karte eine Monster Spell oder Trap Karte ist, falls ja...mache return Wert xyz
+				//String.valueOf of weil man kein Int abgeben kann da ein String gebraucht wird.
 			}
 		}
 		
@@ -380,7 +381,7 @@ public class SampleController {
 		}
 		
 		@FXML 
-		//Übergebe Userdata der jeweiligen Buttons an Sorttype
+		//Übergebe den Wert des Userdatas (0-7) der jeweiligen Buttons an Sorttype
 		private void setSortType(ActionEvent event) {
 			int value = getUserDataValue(event);
 		    sortType = SortType.values()[value];
@@ -397,3 +398,4 @@ public class SampleController {
 		    return Integer.parseInt(data);
 		}
 }
+
