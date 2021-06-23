@@ -1,4 +1,5 @@
-[ {
+[
+  {
     "element": "Finsternis",
     "lvl": 7,
     "atk": 2500,
@@ -12,7 +13,7 @@
     "lvl": 8,
     "atk": 3000,
     "def": 2500,
-    "name": "Blau√§ugiger W. Drache",
+    "name": "Blau‰ugiger W. Drache",
     "kategory": 1,
     "id": 2
   },

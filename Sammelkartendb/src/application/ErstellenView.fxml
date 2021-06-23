@@ -164,7 +164,7 @@
                               </Label>
                               <TextArea fx:id="magicEffectBox" prefHeight="74.0" prefWidth="276.0" GridPane.columnIndex="1" />
                               <ComboBox fx:id="magicTypeBox" prefHeight="26.0" prefWidth="439.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <FlowPane fx:id="CheckMagic" alignment="CENTER_LEFT" hgap="5.0" prefHeight="213.0" prefWidth="673.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <FlowPane alignment="CENTER_LEFT" hgap="5.0" prefHeight="213.0" prefWidth="673.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <CheckBox fx:id="magicTagZer" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="zerstören" wrapText="true" />
                                     <CheckBox fx:id="magicTagBes" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="beschwören" wrapText="true" />
@@ -212,7 +212,7 @@
                               </Label>
                               <TextArea fx:id="trapEffectBox" prefHeight="85.0" prefWidth="463.0" GridPane.columnIndex="1" />
                               <ComboBox fx:id="trapTypeBox" prefHeight="26.0" prefWidth="452.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <FlowPane fx:id="CheckTrap" alignment="CENTER_LEFT" hgap="5.0" prefHeight="75.0" prefWidth="432.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <FlowPane alignment="CENTER_LEFT" hgap="5.0" prefHeight="75.0" prefWidth="432.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <CheckBox fx:id="trapTagZer" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="zerstören" wrapText="true" />
                                     <CheckBox fx:id="trapTagBes" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="130.0" text="beschwören" wrapText="true" />

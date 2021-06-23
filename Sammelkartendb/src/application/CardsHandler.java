@@ -50,7 +50,7 @@ public class CardsHandler {
 		return instance;
 	}
 	
-
+	//? wieso monsterCard
 	public void addMonster(Monster monsterCard) throws FileNotFoundException {
 		monsterCards.add(monsterCard);
 		allCards.add(monsterCard);
