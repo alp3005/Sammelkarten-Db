@@ -135,32 +135,32 @@
                               </Label>
                               <FlowPane alignment="TOP_CENTER" columnHalignment="CENTER" hgap="5.0" prefHeight="200.0" prefWidth="200.0" vgap="5.0">
                                  <children>
-                                    <Button  mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Name" onAction="#setSortType" userData="0">
+                                    <Button mnemonicParsing="false" onAction="#setSortType" prefHeight="32.0" prefWidth="145.0" text="Name" userData="0">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Kartenart" onAction="#setSortType" userData="1">
+                                    <Button mnemonicParsing="false" onAction="#setSortType" prefHeight="32.0" prefWidth="145.0" text="Kartenart" userData="1">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Stufe" onAction="#setSortType" userData="2">
+                                    <Button mnemonicParsing="false" onAction="#setSortType" prefHeight="32.0" prefWidth="145.0" text="Stufe" userData="2">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Angriff" onAction="#setSortType" userData="3">
+                                    <Button mnemonicParsing="false" onAction="#setSortType" prefHeight="32.0" prefWidth="145.0" text="Angriff" userData="3">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Verteidigung" onAction="#setSortType" userData="4">
+                                    <Button mnemonicParsing="false" onAction="#setSortType" prefHeight="32.0" prefWidth="145.0" text="Verteidigung" userData="4">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Typ" onAction="#setSortType" userData="5">
+                                    <Button mnemonicParsing="false" onAction="#setSortType" prefHeight="32.0" prefWidth="145.0" text="Typ" userData="5">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
@@ -188,85 +188,123 @@
                               </Label>
                               <HBox prefHeight="341.0" prefWidth="620.0" spacing="5.0" style="-fx-background-color: #8697A6;">
                                  <children>
-                                    <VBox alignment="TOP_CENTER" prefHeight="242.0" prefWidth="303.0" style="-fx-background-color: #BFCDD9;">
+                                    <VBox alignment="TOP_CENTER" prefHeight="242.0" prefWidth="612.0" style="-fx-background-color: #BFCDD9;">
                                        <children>
-                                          <GridPane prefHeight="57.0" prefWidth="293.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="205.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
                                              <children>
-                                                <Label text="Name:">
+                                                <Label prefWidth="145.0" text="Name:">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
+                                                   <HBox.margin>
+                                                      <Insets />
+                                                   </HBox.margin>
                                                 </Label>
-                                                <Label text="Kartenart:" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="nameFieldKF1" text="TestTestTest" GridPane.columnIndex="1">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="typeBoxKF1" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <Label fx:id="cardInfoName" prefHeight="30.0" prefWidth="438.0">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Label>
                                              </children>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" />
-                                             </VBox.margin>
-                                          </GridPane>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                       </padding>
-                                    </VBox>
-                                    <VBox alignment="TOP_CENTER" prefHeight="242.0" prefWidth="303.0" style="-fx-background-color: #BFCDD9;">
-                                       <children>
-                                          <GridPane prefHeight="54.0" prefWidth="293.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="148.0" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="205.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
                                              <children>
-                                                <Label text="Name:">
+                                                <Label prefHeight="30.0" prefWidth="145.0" text="Kartenart:">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="Kartenart:" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="nameFieldKF2" text="TestTestTest" GridPane.columnIndex="1">
-                                                   <font>
-                                                      <Font size="20.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label fx:id="typeBoxKF2" text="TestTestTest" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                <Label fx:id="cardInfoArt" prefHeight="30.0" prefWidth="438.0">
                                                    <font>
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Label>
                                              </children>
-                                             <VBox.margin>
-                                                <Insets bottom="5.0" />
-                                             </VBox.margin>
-                                          </GridPane>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
+                                             <children>
+                                                <Label prefWidth="145.0" text="Stufe:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="cardInfoLvl" prefHeight="30.0" prefWidth="438.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
+                                             <children>
+                                                <Label prefWidth="145.0" text="Angriff:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="cardInfoAtk" prefHeight="30.0" prefWidth="438.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
+                                             <children>
+                                                <Label prefWidth="145.0" text="Verteidigung:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="cardInfoDef" prefHeight="30.0" prefWidth="438.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
+                                             <children>
+                                                <Label prefWidth="145.0" text="Typ:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="cardInfoType" prefHeight="30.0" prefWidth="438.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
+                                             <children>
+                                                <Label prefWidth="145.0" text="Tags:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="cardInfoTags" prefHeight="30.0" prefWidth="438.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" prefWidth="600.0">
+                                             <children>
+                                                <Label prefWidth="145.0" text="Element:">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="cardInfoElement" prefHeight="30.0" prefWidth="438.0">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

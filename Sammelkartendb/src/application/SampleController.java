@@ -12,6 +12,7 @@ import Cards.Trap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -20,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -212,7 +214,29 @@ public class SampleController {
 		
 		ObservableList<String> magicTrapTagListSearch = FXCollections.observableArrayList("zerstören", "beschwören", "einschränken", "Position ändern", "suchen", "anderes");
 		
+
+	    @FXML
+	    private Label cardInfoName;
+	    @FXML
+	    private Label cardInfoArt;
+	    @FXML
+	    private Label cardInfoLvl;
+	    @FXML
+	    private Label cardInfoAtk;
+	    @FXML
+	    private Label cardInfoDef;
+	    @FXML
+	    private Label cardInfoType;
+	    @FXML
+	    private Label cardInfoTags;
+	    @FXML
+	    private Label cardInfoElement;
+	    private HBox selectedCardHBox;
+	    private int selectedCardId;
+		
+		
 		private Font labelFont = new Font("Arial", 22.0); 
+		private Font labelSelectedFont = new Font("Arial Black", 22.0); 
 		private SortType sortType;
 		
 		@FXML
@@ -278,6 +302,7 @@ public class SampleController {
 			
 			//Lösche Inhalt damit beim Buttonpress die alte Liste an Karten gelöscht ist außer Title
 			cardsVBoxChildren.clear();
+			selectedCardHBox = null;
 
 			cardsVBoxChildren.add(titleNode);
 			//erstelle für jede Karte einen neuen Node
@@ -293,6 +318,13 @@ public class SampleController {
 			hBox.setPrefWidth(569.0);
 			hBox.setSpacing(5.0);
 			hBox.setPadding(new Insets(5, 5, 5, 5));
+			hBox.setOnMouseClicked(new selectCardEventHandler());
+			
+			//erstelle unsichtbare IdLabel, um beim Klicken der jeweiligen Labels der Kartenliste auf die Id zuzugreifen.
+			Label idLabel = new Label();
+			idLabel.setVisible(false);
+			idLabel.setPrefWidth(0);
+			idLabel.setText(String.valueOf(card.getId()));
 			
 			Label nameLabel = new Label();
 			nameLabel.setPrefHeight(29.0);
@@ -309,8 +341,14 @@ public class SampleController {
 			
 			ObservableList<Node> hBoxChildren = hBox.getChildren();
 			//packe Name und Attribute in Hbox 
+			hBoxChildren.add(idLabel);
 			hBoxChildren.add(nameLabel);
 			hBoxChildren.add(attributeLabel);
+			
+			// Abfrage: Wenn selektierte Karte angeklickt wurde, färbe die neu erstellte Hbox
+			if (card.getId() == selectedCardId) {
+				setNewSelectedHBox(hBox);
+			}
 			
 			return hBox;
 		}
@@ -388,5 +426,51 @@ public class SampleController {
 		    String data = (String) button.getUserData();
 		    //Übertrage von String to Integer
 		    return Integer.parseInt(data);
+		}
+		
+		private void setNewSelectedHBox(HBox hBox) {
+			if (selectedCardHBox != null) {
+				// setLabelsFont(selectedCardHBox.getChildren(), labelFont);
+				selectedCardHBox.setStyle("-fx-background-color: 'transparent'");
+			}
+			
+			selectedCardHBox = hBox;
+			selectedCardId = Integer.parseInt(((Label)hBox.getChildren().get(0)).getText());
+			hBox.setStyle("-fx-background-color: 'powderblue'");
+		}
+		
+		private class selectCardEventHandler implements EventHandler<MouseEvent> {
+
+			@Override
+			public void handle(MouseEvent event) {
+				HBox hBox = (HBox)event.getSource();
+				setNewSelectedHBox(hBox);
+				Label idLabel = (Label)hBox.getChildren().get(0); 
+				int id = Integer.parseInt(idLabel.getText());
+				Card card = CardsHandler.get().getCardById(id);
+				
+				cardInfoName.setText(card.getName());
+				cardInfoArt.setText(cardTypeListSearch.get(card.getKategory() - 1));
+				// Frage ab ob geklickte Karte eine Monsterkarte ist, wenn ja: gebe Wert der Atk. Andernfalls gebe "-" wieder
+				cardInfoAtk.setText(card instanceof Monster ? String.valueOf(((Monster)card).getAtk()) : "-");
+				cardInfoDef.setText(card instanceof Monster ? String.valueOf(((Monster)card).getDef()) : "-");
+				cardInfoElement.setText(card instanceof Monster ? ((Monster)card).getAttribute() : "-");
+				cardInfoLvl.setText(card instanceof Monster ? String.valueOf(((Monster)card).getLvl()) : "-");
+				
+				if (card instanceof Spell) { 
+					Spell spell = (Spell)card;
+					cardInfoTags.setText(String.join(", ", spell.getTags()));
+					cardInfoType.setText(spell.getType());
+				} else if (card instanceof Trap) { 
+					Trap trap = (Trap)card;
+					cardInfoTags.setText(String.join(", ", trap.getTags()));
+					cardInfoType.setText(trap.getType());
+				} else  {
+					cardInfoTags.setText("-");
+					cardInfoType.setText("-");
+				}
+			}
+			
+			
 		}
 }

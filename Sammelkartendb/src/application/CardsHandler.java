@@ -72,6 +72,13 @@ public class CardsHandler {
 	public List<Card> getCards() {
 		return allCards;
 	}
+	//suche nach Karte mit der richtigen Id. Falls richtig return die Karte
+	public Card getCardById(int id) {
+		for (Card card : allCards) {
+			if (card.getId() == id) return card;
+		}
+		return null;
+	}
 	
 	public int getNextId() {
 		highestId++;
