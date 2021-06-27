@@ -10,6 +10,7 @@ import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
+import SuchenUndSortieren.SortierenMain;
 
 public class CardsHandler {
 	private Database database = new Database();
@@ -20,6 +21,9 @@ public class CardsHandler {
 	private List<Trap> trapCards;
 	private static CardsHandler instance;
 	private int highestId = 0;
+	
+	private SortType sortAttribute;
+	private int sortAlgorithm;
 	
 	
 	private CardsHandler() {
@@ -83,5 +87,23 @@ public class CardsHandler {
 	public int getNextId() {
 		highestId++;
 		return highestId;
+	}
+
+	public void setSortAttribute(SortType sortAttribute) {
+		try {
+			this.sortAttribute = sortAttribute;
+			allCards = SortierenMain.sort(allCards, sortAlgorithm, sortAttribute, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void setSortAlgorithm(int algorithm) {
+		try {
+			this.sortAlgorithm = algorithm;
+			allCards = SortierenMain.sort(allCards, sortAlgorithm, sortAttribute, false);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

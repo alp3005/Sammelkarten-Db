@@ -34,13 +34,13 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="150.0" />
-                        <Label text="Suchgorithmen:">
+                        <ComboBox fx:id="sortAlgorithmComboBox" prefWidth="150.0" onAction="#setSortAlgorithm" />
+                        <Label text="Suchalgorithmen:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="150.0" />
+                        <ComboBox fx:id="searchAlgorithmComboBox" prefWidth="150.0" onAction="#setSearchAlgorithm"/>
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -426,11 +426,11 @@
                                                 <ComboBox fx:id="magicTypeBoxSearch" prefHeight="26.0" prefWidth="439.0" GridPane.columnIndex="1" />
                                                 <FlowPane alignment="CENTER_LEFT" hgap="5.0" prefHeight="213.0" prefWidth="673.0" vgap="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <children>
-                                                      <CheckBox fx:id="magicTagZerSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="zerstören" wrapText="true" />
-                                                      <CheckBox fx:id="magicTagBesSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="beschwören" wrapText="true" />
-                                                      <CheckBox fx:id="magicTagEinSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="einschränken" wrapText="true" />
-                                                      <CheckBox fx:id="magicTagPosSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="Position ändern" wrapText="true" />
-                                                      <CheckBox fx:id="magicTagSucSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="suchen" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="zerstören" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="beschwören" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="einschränken" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="Position ändern" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="suchen" wrapText="true" />
                                                    </children>
                                                    <padding>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -470,11 +470,11 @@
                                                 <ComboBox fx:id="trapTypeBoxSearch" prefHeight="26.0" prefWidth="452.0" GridPane.columnIndex="1" />
                                                 <FlowPane alignment="CENTER_LEFT" hgap="5.0" prefHeight="75.0" prefWidth="432.0" vgap="2.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <children>
-                                                      <CheckBox fx:id="trapTagZerSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="zerstören" wrapText="true" />
-                                                      <CheckBox fx:id="trapTagBesSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="beschwören" wrapText="true" />
-                                                      <CheckBox fx:id="trapTagEinSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="einschränken" wrapText="true" />
-                                                      <CheckBox fx:id="trapTagPosSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="Position ändern" wrapText="true" />
-                                                      <CheckBox fx:id="trapTagSucSearch" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="suchen" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="zerstören" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="beschwören" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="einschränken" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="Position ändern" wrapText="true" />
+                                                      <CheckBox graphicTextGap="0.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" text="suchen" wrapText="true" />
                                                    </children>
                                                    <padding>
                                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

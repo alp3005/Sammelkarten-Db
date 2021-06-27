@@ -8,10 +8,11 @@ import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
+import application.SortType;
 
 public class SuchenMain {
 
-	public Card[] search(Card[] cards, int m, int at, int wertInt, String wertString) throws Exception {
+	public List<Card> search(List<Card> cards, int m, SortType at, int wertInt, String wertString) throws Exception {
 		/* m = Variable zur Zuordnung der Suchmethode --> 1=BinarySearch, 2=FibonacciSearch, 3=ExponentialSearch, 4=InterpolationSearch
 		 * at = Variable zur Zuordnung des Attributs nach dem gesucht werden soll --> 1=Name, 2=Typ, 3=ATK, 4=DEF, 5=Kartenart, 6=Stufe
 		 * wertInt = gesuchter Wert, falls Zahl
@@ -83,7 +84,7 @@ public class SuchenMain {
 		return suchergebnis;
 	}
 
-	private static Card[] BinarySwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, int wertInt, String wertString) throws Exception {
+	private static Card[] BinarySwitch(Monster[] monsters, Spell[] spells, Trap[] traps, SortType at, int wertInt, String wertString) throws Exception {
 		Card[] tempS = new Card[spells.length];
 		Card[] tempT = new Card[traps.length];
 		Card[] tempM = new Card[monsters.length];
@@ -93,17 +94,17 @@ public class SuchenMain {
 		Arrays.fill(tempM, null);
 		Arrays.fill(ergebnis, null);
 		switch(at) {
-		case 2: //Typ
+		case TYPE: //Typ
 			tempS = SuchenZauber.BinarySearchZauber(spells, 0, spells.length-1, at, wertString);
 			tempT = SuchenFalle.BinarySearchFalle(traps, 0, spells.length-1, at, wertString);
 			break;
-		case 3: //ATK
+		case ATTACK: //ATK
 			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
-		case 4: //DEF
+		case DEFENSE: //DEF
 			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
-		case 6: //Stufe
+		case LEVEL: //Stufe
 			tempM = SuchenMonster.BinarySearchMonster(monsters, 0, monsters.length-1, at, wertInt);
 			break;
 		}
@@ -111,7 +112,7 @@ public class SuchenMain {
 		return ergebnis;
 	}
 
-	private static Card[] FibonacciSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, int wertInt, String wertString) throws Exception {
+	private static Card[] FibonacciSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, SortType at, int wertInt, String wertString) throws Exception {
 		Card[] tempS = new Card[spells.length];
 		Card[] tempT = new Card[traps.length];
 		Card[] tempM = new Card[monsters.length];
@@ -121,17 +122,17 @@ public class SuchenMain {
 		Arrays.fill(tempM, null);
 		Arrays.fill(ergebnis, null);
 		switch(at) {
-		case 2: //Typ
+		case TYPE: //Typ
 			tempS = SuchenZauber.FibonacciSearchZauber(spells, 0, spells.length, at, wertString);
 			tempT = SuchenFalle.FibonacciSearchFalle(traps, 0, spells.length, at, wertString);
 			break;
-		case 3: //ATK
+		case ATTACK: //ATK
 			tempM = SuchenMonster.FibonacciSearchMonster(monsters, 0, monsters.length, at, wertInt);
 			break;
-		case 4: //DEF
+		case DEFENSE: //DEF
 			tempM = SuchenMonster.FibonacciSearchMonster(monsters, 0, monsters.length, at, wertInt);
 			break;
-		case 6: //Stufe
+		case LEVEL: //Stufe
 			tempM = SuchenMonster.FibonacciSearchMonster(monsters, 0, monsters.length, at, wertInt);
 			break;
 		}
