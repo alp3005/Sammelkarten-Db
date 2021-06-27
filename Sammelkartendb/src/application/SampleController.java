@@ -39,38 +39,6 @@ public class SampleController {
 	}
 	
 	
-	/*@FXML
-	private void initialize1() {
-		
-		//---Suchen---
-		typeBoxSearch.setItems(cardTypeListSearch);
-		typeBoxSearch.setValue("Monster");
-		
-		//Monster stuff
-		elementBoxSearch.setItems(monsterElementListSearch);
-		elementBoxSearch.setValue("Licht");
-		levelBoxSearch.setItems(monsterLevelListSearch);
-		levelBoxSearch.setValue("1");
-		
-		//Zauber stuff
-		magicTypeBoxSearch.setItems(magicTypeListSearch);
-		magicTypeBoxSearch.setValue("Normal");
-		magicTagBoxSearch.setItems(magicTrapTagListSearch);
-		magicTagBoxSearch.setValue("anderes");
-		
-		//Fallen stuff
-		trapTypeBoxSearch.setItems(trapTypeListSearch);
-		trapTypeBoxSearch.setValue("Normal");
-		trapTagBoxSearch.setItems(magicTrapTagListSearch);
-		trapTagBoxSearch.setValue("anderes");
-		
-		//entferne andere stuff
-		magicGridSearch.setManaged(false);
-		magicGridSearch.setVisible(false);
-		trapGridSearch.setManaged(false);
-		trapGridSearch.setVisible(false);
-		//---Suchen ende---
-	}*/
 	
 	//---Kartenfeld 1---//
 	@FXML
@@ -286,7 +254,9 @@ public class SampleController {
 			trapGridSearch.setVisible(false);
 			
 			sortAlgorithmComboBox.setItems(sortAlgorithms);
+			sortAlgorithmComboBox.setValue("Mergesort");
 			searchAlgorithmComboBox.setItems(searchAlgorithms);
+			searchAlgorithmComboBox.setValue("Binäre Suche");
 			
 			sortType = sortType.CATEGORY;
 			initializeCardsVBox();

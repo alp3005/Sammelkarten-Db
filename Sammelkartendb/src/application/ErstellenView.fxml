@@ -239,7 +239,7 @@
             <HBox alignment="TOP_RIGHT" spacing="15.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#createCard" text="Erstellen" />
-                  <Button mnemonicParsing="false" text="Abbrechen" />
+                  <Button mnemonicParsing="false" onAction="#closeWindow" text="Abbrechen" />
                </children>
             </HBox>
          </children>

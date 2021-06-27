@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class ErstellenViewController {
@@ -218,5 +219,12 @@ public class ErstellenViewController {
 		String tagName = checkBox.getText();
 		if (checkBox.isSelected()) selectedTags.add(tagName);
 		else selectedTags.remove(tagName);
+	}
+	
+	@FXML
+	private void closeWindow(ActionEvent event) {
+		Node n = (Node) event.getSource();
+		Stage stage = (Stage)  n.getScene().getWindow();
+		stage.close();
 	}
 }

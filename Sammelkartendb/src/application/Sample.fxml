@@ -27,20 +27,20 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="628.0" spacing="10.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="700.0" spacing="10.0">
                      <children>
                         <Label text="Sortieralgorithmen:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="sortAlgorithmComboBox" prefWidth="150.0" onAction="#setSortAlgorithm" />
+                        <ComboBox fx:id="sortAlgorithmComboBox" onAction="#setSortAlgorithm" prefWidth="150.0" />
                         <Label text="Suchalgorithmen:">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="searchAlgorithmComboBox" prefWidth="150.0" onAction="#setSearchAlgorithm"/>
+                        <ComboBox fx:id="searchAlgorithmComboBox" onAction="#setSearchAlgorithm" prefWidth="150.0" />
                      </children>
                      <HBox.margin>
                         <Insets />
