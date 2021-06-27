@@ -321,9 +321,6 @@ public class SampleController {
 				case NAME: return card.getName();
 			//Gebe Eintrag der Kategorie (Monster, Spell, Trap) als Index wieder und subtrahiere -1 da der Index von 0-2 in diesem Fall ist 
 				case CATEGORY: return cardTypeListSearch.get(card.getKategory() - 1);
-				case ELEMENT: 
-					if (card instanceof Monster) return ((Monster)card).getAttribute();
-					return "";
 				case LEVEL: 
 					if (card instanceof Monster) return String.valueOf(((Monster)card).getLvl());
 					return "";
@@ -336,10 +333,6 @@ public class SampleController {
 				case TYPE: 
 					if (card instanceof Spell) return ((Spell)card).getType();
 					if (card instanceof Trap) return ((Trap)card).getType();
-					return "";
-				case TAG: 
-					if (card instanceof Spell) return ((Spell)card).getTag();
-					if (card instanceof Trap) return ((Trap)card).getTag();
 					return "";
 				default: return "";
 			}

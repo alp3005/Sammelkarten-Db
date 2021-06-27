@@ -3,13 +3,13 @@ package Cards;
 public class Spell extends Card {
 	private String type;
 	private String effect;
-	private String tag;
+	private String[] tags;
 	
-	public Spell(String name, int id, String type, String effect, String tag) {
+	public Spell(String name, int id, String type, String effect, String[] tags) {
 		super(name, 2, id);
 		this.type = type;
 		this.effect = effect;
-		this.tag = tag;
+		this.tags = tags;
 	}
 
 	public String getType() {
@@ -28,12 +28,12 @@ public class Spell extends Card {
 		this.effect = effect;
 	}
 	
-	public String getTag() {
-		return this.tag;
+	public String[] getTags() {
+		return this.tags;
 	}
 	
-	public void setTag(String t) {
-		this.tag = t;
+	public void setTags(String[] tags) {
+		this.tags = tags;
 	}
 	
 }

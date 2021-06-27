@@ -145,32 +145,22 @@
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Element" onAction="#setSortType" userData="2">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Stufe" onAction="#setSortType" userData="2">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Stufe" onAction="#setSortType" userData="3">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Angriff" onAction="#setSortType" userData="3">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Angriff" onAction="#setSortType" userData="4">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Verteidigung" onAction="#setSortType" userData="4">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Verteidigung" onAction="#setSortType" userData="5">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Typ" onAction="#setSortType" userData="6">
-                                       <font>
-                                          <Font name="Arial Black" size="15.0" />
-                                       </font>
-                                    </Button>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Tag" onAction="#setSortType" userData="7">
+                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="145.0" text="Typ" onAction="#setSortType" userData="5">
                                        <font>
                                           <Font name="Arial Black" size="15.0" />
                                        </font>
