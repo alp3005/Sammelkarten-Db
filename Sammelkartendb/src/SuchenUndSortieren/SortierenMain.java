@@ -8,10 +8,11 @@ import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
+import application.SortType;
 
 public class SortierenMain {
 
-	public static Card[] sort(Card[] cards, int m, int at, boolean down) throws Exception {
+	public static List<Card> sort(List<Card> cards, int m, SortType at, boolean down) throws Exception {
 		/* m = Variable zur Zuordnung der Sortiermethode --> 1=Mergesort, 2=Quicksort, 3=Selectionsort, 4=Heapsort
 		 * at = Variable zur Zuordnung des Attributs nach dem sortiert werden soll --> 1=Name, 2=Typ, 3=ATK, 4=DEF, 5=Kartenart, 6=Stufe
 		 * down = Variable, ob absteigend sortiert wird
@@ -21,7 +22,7 @@ public class SortierenMain {
 		List<Monster> monList = new Vector<Monster>(0,1);
 		List<Spell> spellList = new Vector<Spell>(0,1);
 		List<Trap> trapList = new Vector<Trap>(0,1);
-		for(int i = 0; i < cards.length; i++) {
+		for(int i = 0; i < cards.size(); i++) {
 			switch(cards[i].getKategory()) {
 			case 1:
 				monList.add((Monster) cards[i]);

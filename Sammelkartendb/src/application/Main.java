@@ -35,13 +35,12 @@ public class Main extends Application {
 		launch(args);
 	}
 	
-	public static void showAddStage() throws IOException {
+	public static Stage showAddStage() throws IOException {
 		System.out.println("Button pressed");
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("ErstellenView.fxml"));
 		AnchorPane erstellenView = loader.load();
 	 
-		
 		Stage addDialogeStage = new Stage();
 		addDialogeStage.setTitle("Erstelle Sie eine eigene Karte");
 		addDialogeStage.initModality(Modality.WINDOW_MODAL);
@@ -49,5 +48,6 @@ public class Main extends Application {
 		Scene scene = new Scene(erstellenView);
 		addDialogeStage.setScene(scene);
 		addDialogeStage.showAndWait();	
+		return addDialogeStage;
 	}
 }

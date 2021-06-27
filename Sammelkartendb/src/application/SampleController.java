@@ -9,9 +9,11 @@ import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
+import SuchenUndSortieren.SortierenMain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -24,12 +26,15 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class SampleController {
 	
 	@FXML
 	private void addBtn() throws IOException {
-		Main.showAddStage();
+		Stage stage = Main.showAddStage();
+		initializeCardsVBox();
 	}
 	
 	
@@ -200,17 +205,11 @@ public class SampleController {
 		@FXML
 		private VBox cardsVBox;
 		@FXML
-		private CheckBox trapTagZerSearch;
+		private ComboBox sortAlgorithmComboBox;
 		@FXML
-		private CheckBox trapTagBesSearch;
-		@FXML
-		private CheckBox trapTagEinSearch;
-		@FXML
-		private CheckBox trapTagPosSearch;
-		@FXML
-		private CheckBox trapTagSucSearch;
-		
-		ObservableList<String> magicTrapTagListSearch = FXCollections.observableArrayList("zerstören", "beschwören", "einschränken", "Position ändern", "suchen", "anderes");
+		private ComboBox searchAlgorithmComboBox;
+		private ObservableList<String> sortAlgorithms = FXCollections.observableArrayList("Mergesort", "Quicksort", "Selectionsort", "Heapsort");
+		private ObservableList<String> searchAlgorithms = FXCollections.observableArrayList("Binäre Suche", "Fibonacci Suche", "Exponential Suche", "Interpolationssuche");
 		
 		private Font labelFont = new Font("Arial", 22.0); 
 		private SortType sortType;
@@ -262,6 +261,9 @@ public class SampleController {
 			magicGridSearch.setVisible(false);
 			trapGridSearch.setManaged(false);
 			trapGridSearch.setVisible(false);
+			
+			sortAlgorithmComboBox.setItems(sortAlgorithms);
+			searchAlgorithmComboBox.setItems(searchAlgorithms);
 			
 			sortType = sortType.CATEGORY;
 			initializeCardsVBox();
@@ -378,6 +380,7 @@ public class SampleController {
 			int value = getUserDataValue(event);
 		    sortType = SortType.values()[value];
 		    System.out.println(sortType);
+		    CardsHandler.get().setSortAttribute(sortType);
 		//Erstelle neue Kartenliste nach Klicken eines Buttons, da sonst die alte Kartenliste noch vorhanden wäre
 		    initializeCardsVBox();
 		}
@@ -388,5 +391,17 @@ public class SampleController {
 		    String data = (String) button.getUserData();
 		    //Übertrage von String to Integer
 		    return Integer.parseInt(data);
+		}
+		
+		@FXML
+		private void setSortAlgorithm(ActionEvent event) {
+			int sortAlgorithm = sortAlgorithms.indexOf(sortAlgorithmComboBox.getValue()) + 1;
+			CardsHandler.get().setSortAlgorithm(sortAlgorithm);
+		}
+		
+		@FXML
+		private void setSearchAlgorithm(ActionEvent event) {
+			// int sortAlgorithm = sortAlgorithms.indexOf(sortAlgorithmComboBox.getValue()) + 1;
+			// CardsHandler.get().setSortAlgorithm(sortAlgorithm);
 		}
 }
