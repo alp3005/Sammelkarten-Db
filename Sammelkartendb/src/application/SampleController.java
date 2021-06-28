@@ -17,6 +17,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -38,85 +40,6 @@ public class SampleController {
 		initializeCardsVBox();
 	}
 	
-	
-	
-	//---Kartenfeld 1---//
-	@FXML
-	private Label nameFieldKF1;
-	@FXML
-	private Label typeBoxKF1;
-	
-	//Monster Stuff
-	@FXML
-	private GridPane monsterGridKF1;
-	
-	@FXML
-	private Label elementKF1;
-	@FXML
-	private Label levelBoxKF1;
-	@FXML
-	private Label attackFieldKF1;
-	@FXML
-	private Label defenseFieldKF1;
-	
-	//Zauber Stuff
-	@FXML
-	private GridPane magicGridKF1;
-	
-	@FXML
-	private Label magicTypeBoxKF1;
-	@FXML
-	private Label magicTagBoxKF1;
-
-	//Fallen stuff
-	@FXML
-	private GridPane trapGridKF1;
-	
-	@FXML
-	private Label trapTypeBoxKF1;
-	@FXML
-	private Label trapTagBoxKF1;
-	
-	//---Kartenfeld 1 ende---
-	
-	//---Kartenfeld 2---//
-		@FXML
-		private Label nameFieldKF2;
-		@FXML
-		private Label typeBoxKF2;
-		
-		//Monster Stuff
-		@FXML
-		private GridPane monsterGridKF2;
-		
-		@FXML
-		private Label elementKF2;
-		@FXML
-		private Label levelBoxKF2;
-		@FXML
-		private Label attackFieldKF2;
-		@FXML
-		private Label defenseFieldKF2;
-		
-		//Zauber Stuff
-		@FXML
-		private GridPane magicGridKF2;
-		
-		@FXML
-		private Label magicTypeBoxKF2;
-		@FXML
-		private Label magicTagBoxKF2;
-
-		//Fallen stuff
-		@FXML
-		private GridPane trapGridKF2;
-		
-		@FXML
-		private Label trapTypeBoxKF2;
-		@FXML
-		private Label trapTagBoxKF2;
-		
-		//---Kartenfeld 1 ende---
 	
 	//----Suchen----
 	//Optionen die im drop down menu für den Karten Typ angezeigt werden
@@ -181,6 +104,8 @@ public class SampleController {
 		private ObservableList<String> searchAlgorithms = FXCollections.observableArrayList("Binäre Suche", "Fibonacci Suche", "Exponential Suche", "Interpolationssuche");
 		
 
+		@FXML
+		private Button cardInfoButton;
 	    @FXML
 	    private Label cardInfoName;
 	    @FXML
@@ -197,11 +122,32 @@ public class SampleController {
 	    private Label cardInfoTags;
 	    @FXML
 	    private Label cardInfoElement;
+	    
+	    @FXML
+		private Button cardInfoButton2;
+	    @FXML
+	    private Label cardInfoName2;
+	    @FXML
+	    private Label cardInfoArt2;
+	    @FXML
+	    private Label cardInfoLvl2;
+	    @FXML
+	    private Label cardInfoAtk2;
+	    @FXML
+	    private Label cardInfoDef2;
+	    @FXML
+	    private Label cardInfoType2;
+	    @FXML
+	    private Label cardInfoTags2;
+	    @FXML
+	    private Label cardInfoElement2;
+	    
 	    private HBox selectedCardHBox;
 	    private int selectedCardId;
 		
+	    private int cardInfoArea = 1;
 		
-		private Font labelFont = new Font("Arial", 22.0); 
+		private Font labelFont = new Font("Arial", 18.0); 
 		private Font labelSelectedFont = new Font("Arial Black", 22.0); 
 		private SortType sortType;
 		
@@ -260,6 +206,22 @@ public class SampleController {
 			
 			sortType = sortType.CATEGORY;
 			initializeCardsVBox();
+		}
+		
+		@FXML
+		private void selectCardInfo1(ActionEvent event) {
+			cardInfoButton.setStyle("-fx-background-color: gold");
+			cardInfoButton2.setStyle("-fx-background-color: ");
+			
+			cardInfoArea = 1;
+		}
+		
+		@FXML
+		private void selectCardInfo2(ActionEvent event) {
+			cardInfoButton2.setStyle("-fx-background-color: gold");
+			cardInfoButton.setStyle("-fx-background-color: ");
+			
+			cardInfoArea = 2;
 		}
 		
 		private void initializeCardsVBox() {
@@ -421,25 +383,49 @@ public class SampleController {
 				int id = Integer.parseInt(idLabel.getText());
 				Card card = CardsHandler.get().getCardById(id);
 				
-				cardInfoName.setText(card.getName());
-				cardInfoArt.setText(cardTypeListSearch.get(card.getKategory() - 1));
-				// Frage ab ob geklickte Karte eine Monsterkarte ist, wenn ja: gebe Wert der Atk. Andernfalls gebe "-" wieder
-				cardInfoAtk.setText(card instanceof Monster ? String.valueOf(((Monster)card).getAtk()) : "-");
-				cardInfoDef.setText(card instanceof Monster ? String.valueOf(((Monster)card).getDef()) : "-");
-				cardInfoElement.setText(card instanceof Monster ? ((Monster)card).getAttribute() : "-");
-				cardInfoLvl.setText(card instanceof Monster ? String.valueOf(((Monster)card).getLvl()) : "-");
-				
-				if (card instanceof Spell) { 
-					Spell spell = (Spell)card;
-					cardInfoTags.setText(String.join(", ", spell.getTags()));
-					cardInfoType.setText(spell.getType());
-				} else if (card instanceof Trap) { 
-					Trap trap = (Trap)card;
-					cardInfoTags.setText(String.join(", ", trap.getTags()));
-					cardInfoType.setText(trap.getType());
-				} else  {
-					cardInfoTags.setText("-");
-					cardInfoType.setText("-");
+				if(cardInfoArea == 1) {
+					cardInfoName.setText(card.getName());
+					cardInfoArt.setText(cardTypeListSearch.get(card.getKategory() - 1));
+					// Frage ab ob geklickte Karte eine Monsterkarte ist, wenn ja: gebe Wert der Atk. Andernfalls gebe "-" wieder
+					cardInfoAtk.setText(card instanceof Monster ? String.valueOf(((Monster)card).getAtk()) : "-");
+					cardInfoDef.setText(card instanceof Monster ? String.valueOf(((Monster)card).getDef()) : "-");
+					cardInfoElement.setText(card instanceof Monster ? ((Monster)card).getAttribute() : "-");
+					cardInfoLvl.setText(card instanceof Monster ? String.valueOf(((Monster)card).getLvl()) : "-");
+					
+					if (card instanceof Spell) { 
+						Spell spell = (Spell)card;
+						cardInfoTags.setText(String.join(", ", spell.getTags()));
+						cardInfoType.setText(spell.getType());
+					} else if (card instanceof Trap) { 
+						Trap trap = (Trap)card;
+						cardInfoTags.setText(String.join(", ", trap.getTags()));
+						cardInfoType.setText(trap.getType());
+					} else  {
+						cardInfoTags.setText("-");
+						cardInfoType.setText("-");
+					}
+				}
+				else {
+					cardInfoName2.setText(card.getName());
+					cardInfoArt2.setText(cardTypeListSearch.get(card.getKategory() - 1));
+					// Frage ab ob geklickte Karte eine Monsterkarte ist, wenn ja: gebe Wert der Atk. Andernfalls gebe "-" wieder
+					cardInfoAtk2.setText(card instanceof Monster ? String.valueOf(((Monster)card).getAtk()) : "-");
+					cardInfoDef2.setText(card instanceof Monster ? String.valueOf(((Monster)card).getDef()) : "-");
+					cardInfoElement2.setText(card instanceof Monster ? ((Monster)card).getAttribute() : "-");
+					cardInfoLvl2.setText(card instanceof Monster ? String.valueOf(((Monster)card).getLvl()) : "-");
+					
+					if (card instanceof Spell) { 
+						Spell spell = (Spell)card;
+						cardInfoTags2.setText(String.join(", ", spell.getTags()));
+						cardInfoType2.setText(spell.getType());
+					} else if (card instanceof Trap) { 
+						Trap trap = (Trap)card;
+						cardInfoTags2.setText(String.join(", ", trap.getTags()));
+						cardInfoType2.setText(trap.getType());
+					} else  {
+						cardInfoTags2.setText("-");
+						cardInfoType2.setText("-");
+					}
 				}
 			}
 		}
