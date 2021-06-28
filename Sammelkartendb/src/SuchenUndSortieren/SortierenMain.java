@@ -76,6 +76,7 @@ public class SortierenMain {
 				}
 				break;
 			default: //sollte nicht eintreten können
+				System.out.println("Fehler: kein Algorithmus ausgewählt");
 				break;
 			}
 		} catch (IOException e) { //Exception falls gewünschtes Attribut und Kartentyp nicht zusammen passen
@@ -504,16 +505,16 @@ public class SortierenMain {
 	private static List<Card> combine2Lists(List<Card> arr1, List<Card> arr2) {
 		List<Card> combinedList = arr1;
 		for(Card c : arr2)
-			combinedList.add(arr1.size()+arr2.indexOf(c), c);
+			combinedList.add(c);
 		return combinedList;
 	}
 
 	private static List<Card> combine3List(List<Card> arr1, List<Card> arr2, List<Card> arr3) {
 		List<Card> combinedList = arr1;
 		for(Card c : arr2)
-			combinedList.add(arr1.size()+arr2.indexOf(c), c);
+			combinedList.add(c);
 		for(Card c : arr3)
-			combinedList.add(arr1.size()+arr2.size()+arr3.indexOf(c), c);
+			combinedList.add(c);
 		return combinedList;
 	}
 
