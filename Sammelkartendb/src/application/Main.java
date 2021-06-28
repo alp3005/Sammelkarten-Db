@@ -1,16 +1,11 @@
 package application;
 	
 import java.io.IOException;
-import java.util.ArrayList;
-
-import Cards.Card;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {

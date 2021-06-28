@@ -1,60 +1,73 @@
 package SuchenUndSortieren;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Cards.Card;
 import Cards.Monster;
+import application.SortType;
 
 public class SortierenMonster {
 
-	static Card[] mergeSort(Monster[] arr, int at) throws Exception {
-		if(arr.length > 1) {
-			int mid = (int)(arr.length / 2);
-			Monster[] l = new Monster[mid];
+	static List<Card> mergeSort(List<Monster> arr, SortType at) throws Exception {
+		if(arr.size() > 1) {
+			int mid = (int)(arr.size()/2);
+			List<Monster> l = new ArrayList<Monster>(mid);
 			for (int i = 0; i < mid; i++)
-				l[i] = arr[i];
-			Monster[] r = new Monster[arr.length-mid];
-			for (int j = mid; j < arr.length; j++)
-				r[j-mid] = arr[j];
-			l = (Monster[]) mergeSort(l, at);
-			r = (Monster[]) mergeSort(r, at);
+				l.add(i, arr.get(i));
+			List<Monster> r = new ArrayList<Monster>(arr.size()-mid);
+			for (int j = mid; j < arr.size(); j++)
+				r.add(j-mid, arr.get(j));
+			List<Card> tempL = new ArrayList<Card>(0);
+			List<Card> tempR = new ArrayList<Card>(0);
+			tempL = mergeSort(l, at);
+			tempR = mergeSort(r, at);
+			for(Card c : tempL)
+				l.add(tempL.indexOf(c), (Monster) c);
+			for(Card c : tempR)
+				r.add(tempR.indexOf(c), (Monster) c);
 			return mergeSortCombine(l, r, at);
 		} else {
-			return arr;
+			List<Card> ret = new ArrayList<Card> (0);
+			for(Monster m : arr)
+				ret.add((Card) m);
+			return ret;
 		}
 	}
 
-	private static Monster[] mergeSortCombine(Monster[] l, Monster[] r, int at) throws Exception {
-		Monster[] newl = new Monster[l.length + r.length];
+	private static List<Card> mergeSortCombine(List<Monster> l, List<Monster> r, SortType at) throws Exception {
+		List<Card> newl = new ArrayList<Card>(l.size() + r.size());
 		int indexl = 0;
 		int indexr = 0;
 		int indexx = 0;
-		while (indexl < l.length && indexr < r.length) {
+		while (indexl < l.size() && indexr < r.size()) {
 			switch(at) {
-			case 3: //ATK
-				if (l[indexl].getAtk() < r[indexr].getAtk()) {
-					newl[indexx] = l[indexl];
+			case ATTACK: //ATK
+				if (l.get(indexl).getAtk() < r.get(indexr).getAtk()) {
+					newl.add(indexx, l.get(indexl));
 					indexl++;
 				} else {
-					newl[indexx] = r[indexr];
+					newl.add(indexx, r.get(indexr));
 					indexr += 1;
 				}
 				indexx++;
 				break;
-			case 4: //DEF
-				if (l[indexl].getDef() < r[indexr].getDef()) {
-					newl[indexx] = l[indexl];
+			case DEFENSE: //DEF
+				if (l.get(indexl).getDef() < r.get(indexr).getDef()) {
+					newl.add(indexx, l.get(indexl));
 					indexl++;
 				} else {
-					newl[indexx] = r[indexr];
+					newl.add(indexx, r.get(indexr));
 					indexr += 1;
 				}
 				indexx++;
 				break;
-			case 6:
-				if (l[indexl].getLvl() < r[indexr].getLvl()) {
-					newl[indexx] = l[indexl];
+			case LEVEL: //Stufe
+				if (l.get(indexl).getLvl() < r.get(indexr).getLvl()) {
+					newl.add(indexx, l.get(indexl));
 					indexl++;
 				} else {
-					newl[indexx] = r[indexr];
+					newl.add(indexx, r.get(indexr));
 					indexr += 1;
 				}
 				indexx++;
@@ -63,24 +76,28 @@ public class SortierenMonster {
 				throw new Exception("Gewähltes Attribut passt nicht zum Kartentyp Monster"); //Sollte im fertigen Programm nicht eintreten können
 			}
 		}
-		while (indexl < l.length) {
-			newl[indexx] = l[indexl];
+		while (indexl < l.size()) {
+			newl.add(indexx, l.get(indexl));
 			indexl++;
 			indexx++;
 		}
-		while (indexr < r.length) {
-			newl[indexx] = r[indexr];
+		while (indexr < r.size()) {
+			newl.add(indexx, r.get(indexr));
 			indexr++;
 			indexx++;
 		}
 		return newl;
 	}
 
-	static Card[] quickSortInit(Monster[] arr, int at) throws Exception {
-		return quicksort(arr, 0, arr.length-1, at);
+	static List<Card> quickSortInit(List<Monster> arr, SortType at) throws Exception {
+		List<Monster> tempM = quicksort(arr, 0, arr.size()-1, at);
+		List<Card> tempC = new ArrayList<Card>(0);
+		for(Monster m : tempM)
+			tempC.add((Card) m);
+		return tempC;
 	}
 
-	private static Monster[] quicksort(Monster[] arr, int l, int r, int at) throws Exception {
+	private static List<Monster> quicksort(List<Monster> arr, int l, int r, SortType at) throws Exception {
 		int t;
 		if(l < r) {
 			t = quicksortSplit(arr, l, r, at);
@@ -90,58 +107,58 @@ public class SortierenMonster {
 		return arr;
 	}
 
-	private static int quicksortSplit(Monster[] arr,int l, int r, int at) throws Exception {
+	private static int quicksortSplit(List<Monster> arr,int l, int r, SortType at) throws Exception {
 		int pivot;
 		int i = l-1;
 		int j = r+1;
 		switch(at) {
-		case 3:
-			pivot = arr[(l+r)/2].getAtk();
+		case ATTACK: //Atk
+			pivot = arr.get((l+r)/2).getAtk();
 			while (true) {
 				do {
 					i++;
-				} while (arr[i].getAtk() < pivot);
+				} while (arr.get(i).getAtk() < pivot);
 				do {
 					j--;
-				} while (arr[j].getAtk() > pivot);
+				} while (arr.get(j).getAtk() > pivot);
 				if (i < j) {
-					Monster a = arr[i];
-					arr[i] = arr[j];
-					arr[j] = a;
+					Monster a = arr.get(i);
+					arr.add(i, arr.get(j));
+					arr.add(j, a);
 				} else {
 					return j;
 				}
 			}
-		case 4:
-			pivot = arr[(l+r)/2].getDef();
+		case DEFENSE: //Def
+			pivot = arr.get((l+r)/2).getDef();
 			while (true) {
 				do {
 					i++;
-				} while (arr[i].getDef() < pivot);
+				} while (arr.get(i).getDef() < pivot);
 				do {
 					j--;
-				} while (arr[j].getDef() > pivot);
+				} while (arr.get(j).getDef() > pivot);
 				if (i < j) {
-					Monster a = arr[i];
-					arr[i] = arr[j];
-					arr[j] = a;
+					Monster a = arr.get(i);
+					arr.add(i, arr.get(j));
+					arr.add(j, a);
 				} else {
 					return j;
 				}
 			}
-		case 6:
-			pivot = arr[(l+r)/2].getLvl();
+		case LEVEL: //Stufe
+			pivot = arr.get((l+r)/2).getLvl();
 			while (true) {
 				do {
 					i++;
-				} while (arr[i].getLvl() < pivot);
+				} while (arr.get(i).getLvl() < pivot);
 				do {
 					j--;
-				} while (arr[j].getLvl() > pivot);
+				} while (arr.get(j).getLvl() > pivot);
 				if (i < j) {
-					Monster a = arr[i];
-					arr[i] = arr[j];
-					arr[j] = a;
+					Monster a = arr.get(i);
+					arr.add(i, arr.get(j));
+					arr.add(j, a);
 				} else {
 					return j;
 				}
@@ -151,28 +168,28 @@ public class SortierenMonster {
 		}
 	}
 
-	static Card[] selectionSort(Monster[] arr, int at) throws Exception {
-		for (int i = 0; i < arr.length-1; i++) {
+	static List<Card> selectionSort(List<Monster> arr, SortType at) throws Exception {
+		for (int i = 0; i < arr.size()-1; i++) {
 			int minPos = i;
-			Monster min = arr[minPos];
-			for (int j = i+1; j < arr.length; j++) {
+			Monster min = arr.get(minPos);
+			for (int j = i+1; j < arr.size(); j++) {
 				switch (at) {
-				case 3:
-					if (arr[j].getAtk() < min.getAtk()) {
+				case ATTACK: //Atk
+					if (arr.get(j).getAtk() < min.getAtk()) {
 						minPos = j;
-						min = arr[minPos];
+						min = arr.get(minPos);
 					}
 					break;
-				case 4:
-					if (arr[j].getDef() < min.getDef()) {
+				case DEFENSE: //Def
+					if (arr.get(j).getDef() < min.getDef()) {
 						minPos = j;
-						min = arr[minPos];
+						min = arr.get(minPos);
 					}
 					break;
-				case 6:
-					if (arr[j].getLvl() < min.getLvl()) {
+				case LEVEL: //Stufe
+					if (arr.get(j).getLvl() < min.getLvl()) {
 						minPos = j;
-						min = arr[minPos];
+						min = arr.get(minPos);
 					}
 					break;
 				default:
@@ -180,58 +197,64 @@ public class SortierenMonster {
 				}
 			}
 			if (minPos != i) {
-				arr[minPos] = arr[i];
-				arr[i] = min;
+				arr.add(minPos, arr.get(i));
+				arr.add(i, min);
 			}
 		}
-		return arr;
+		List<Card> ret = new ArrayList<Card>(0);
+		for(Monster m : arr)
+			ret.add((Card) m);
+		return ret;
 	}
 
-	static Card[] heapSort(Monster[] arr, int at) throws Exception {
+	static List<Card> heapSort(List<Monster> arr, SortType at) throws Exception {
 		arr = heapSortMax(arr, at);
-		for(int i = arr.length-1; i > 0; i--) {
+		for(int i = arr.size()-1; i > 0; i--) {
 			arr = heapSortSwap(arr, i, 0);
 			arr = heapSortDown(arr, 0, i, at);
 		}
-		return arr;
+		List<Card> ret = new ArrayList<Card>(0);
+		for(Monster m : arr)
+			ret.add((Card) m);
+		return ret;
 	}
 
-	private static Monster[] heapSortMax(Monster[] arr, int at) throws Exception {
-		Monster[] arrMax = arr;
-		for(int i = (arr.length/2)-1; i >= 0 ; i--)
-			arrMax = heapSortDown(arr, i, arr.length, at);
+	private static List<Monster> heapSortMax(List<Monster> arr, SortType at) throws Exception {
+		List<Monster> arrMax = arr;
+		for(int i = (arr.size()/2)-1; i >= 0 ; i--)
+			arrMax = heapSortDown(arr, i, arr.size(), at);
 		return arrMax;
 	}
 
-	private static Monster[] heapSortDown(Monster[] arr, int a, int b, int at) throws Exception {
+	private static List<Monster> heapSortDown(List<Monster> arr, int a, int b, SortType at) throws Exception {
 		while(a <= (b/2)-1) {
 			int c = ((a+1)*2)-1;
 			switch(at) {
-			case 3:
+			case ATTACK: //Atk
 				if(c+1 <= b-1)
-					if(arr[c].getAtk() <= arr[c+1].getAtk())
+					if(arr.get(c).getAtk() <= arr.get(c+1).getAtk())
 						c++;
-				if(arr[a].getAtk() <= arr[c].getAtk()) {
+				if(arr.get(a).getAtk() <= arr.get(c).getAtk()) {
 					arr = heapSortSwap(arr, a, c);
 					a = c;
 				} else
 					break;
 				break;
-			case 4:
+			case DEFENSE: //Def
 				if(c+1 <= b-1)
-					if(arr[c].getDef() <= arr[c+1].getDef())
+					if(arr.get(c).getDef() <= arr.get(c+1).getDef())
 						c++;
-				if(arr[a].getDef() <= arr[c].getDef()) {
+				if(arr.get(a).getDef() <= arr.get(c).getDef()) {
 					arr = heapSortSwap(arr, a, c);
 					a = c;
 				} else
 					break;
 				break;
-			case 6:
+			case LEVEL: //Stufe
 				if(c+1 <= b-1)
-					if(arr[c].getLvl() <= arr[c+1].getLvl())
+					if(arr.get(c).getLvl() <= arr.get(c+1).getLvl())
 						c++;
-				if(arr[a].getLvl() <= arr[c].getLvl()) {
+				if(arr.get(a).getLvl() <= arr.get(c).getLvl()) {
 					arr = heapSortSwap(arr, a, c);
 					a = c;
 				} else
@@ -244,10 +267,10 @@ public class SortierenMonster {
 		return arr;
 	}
 
-	private static Monster[] heapSortSwap(Monster[] arr, int i, int c) {
-		Monster temp = arr[i];
-		arr[i] = arr[c];
-		arr[c] = temp;
+	private static List<Monster> heapSortSwap(List<Monster> arr, int i, int c) {
+		Monster temp = arr.get(i);
+		arr.add(i, arr.get(c));
+		arr.add(c, temp);
 		return arr;
 	}
 

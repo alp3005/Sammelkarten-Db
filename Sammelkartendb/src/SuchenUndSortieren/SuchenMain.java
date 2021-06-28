@@ -25,16 +25,16 @@ public class SuchenMain {
 		List<Monster> monList = new Vector<Monster>(0,1);
 		List<Spell> spellList = new Vector<Spell>(0,1);
 		List<Trap> trapList = new Vector<Trap>(0,1);
-		for(int i = 0; i < cards.length; i++) {
-			switch(cards[i].getKategory()) {
+		for(Card c : cards) {
+			switch(c.getKategory()) {
 			case 1:
-				monList.add((Monster) cards[i]);
+				monList.add((Monster) c);
 				break;
 			case 2:
-				spellList.add((Spell) cards[i]);
+				spellList.add((Spell) c);
 				break;
 			case 3:
-				trapList.add((Trap) cards[i]);
+				trapList.add((Trap) c);
 				break;
 			}
 		}
@@ -49,7 +49,7 @@ public class SuchenMain {
 			switch(m) {
 			case 1: //BinarySearch
 				if(at == 1 || at == 5) {
-					suchergebnis = BinarySearch(cards, 0, cards.length, at, wertInt, wertString);
+					suchergebnis = BinarySearch(cards, 0, cards.size(), at, wertInt, wertString);
 				} else {
 					suchergebnis = BinarySwitch(monsters, spells, traps, at, wertInt, wertString);
 				}
@@ -70,7 +70,7 @@ public class SuchenMain {
 				break;
 			case 4: //InterpolationSearch
 				if(at == 1 || at == 5) {
-					suchergebnis = InterpolationSearch(cards, 0, cards.length-1, at, wertInt, wertString);
+					suchergebnis = InterpolationSearch(cards, 0, cards.size()-1, at, wertInt, wertString);
 				} else {
 					suchergebnis = InterpolationSwitch(monsters, spells, traps, at, wertInt, wertString);
 				}
@@ -84,7 +84,7 @@ public class SuchenMain {
 		return suchergebnis;
 	}
 
-	private static Card[] BinarySwitch(Monster[] monsters, Spell[] spells, Trap[] traps, SortType at, int wertInt, String wertString) throws Exception {
+	private static List<Card> BinarySwitch(Monster[] monsters, Spell[] spells, Trap[] traps, SortType at, int wertInt, String wertString) throws Exception {
 		Card[] tempS = new Card[spells.length];
 		Card[] tempT = new Card[traps.length];
 		Card[] tempM = new Card[monsters.length];
@@ -112,7 +112,7 @@ public class SuchenMain {
 		return ergebnis;
 	}
 
-	private static Card[] FibonacciSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, SortType at, int wertInt, String wertString) throws Exception {
+	private static List<Card> FibonacciSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, SortType at, int wertInt, String wertString) throws Exception {
 		Card[] tempS = new Card[spells.length];
 		Card[] tempT = new Card[traps.length];
 		Card[] tempM = new Card[monsters.length];
@@ -140,7 +140,7 @@ public class SuchenMain {
 		return ergebnis;
 	}
 
-	private static Card[] ExponentialSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, int wertInt, String wertString) throws Exception {
+	private static List<Card> ExponentialSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, int wertInt, String wertString) throws Exception {
 		Card[] tempS = new Card[spells.length];
 		Card[] tempT = new Card[traps.length];
 		Card[] tempM = new Card[monsters.length];
@@ -168,7 +168,7 @@ public class SuchenMain {
 		return ergebnis;
 	}
 
-	private static Card[] InterpolationSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, int wertInt, String wertString) throws Exception {
+	private static List<Card> InterpolationSwitch(Monster[] monsters, Spell[] spells, Trap[] traps, int at, int wertInt, String wertString) throws Exception {
 		Card[] tempS = new Card[spells.length];
 		Card[] tempT = new Card[traps.length];
 		Card[] tempM = new Card[monsters.length];
@@ -196,7 +196,7 @@ public class SuchenMain {
 		return ergebnis;
 	}
 
-	private static Card[] BinarySearch(Card[] arr, int start, int stop, int at, int wertInt, String wertString) throws Exception {
+	private static List<Card> BinarySearch(Card[] arr, int start, int stop, int at, int wertInt, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
@@ -230,7 +230,7 @@ public class SuchenMain {
 		return (Card[]) cardList.toArray(); //nicht sicher, ob dieser Fall überhaupt eintreten kann, aber sonst beschwert sich eclipse
 	}
 
-	private static Card[] FibonacciSearch(Card[] arr, int at, int wertInt, String wertString) throws Exception {
+	private static List<Card> FibonacciSearch(Card[] arr, int at, int wertInt, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
@@ -292,7 +292,7 @@ public class SuchenMain {
 		}
 	}
 
-	private static Card[] ExponentialSearch(Card[] arr, int at, int wertInt, String wertString) throws Exception {
+	private static List<Card> ExponentialSearch(Card[] arr, int at, int wertInt, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
@@ -320,7 +320,7 @@ public class SuchenMain {
 		}
 	}
 
-	private static Card[] InterpolationSearch(Card[] arr, int start, int stop, int at, int wertInt, String wertString) throws Exception {
+	private static List<Card> InterpolationSearch(Card[] arr, int start, int stop, int at, int wertInt, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
