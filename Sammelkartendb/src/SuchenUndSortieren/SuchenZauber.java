@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Vector;
 import Cards.Card;
 import Cards.Spell;
+import application.SortType;
 
 public class SuchenZauber {
 
-	static Card[] BinarySearchZauber(Spell[] arr, int start, int stop, int at, String wertString) throws Exception {
+	static Card[] BinarySearchZauber(Spell[] arr, int start, int stop, SortType at, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
@@ -15,7 +16,7 @@ public class SuchenZauber {
 		if(grenze >= arr.length) {
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht enthalten. Leeres Array wird zurückgegeben
 		}
-		if(at == 2) { //Typ
+		if(at.name().equals("TYPE")) { //Typ
 			if(wertString.compareToIgnoreCase(arr[grenze].getType()) > 0) {
 				BinarySearchZauber(arr, grenze+1, stop, at, wertString);
 			} else if(wertString.compareToIgnoreCase(arr[grenze].getType()) < 0 && start != grenze) {
@@ -31,7 +32,7 @@ public class SuchenZauber {
 		return (Card[]) cardList.toArray();
 	}
 
-	static Card[] FibonacciSearchZauber(Spell[] arr, int i, int length, int at, String wertString) throws Exception {
+	static Card[] FibonacciSearchZauber(Spell[] arr, int i, int length, SortType at, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
@@ -46,7 +47,7 @@ public class SuchenZauber {
 			fibN = fibNr2 + fibNr1;
 		}
 		//Eigentliche Suche
-		if(at == 2) { //Typ
+		if(at.name().equals("TYPE")) { //Typ
 			while (fibN > 1) {
 				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getType().compareToIgnoreCase(wertString) < 0) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
@@ -73,10 +74,10 @@ public class SuchenZauber {
 		}
 	}
 	
-	static Card[] ExponentialSearchZauber(Spell[] arr, int i, int length, int at, String wertString) throws Exception {
+	static Card[] ExponentialSearchZauber(Spell[] arr, int i, int length, SortType at, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
-		if(at == 2) {
+		if(at.name().equals("TYPE")) {
 			List<Card> cardList = new Vector<Card>(0,1);
 			int ex = 1; //Exponentiale Variable
 			if (arr[0].getType().equals(wertString)) { //Test, ob das erste Element des Array ein Treffer ist
@@ -93,12 +94,12 @@ public class SuchenZauber {
 		}
 	}
 
-	static Card[] InterpolationSearchZauber(Spell[] arr, int start, int stop, int at, String wertString) throws Exception {
+	static Card[] InterpolationSearchZauber(Spell[] arr, int start, int stop, SortType at, String wertString) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
 		int pos;
-		if(at == 2) { //Name
+		if(at.name().equals("TYPE")) { //Name
 			if (start <= stop && wertString.compareToIgnoreCase(arr[start].getType()) >= 0 && wertString.compareToIgnoreCase(arr[stop].getType()) <= 0) {
 
 				pos = start+(((stop-start)/(arr[stop].getType().hashCode()-arr[start].getType().hashCode()))*(wertString.hashCode()-arr[start].getType().hashCode())); //Neue Testposition //WICHTIG: Potentieller Fehler

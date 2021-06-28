@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Vector;
 import Cards.Card;
 import Cards.Monster;
+import application.SortType;
 
 public class SuchenMonster {
 
-	static Card[] BinarySearchMonster(Monster[] arr, int start, int stop, int at, int wertInt) throws Exception {
+	static Card[] BinarySearchMonster(Monster[] arr, int start, int stop, SortType at, int wertInt) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
@@ -17,7 +18,7 @@ public class SuchenMonster {
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht enthalten. Leeres Array wird zurückgegeben
 		}
 		switch(at) {
-		case 3: //ATK
+		case ATTACK: //ATK
 			if(wertInt > arr[grenze].getAtk()) {
 				BinarySearchMonster(arr, grenze+1, stop, at, wertInt);
 			} else if(wertInt < arr[grenze].getAtk() && start != grenze) {
@@ -29,7 +30,7 @@ public class SuchenMonster {
 				return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
 			}
 			break;
-		case 4: //DEF
+		case DEFENSE: //DEF
 			if(wertInt > arr[grenze].getDef()) {
 				BinarySearchMonster(arr, grenze+1, stop, at, wertInt);
 			} else if(wertInt < arr[grenze].getDef() && start != grenze) {
@@ -41,7 +42,7 @@ public class SuchenMonster {
 				return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
 			}
 			break;
-		case 6: //Stufe
+		case LEVEL: //Stufe
 			if(wertInt > arr[grenze].getLvl()) {
 				BinarySearchMonster(arr, grenze+1, stop, at, wertInt);
 			} else if(wertInt < arr[grenze].getLvl() && start != grenze) {
@@ -61,7 +62,7 @@ public class SuchenMonster {
 		return (Card[]) cardList.toArray();
 	}
 
-	static Card[] FibonacciSearchMonster(Monster[] arr, int i, int length, int at, int wertInt) throws Exception {
+	static Card[] FibonacciSearchMonster(Monster[] arr, int i, int length, SortType at, int wertInt) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
@@ -77,7 +78,7 @@ public class SuchenMonster {
 		}
 		//Eigentliche Suche
 		switch(at) {
-		case 3: //ATK
+		case ATTACK: //ATK
 			while (fibN > 1) {
 				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getAtk() < wertInt) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
@@ -99,7 +100,7 @@ public class SuchenMonster {
 				return (Card[]) cardList.toArray();
 			}
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht im Array gefunden, leeres Array zurückgegeben
-		case 4: //DEF
+		case DEFENSE: //DEF
 			while (fibN > 1) {
 				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getDef() < wertInt) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
@@ -121,7 +122,7 @@ public class SuchenMonster {
 				return (Card[]) cardList.toArray();
 			}
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht im Array gefunden, leeres Array zurückgegeben
-		case 6: //Stufe
+		case LEVEL: //Stufe
 			while (fibN > 1) {
 				int n = Math.min(offset+fibNr2, arr.length-1);
 				if(arr[n].getLvl() < wertInt) { //Wenn der gesuchte Wert größer als der an Position fibNr2 ist, wird bis zum derzeitigen i das Array nicht weiter geprüft
@@ -148,13 +149,13 @@ public class SuchenMonster {
 		}
 	}
 
-	static Card[] ExponentialSearchMonster(Monster[] arr, int i, int length, int at, int wertInt) throws Exception {
+	static Card[] ExponentialSearchMonster(Monster[] arr, int i, int length, SortType at, int wertInt) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
 		int ex = 1; //Exponentiale Variable
 		switch(at) {
-		case 2: //ATK
+		case ATTACK: //ATK
 			if (arr[0].getAtk() == wertInt) { //Test, ob das erste Element des Array ein Treffer ist
 				cardList = CheckForMoreInt(arr, cardList, 0, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
 				return (Card[]) cardList.toArray();
@@ -164,7 +165,7 @@ public class SuchenMonster {
 				ex = ex*2;
 			//Binäre Suche für eingeschränkten Bereich
 			return BinarySearchMonster(arr, ex/2, Math.min(ex, arr.length-1), at, wertInt);
-		case 3: //DEF
+		case DEFENSE: //DEF
 			if (arr[0].getDef() == wertInt) { //Test, ob das erste Element des Array ein Treffer ist
 				cardList = CheckForMoreInt(arr, cardList, 0, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
 				return (Card[]) cardList.toArray();
@@ -174,7 +175,7 @@ public class SuchenMonster {
 				ex = ex*2;
 			//Binäre Suche für eingeschränkten Bereich
 			return BinarySearchMonster(arr, ex/2, Math.min(ex, arr.length-1), at, wertInt);
-		case 6: //Stufe
+		case LEVEL: //Stufe
 			if (arr[0].getLvl() == wertInt) { //Test, ob das erste Element des Array ein Treffer ist
 				cardList = CheckForMoreInt(arr, cardList, 0, at, wertInt); //Check, ob weitere Werte den Suchparametern entsprechen
 				return (Card[]) cardList.toArray();
@@ -189,13 +190,13 @@ public class SuchenMonster {
 		}
 	}
 
-	static Card[] InterpolationSearchMonster(Monster[] arr, int start, int stop, int at, int wertInt) throws Exception {
+	static Card[] InterpolationSearchMonster(Monster[] arr, int start, int stop, SortType at, int wertInt) throws Exception {
 		if(arr.length == 0)
 			throw new Exception("Keine Karten in der Datenbank"); //Falls die Datenbank leer ist
 		List<Card> cardList = new Vector<Card>(0,1);
 		int pos;
 		switch(at) {
-		case 3: //ATK
+		case ATTACK: //ATK
 			if (start <= stop && wertInt >= arr[start].getAtk() && wertInt <= arr[stop].getAtk()) {
 
 				pos = start+(((stop-start)/(arr[stop].getAtk()-arr[start].getAtk()))*(wertInt-arr[start].getAtk())); //Neue Testposition
@@ -210,7 +211,7 @@ public class SuchenMonster {
 				}
 			}
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
-		case 4: //DEF
+		case DEFENSE: //DEF
 			if (start <= stop && wertInt >= arr[start].getDef() && wertInt <= arr[stop].getDef()) {
 
 				pos = start+(((stop-start)/(arr[stop].getDef()-arr[start].getDef()))*(wertInt-arr[start].getDef())); //Neue Testposition
@@ -225,7 +226,7 @@ public class SuchenMonster {
 				}
 			}
 			return (Card[]) cardList.toArray(); //gesuchter Wert nicht gefunden. Leeres Array wird zurückgegeben
-		case 6: //Stufe
+		case LEVEL: //Stufe
 			if (start <= stop && wertInt >= arr[start].getLvl() && wertInt <= arr[stop].getLvl()) {
 
 				pos = start+(((stop-start)/(arr[stop].getLvl()-arr[start].getLvl()))*(wertInt-arr[start].getLvl())); //Neue Testposition
@@ -248,10 +249,10 @@ public class SuchenMonster {
 
 	}
 
-	private static List<Card> CheckForMoreInt(Monster[] arr, List<Card> list, int n, int at, int wertInt) { //Prüft, ob die Werte nach und vor einem gegebenen index n ebenfalls zu den Suchparametern passen
+	private static List<Card> CheckForMoreInt(Monster[] arr, List<Card> list, int n, SortType at, int wertInt) { //Prüft, ob die Werte nach und vor einem gegebenen index n ebenfalls zu den Suchparametern passen
 		list.add(arr[n]); //erstes gefundenens Element
 		switch(at) {
-		case 3:
+		case ATTACK:
 			for(int i = n; i > 0; i--) { //Werte unter n
 				if(wertInt == arr[i].getAtk()) {
 					list.add(arr[i]);
@@ -265,7 +266,7 @@ public class SuchenMonster {
 					break; //Da die Werte vorher sortiert wurden, kann beim ersten nicht mehr übereinstimmenden Element abgebrochen werden
 			}
 			break;	
-		case 4:
+		case DEFENSE:
 			for(int i = n; i > 0; i--) { //Werte unter n
 				if(wertInt == arr[i].getDef()) {
 					list.add(arr[i]);
@@ -279,7 +280,7 @@ public class SuchenMonster {
 					break; //Da die Werte vorher sortiert wurden, kann beim ersten nicht mehr übereinstimmenden Element abgebrochen werden
 			}
 			break;
-		case 6:
+		case LEVEL:
 			for(int i = n; i > 0; i--) { //Werte unter n
 				if(wertInt == arr[i].getLvl()) {
 					list.add(arr[i]);
@@ -292,6 +293,8 @@ public class SuchenMonster {
 				} else
 					break; //Da die Werte vorher sortiert wurden, kann beim ersten nicht mehr übereinstimmenden Element abgebrochen werden
 			}
+			break;
+		default:
 			break;	
 		}
 		return list;
