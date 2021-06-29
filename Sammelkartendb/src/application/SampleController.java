@@ -103,7 +103,7 @@ public class SampleController {
 	    private ComboBox searchTextAttribute;
 	    @FXML
 	    private TextField searchText;
-	    private ObservableList<String> attributes = FXCollections.observableArrayList("Name", "Kategorie", "Stufe", "Attacke", "Verteidigung", "Element", "Typ");
+	    private ObservableList<String> attributes = FXCollections.observableArrayList("Name", "Kategorie", "Stufe", "Attacke", "Verteidigung");
 	    
 	    private HBox selectedCardHBox;
 	    private int selectedCardId;
