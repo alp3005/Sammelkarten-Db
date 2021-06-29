@@ -14,7 +14,6 @@ import SuchenUndSortieren.SortierenMain;
 
 public class CardsHandler {
 	private Database database = new Database();
-	
 	private List<Card> allCards = new ArrayList<Card>();
 	private List<Monster> monsterCards;
 	private List<Spell> spellCards;
@@ -54,7 +53,6 @@ public class CardsHandler {
 		return instance;
 	}
 	
-	//? wieso monsterCard
 	public void addMonster(Monster monsterCard) throws FileNotFoundException {
 		monsterCards.add(monsterCard);
 		allCards.add(monsterCard);

@@ -234,7 +234,7 @@ public class SampleController {
 			List<Card> cards = cardsHandler.getCards();
 			
 			ObservableList<Node> cardsVBoxChildren = cardsVBox.getChildren();
-			//bleibt immer
+			//Titel: Kartenname Attribut soll immer bestehen
 			HBox titleNode = (HBox)cardsVBoxChildren.get(0);
 			
 			//Lösche Inhalt damit beim Buttonpress die alte Liste an Karten gelöscht ist außer Title
@@ -366,6 +366,7 @@ public class SampleController {
 		    return Integer.parseInt(data);
 		}
 		
+		//Kartenauswahl 
 		private void setNewSelectedHBox(HBox hBox) {
 			if (selectedCardHBox != null) {
 				// setLabelsFont(selectedCardHBox.getChildren(), labelFont);

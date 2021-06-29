@@ -166,7 +166,6 @@ public class ErstellenViewController {
 			Scene scene = ((Node)(event.getSource())).getScene();
 			scene.getWindow().hide();
 		} catch(Exception ex) {
-			// Maybe revert the highest id in CardsHandler
 			ex.printStackTrace();
 		}
 		
@@ -191,10 +190,8 @@ public class ErstellenViewController {
 		CardsHandler cardsHandler = CardsHandler.get();
 		String name = nameField.getText();
 		int id = cardsHandler.getNextId();
-		//int type = magicTypeList.indexOf(magicTypeBox.getValue());
 		String type = (String) magicTypeBox.getValue();
  		String effect = magicEffectBox.getText();
-		//int tag = magicTrapTagList.indexOf(magicTagBox.getValue());
  		String[] tags = selectedTags.toArray(new String[0]);
  		
 		Spell spell = new Spell(name, id, type, effect, tags);

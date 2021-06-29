@@ -16,7 +16,7 @@ import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
 
-class Database {
+public class Database {
 	// Erstelle Objekt für Json - GsonBuilder().setPrettyPrinting().create() = Json Datei schreiben mit Zeilenumbruch statt Einzeiler // Mehr Speicherplatz
 	private Gson gson = new GsonBuilder().setPrettyPrinting().create(); 
 	// Alternative als Einzeiler:
@@ -40,7 +40,6 @@ class Database {
 		FileReader filereader = new FileReader(monsterDatabasePath);
 		//ListType ist der Type von List<Monster> um Json in Liste umzuwandeln -Stackoverflow
 		Type listType = new TypeToken<List<Monster>>() {}.getType();
-		//?
 		List<Monster> monster = gson.fromJson(filereader, listType);
 		return monster;
 	}
