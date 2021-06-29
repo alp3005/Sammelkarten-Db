@@ -1,6 +1,6 @@
 package application;
 
-public enum SortType {
+public enum SortAttribute {
 	NAME, 
 	CATEGORY,
 	LEVEL,

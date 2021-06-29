@@ -2,17 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -27,7 +25,7 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="700.0" spacing="10.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="1005.0" spacing="10.0">
                      <children>
                         <Label text="Sortieralgorithmen:">
                            <font>
@@ -41,6 +39,12 @@
                            </font>
                         </Label>
                         <ComboBox fx:id="searchAlgorithmComboBox" onAction="#setSearchAlgorithm" prefWidth="150.0" />
+                        <CheckBox mnemonicParsing="false" onAction="#toggleSortDesc" prefHeight="17.0" prefWidth="152.0" />
+                          <Label text="Absteigend Sortieren">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                      <HBox.margin>
                         <Insets />
@@ -485,7 +489,7 @@
                                                 <Font name="Arial Black" size="20.0" />
                                              </font>
                                           </Label>
-                                          <Button mnemonicParsing="false" text="Suchen" />
+                                          <Button mnemonicParsing="false" text="Suchen" onAction="#search" />
                                        </children>
                                        <padding>
                                           <Insets right="5.0" />
@@ -493,135 +497,8 @@
                                     </FlowPane>
                                  </children>
                               </HBox>
-                              <VBox prefHeight="213.0" prefWidth="644.0" spacing="5.0" style="-fx-background-color: #BFCDD9;">
-                                 <children>
-                                    <HBox prefHeight="116.0" prefWidth="580.0">
-                                       <children>
-                                          <GridPane prefHeight="36.0" prefWidth="618.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="80.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="544.0" minWidth="10.0" prefWidth="431.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <Label text="Name:">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label text="Kartenart:" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <TextField fx:id="nameFieldSearch" prefHeight="26.0" prefWidth="341.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" />
-                                                <ComboBox fx:id="typeBoxSearch" onAction="#selectCardType" prefHeight="25.0" prefWidth="535.0" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                             </children>
-                                          </GridPane>
-                                       </children>
-                                    </HBox>
-                                    <HBox prefHeight="184.0" prefWidth="600.0">
-                                       <children>
-                                          <GridPane fx:id="monsterGridSearch" prefHeight="156.0" prefWidth="580.0" vgap="5.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="0.0" prefWidth="130.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="450.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <Label text="Element:">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label text="Stufe:" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label text="Angriff:" GridPane.rowIndex="2">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label text="Verteidigung:" GridPane.rowIndex="3">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <ComboBox fx:id="elementBoxSearch" prefHeight="26.0" prefWidth="456.0" GridPane.columnIndex="1" />
-                                                <ComboBox fx:id="levelBoxSearch" prefHeight="26.0" prefWidth="471.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <TextField fx:id="attackFieldSearch" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="defenseFieldSearch" style="-fx-background-color: lightgrey;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                             </children>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </GridPane>
-                                          <GridPane fx:id="magicGridSearch" prefHeight="156.0" prefWidth="580.0" vgap="5.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="455.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints maxHeight="30.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <Label text="Typ:">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <ComboBox fx:id="magicTypeBoxSearch" prefHeight="26.0" prefWidth="439.0" GridPane.columnIndex="1" />
-                                             </children>
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </GridPane>
-                                          <GridPane fx:id="trapGridSearch" prefHeight="156.0" prefWidth="580.0" vgap="5.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="455.0" minWidth="10.0" prefWidth="455.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints maxHeight="35.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
-                                             <children>
-                                                <Label text="Typ:">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
-                                                </Label>
-                                                <ComboBox fx:id="trapTypeBoxSearch" prefHeight="26.0" prefWidth="452.0" GridPane.columnIndex="1" />
-                                             </children>
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                             <padding>
-                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding>
-                                          </GridPane>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                 </padding>
-                              </VBox>
+                              <ComboBox fx:id="searchTextAttribute" onAction="#setSortAlgorithm" prefWidth="150.0" />
+                              <TextField fx:id="searchText" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

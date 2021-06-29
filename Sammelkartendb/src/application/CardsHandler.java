@@ -10,10 +10,16 @@ import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
-import SuchenUndSortieren.SortierenMain;
+import SuchenUndSortieren.Search.SearchAlgorithm;
+import SuchenUndSortieren.Search.SearchHandler;
+import SuchenUndSortieren.Sorting.SortAlgorithm;
+import SuchenUndSortieren.Sorting.SortHandler;
 
 public class CardsHandler {
 	private Database database = new Database();
+	private SortHandler sortHandler = new SortHandler();
+	private SearchHandler searchHandler = new SearchHandler();
+	
 	private List<Card> allCards = new ArrayList<Card>();
 	private List<Monster> monsterCards;
 	private List<Spell> spellCards;
@@ -21,8 +27,10 @@ public class CardsHandler {
 	private static CardsHandler instance;
 	private int highestId = 0;
 	
-	private SortType sortAttribute;
-	private int sortAlgorithm;
+	private SortAttribute sortAttribute = SortAttribute.NAME;
+	private SortAlgorithm sortAlgorithm = SortAlgorithm.MERGE;
+	private boolean sortAsc = true;		// true => aufsteigend, false => absteigend
+	private SearchAlgorithm searchAlgorithm = SearchAlgorithm.BINARY;
 	
 	
 	private CardsHandler() {
@@ -87,21 +95,41 @@ public class CardsHandler {
 		return highestId;
 	}
 
-	public void setSortAttribute(SortType sortAttribute) {
+	
+	public void setSortAttribute(SortAttribute sortAttribute) {
 		try {
 			this.sortAttribute = sortAttribute;
-			allCards = SortierenMain.sort(allCards, sortAlgorithm, sortAttribute, false);
+			sortHandler.sort(allCards, sortAlgorithm, sortAttribute, sortAsc);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void setSortAlgorithm(int algorithm) {
+	public void setSortAlgorithm(SortAlgorithm algorithm) {
 		try {
 			this.sortAlgorithm = algorithm;
-			allCards = SortierenMain.sort(allCards, sortAlgorithm, sortAttribute, false);
+			System.out.println("a");
+			sortHandler.sort(allCards, sortAlgorithm, sortAttribute, sortAsc);
+			System.out.println("b");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public SortAttribute getSortAttribute() {
+		return sortAttribute;
+	}
+	
+	public void setSortAsc(boolean sortAsc) {
+		this.sortAsc = sortAsc;
+	}
+
+	//führe suche aus mit folgenden Werten: Alle Karten, welcher Such und Sortier Algorithmus verwendet wurde und Value= Wert welchen man in der Textbox der Suche eingegeben hat
+	public Card search(String value, SortAttribute searchForAttribute) {
+		return searchHandler.search(allCards, searchAlgorithm, sortAlgorithm, searchForAttribute, value);
+	}
+
+	public void setSearchAlgorithm(SearchAlgorithm searchAlgorithm) {
+		this.searchAlgorithm = searchAlgorithm;
 	}
 }

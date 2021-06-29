@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import Cards.Card;
 import Cards.Monster;
 import Cards.Spell;
 import Cards.Trap;
-import SuchenUndSortieren.SortierenMain;
+import SuchenUndSortieren.Search.SearchAlgorithm;
+import SuchenUndSortieren.Sorting.SortAlgorithm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,65 +45,17 @@ public class SampleController {
 	
 	//----Suchen----
 	//Optionen die im drop down menu für den Karten Typ angezeigt werden
-		ObservableList<String> cardTypeListSearch = FXCollections.observableArrayList("Monster", "Zauber", "Falle");
+		ObservableList<String> cardTypeList = FXCollections.observableArrayList("Monster", "Zauber", "Falle");
 
-		@FXML
-		private TextField nameFieldSearch;
-		@FXML
-		private ComboBox typeBoxSearch;
-		
-		//Monster Stuff
-		@FXML
-		private GridPane monsterGridSearch;
-		
-		ObservableList<String> monsterElementListSearch = FXCollections.observableArrayList("Licht", "Finsternis", "Wind", "Feuer", "Wasser", "Erde");
-		ObservableList<String> monsterLevelListSearch = FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12");
-		@FXML
-		private ComboBox elementBoxSearch;
-		@FXML
-		private ComboBox levelBoxSearch;
-		@FXML
-		private TextField attackFieldSearch;
-		@FXML
-		private TextField defenseFieldSearch;
-		
-		//Zauber Stuff
-		@FXML
-		private GridPane magicGridSearch;
-		@FXML
-		private TextArea magicEffectSearch;
-		
-		ObservableList<String> magicTypeListSearch = FXCollections.observableArrayList("Normal", "Schnellzauber", "Permanentenzauber", "Ausrüstungszauber");
-		@FXML
-		private ComboBox magicTypeBoxSearch;
-		@FXML
-		private CheckBox magicTagZerSearch;
-		@FXML
-		private CheckBox magicTagBesSearch;
-		@FXML
-		private CheckBox magicTagEinSearch;
-		@FXML
-		private CheckBox magicTagPosSearch;
-		@FXML
-		private CheckBox magicTagSucSearch;
-		
-		//Fallen stuff
-		@FXML
-		private GridPane trapGridSearch;
-		@FXML
-		private TextArea trapEffectSearch;
-		
-		ObservableList<String> trapTypeListSearch = FXCollections.observableArrayList("Normal", "Konterfalle", "Permanentenfalle");
-		@FXML
-		private ComboBox trapTypeBoxSearch;
+
 		@FXML
 		private VBox cardsVBox;
 		@FXML
 		private ComboBox sortAlgorithmComboBox;
 		@FXML
 		private ComboBox searchAlgorithmComboBox;
-		private ObservableList<String> sortAlgorithms = FXCollections.observableArrayList("Mergesort", "Quicksort", "Selectionsort", "Heapsort");
-		private ObservableList<String> searchAlgorithms = FXCollections.observableArrayList("Binäre Suche", "Fibonacci Suche", "Exponential Suche", "Interpolationssuche");
+		private ObservableList<String> sortAlgorithms = FXCollections.observableArrayList("Mergesort", "Quicksort", "Selectionsort");
+		private ObservableList<String> searchAlgorithms = FXCollections.observableArrayList("Binäre Suche", "Lineare Suche", "Exponential Suche");
 		
 
 		@FXML
@@ -145,15 +99,20 @@ public class SampleController {
 	    private Label cardInfoElement2;
 	    @FXML
 	    private TextArea cardInfoEffect2;
+	    @FXML
+	    private ComboBox searchTextAttribute;
+	    @FXML
+	    private TextField searchText;
+	    private ObservableList<String> attributes = FXCollections.observableArrayList("Name", "Kategorie", "Stufe", "Attacke", "Verteidigung", "Element", "Typ");
 	    
 	    private HBox selectedCardHBox;
 	    private int selectedCardId;
-		
+
+	    
 	    private int cardInfoArea = 1;
 		
 		private Font labelFont = new Font("Arial", 18.0); 
 		private Font labelSelectedFont = new Font("Arial Black", 22.0); 
-		private SortType sortType;
 		
 		@FXML
 		private void initialize() {
@@ -179,36 +138,14 @@ public class SampleController {
 //			trapGridKF2.setVisible(false);
 			//--KartenFeld 2 ende--
 			
-			//--Suche start--
-			typeBoxSearch.setItems(cardTypeListSearch);
-			typeBoxSearch.setValue("Monster");
-			
-			//Monster stuff
-			elementBoxSearch.setItems(monsterElementListSearch);
-			elementBoxSearch.setValue("Licht");
-			levelBoxSearch.setItems(monsterLevelListSearch);
-			levelBoxSearch.setValue("1");
-			
-			//Zauber stuff
-			magicTypeBoxSearch.setItems(magicTypeListSearch);
-			magicTypeBoxSearch.setValue("Normal");
-			
-			//Fallen stuff
-			trapTypeBoxSearch.setItems(trapTypeListSearch);
-			trapTypeBoxSearch.setValue("Normal");
-			
-			//entferne andere stuff
-			magicGridSearch.setManaged(false);
-			magicGridSearch.setVisible(false);
-			trapGridSearch.setManaged(false);
-			trapGridSearch.setVisible(false);
-			
 			sortAlgorithmComboBox.setItems(sortAlgorithms);
 			sortAlgorithmComboBox.setValue("Mergesort");
 			searchAlgorithmComboBox.setItems(searchAlgorithms);
 			searchAlgorithmComboBox.setValue("Binäre Suche");
 			
-			sortType = sortType.CATEGORY;
+			searchTextAttribute.setItems(attributes);
+			searchTextAttribute.setValue("Name");
+			
 			initializeCardsVBox();
 		}
 		
@@ -291,11 +228,12 @@ public class SampleController {
 		}
 		
 		private String getAttributeLabelText(Card card) {
+			SortAttribute sortType = CardsHandler.get().getSortAttribute();
 			switch (sortType) {
 			//Schaue auf Sample.fxml: Buttons haben Userdata übergeben (Name=0 ....Tag=7) anhanddessen weiß man welcher Button angeklickt wurde und übergibt diesen Wert
 				case NAME: return card.getName();
 			//Gebe Eintrag der Kategorie (Monster, Spell, Trap) als Index wieder und subtrahiere -1 da der Index von 0-2 in diesem Fall ist 
-				case CATEGORY: return cardTypeListSearch.get(card.getKategory() - 1);
+				case CATEGORY: return cardTypeList.get(card.getKategory() - 1);
 				case LEVEL: 
 					if (card instanceof Monster) return String.valueOf(((Monster)card).getLvl());
 					return "";
@@ -313,47 +251,14 @@ public class SampleController {
 			}
 		}
 		
-		@FXML
-		private void selectCardType(ActionEvent event) {
-			String cardTypeSearch = typeBoxSearch.getSelectionModel().getSelectedItem().toString();
-			//System.out.println(cardType);
-			
-			if(cardTypeSearch.equals("Monster")) {
-				monsterGridSearch.setManaged(true);
-				monsterGridSearch.setVisible(true);
-				//entferne andere stuff
-				magicGridSearch.setManaged(false);
-				magicGridSearch.setVisible(false);
-				trapGridSearch.setManaged(false);
-				trapGridSearch.setVisible(false);
-			}
-			else if(cardTypeSearch.equals("Zauber")) {
-				magicGridSearch.setManaged(true);
-				magicGridSearch.setVisible(true);
-				//entferne andere stuff
-				monsterGridSearch.setManaged(false);
-				monsterGridSearch.setVisible(false);
-				trapGridSearch.setManaged(false);
-				trapGridSearch.setVisible(false);
-			}
-			else if(cardTypeSearch.equals("Falle")) {
-				trapGridSearch.setManaged(true);
-				trapGridSearch.setVisible(true);
-				//entferne andere stuff
-				monsterGridSearch.setManaged(false);
-				monsterGridSearch.setVisible(false);
-				magicGridSearch.setManaged(false);
-				magicGridSearch.setVisible(false);
-			}
-		}
 		
 		@FXML 
 		//Übergebe Userdata der jeweiligen Buttons an Sorttype
 		private void setSortType(ActionEvent event) {
 			int value = getUserDataValue(event);
-		    sortType = SortType.values()[value];
-		    System.out.println(sortType);
-		    CardsHandler.get().setSortAttribute(sortType);
+		    SortAttribute sortAttribute = SortAttribute.values()[value];
+		    System.out.println(sortAttribute);
+		    CardsHandler.get().setSortAttribute(sortAttribute);
 		//Erstelle neue Kartenliste nach Klicken eines Buttons, da sonst die alte Kartenliste noch vorhanden wäre
 		    initializeCardsVBox();
 		}
@@ -390,7 +295,7 @@ public class SampleController {
 				
 				if(cardInfoArea == 1) {
 					cardInfoName.setText(card.getName());
-					cardInfoArt.setText(cardTypeListSearch.get(card.getKategory() - 1));
+					cardInfoArt.setText(cardTypeList.get(card.getKategory() - 1));
 					// Frage ab ob geklickte Karte eine Monsterkarte ist, wenn ja: gebe Wert der Atk. Andernfalls gebe "-" wieder
 					cardInfoAtk.setText(card instanceof Monster ? String.valueOf(((Monster)card).getAtk()) : "-");
 					cardInfoDef.setText(card instanceof Monster ? String.valueOf(((Monster)card).getDef()) : "-");
@@ -415,7 +320,7 @@ public class SampleController {
 				}
 				else {
 					cardInfoName2.setText(card.getName());
-					cardInfoArt2.setText(cardTypeListSearch.get(card.getKategory() - 1));
+					cardInfoArt2.setText(cardTypeList.get(card.getKategory() - 1));
 					// Frage ab ob geklickte Karte eine Monsterkarte ist, wenn ja: gebe Wert der Atk. Andernfalls gebe "-" wieder
 					cardInfoAtk2.setText(card instanceof Monster ? String.valueOf(((Monster)card).getAtk()) : "-");
 					cardInfoDef2.setText(card instanceof Monster ? String.valueOf(((Monster)card).getDef()) : "-");
@@ -443,14 +348,39 @@ public class SampleController {
 			
 			
 		@FXML
+		// Speichere Sortierhalgorithmus in Cardshandler
 		private void setSortAlgorithm(ActionEvent event) {
-			int sortAlgorithm = sortAlgorithms.indexOf(sortAlgorithmComboBox.getValue()) + 1;
+			int value = sortAlgorithms.indexOf(sortAlgorithmComboBox.getValue());
+			SortAlgorithm sortAlgorithm = SortAlgorithm.values()[value];
 			CardsHandler.get().setSortAlgorithm(sortAlgorithm);
+			initializeCardsVBox();
 		}
 		
 		@FXML
+		// Speichere Suchalgorithmus in Cardshandler
 		private void setSearchAlgorithm(ActionEvent event) {
-			// int sortAlgorithm = sortAlgorithms.indexOf(sortAlgorithmComboBox.getValue()) + 1;
-			// CardsHandler.get().setSortAlgorithm(sortAlgorithm);
+			int value = sortAlgorithms.indexOf(sortAlgorithmComboBox.getValue()) + 1;
+			SearchAlgorithm searchAlgorithm = SearchAlgorithm.values()[value];
+			CardsHandler.get().setSearchAlgorithm(searchAlgorithm);
+		}
+		
+		@FXML
+		//Methode um aufsteigend oder absteigend (desc) zu sortieren 
+		private void toggleSortDesc(ActionEvent event) {
+			CheckBox checkBox = (CheckBox)event.getSource();
+			boolean isAsc = !checkBox.isSelected();
+			CardsHandler.get().setSortAsc(isAsc);
+		}
+		
+		@FXML
+		//Gebe gesuchte Karte in der Konsole wieder
+		private void search(ActionEvent event) {
+			String value = searchText.getText().toLowerCase();
+			int attributeValue = attributes.indexOf(searchTextAttribute.getValue());
+			SortAttribute attribute = SortAttribute.values()[attributeValue];
+			Card card = CardsHandler.get().search(value, attribute);
+			
+			System.out.println( new GsonBuilder().setPrettyPrinting().create().toJson(card));
+			
 		}
 }
