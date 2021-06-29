@@ -122,6 +122,8 @@ public class SampleController {
 	    private Label cardInfoTags;
 	    @FXML
 	    private Label cardInfoElement;
+	    @FXML
+	    private TextArea cardInfoEffect;
 	    
 	    @FXML
 		private Button cardInfoButton2;
@@ -141,6 +143,8 @@ public class SampleController {
 	    private Label cardInfoTags2;
 	    @FXML
 	    private Label cardInfoElement2;
+	    @FXML
+	    private TextArea cardInfoEffect2;
 	    
 	    private HBox selectedCardHBox;
 	    private int selectedCardId;
@@ -396,13 +400,16 @@ public class SampleController {
 						Spell spell = (Spell)card;
 						cardInfoTags.setText(String.join(", ", spell.getTags()));
 						cardInfoType.setText(spell.getType());
+						cardInfoEffect.setText(spell.getEffect());
 					} else if (card instanceof Trap) { 
 						Trap trap = (Trap)card;
 						cardInfoTags.setText(String.join(", ", trap.getTags()));
 						cardInfoType.setText(trap.getType());
+						cardInfoEffect.setText(trap.getEffect());
 					} else  {
 						cardInfoTags.setText("-");
 						cardInfoType.setText("-");
+						cardInfoEffect.setText(null);
 					}
 				}
 				else {
@@ -418,13 +425,16 @@ public class SampleController {
 						Spell spell = (Spell)card;
 						cardInfoTags2.setText(String.join(", ", spell.getTags()));
 						cardInfoType2.setText(spell.getType());
+						cardInfoEffect2.setText(spell.getEffect());
 					} else if (card instanceof Trap) { 
 						Trap trap = (Trap)card;
 						cardInfoTags2.setText(String.join(", ", trap.getTags()));
 						cardInfoType2.setText(trap.getType());
+						cardInfoEffect2.setText(trap.getEffect());
 					} else  {
 						cardInfoTags2.setText("-");
 						cardInfoType2.setText("-");
+						cardInfoEffect2.setText(null);
 					}
 				}
 			}
